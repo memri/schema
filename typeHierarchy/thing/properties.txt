@@ -1,0 +1,5 @@
+description
+identifier
+name
+path
+sharedWith

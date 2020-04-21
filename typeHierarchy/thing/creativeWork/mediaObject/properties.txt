@@ -1,0 +1,8 @@
+bitrate
+contentSize
+contentPath
+duration
+endTime
+height
+startTime
+width

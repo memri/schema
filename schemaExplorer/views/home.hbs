@@ -1,0 +1,43 @@
+<h1>{{name}}</h1>
+<p><i>{{data.description}}</i></p>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    {{#each pathLinks}}
+      <li class="breadcrumb-item"><a href="{{this}}">{{@key}}</a></li>
+    {{/each}}
+  </ol>
+</nav>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Properties</th>
+    <th>Expected Type</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  {{#each pathLinks as |type|}}
+    <tr>
+      <th colspan="3"><b>Properties from: <a href="{{type}}">{{@key}}</a></b></th>
+    </tr>
+    {{#each (lookup (lookup ../data type) 'properties') as |prop|}}
+      <tr>
+        <td>{{prop}}</td>
+        <td>[wip]</td>
+        <td>[wip]</td>
+      </tr>
+    {{/each}}
+  {{/each}}
+  </tbody>
+</table>
+
+<h4>Child nodes</h4>
+<ul class="list-group">
+  {{#each (lookup (lookup data path) 'children') as |child|}}
+    <li class="list-group-item">
+      <a href="{{../name}}/{{child}}">{{child}}</a>
+    </li>
+  {{/each}}
+</ul>

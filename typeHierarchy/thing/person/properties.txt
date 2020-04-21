@@ -1,0 +1,9 @@
+address
+birthDate
+email
+familyName
+givenName
+interpersonalRelation
+deathDate
+birthPlace
+deathPlace
