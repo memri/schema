@@ -1,0 +1,1 @@
+The version of the CreativeWork embodied by a specified resource.

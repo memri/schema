@@ -4,7 +4,7 @@ const {readdir} = require('fs').promises;
 const express = require('express');
 const exphbs = require('express-handlebars');
 
-// Express + Handlebars
+// Defines the Express + Handlebars app.
 const app = express();
 const port = 3000;
 app.engine('.hbs', exphbs({
@@ -21,37 +21,46 @@ app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.resolve(__dirname + '/public')));
 
-const typeHierarchyPath = path.resolve('../typeHierarchy');
-const dataFiles = ['description.md', 'properties.txt'];
+const entityHierarchyPath = path.resolve('../entityHierarchy');
+const predicateHierarchyPath = path.resolve('../predicateHierarchy');
+const dataFiles = ['description.md', 'properties.txt', 'expectedTypes.txt'];
 
-function addToHierarchyFromFile(typeHierarchy, type, dir, dirent) {
+function addToHierarchyFromFile(hierarchy, filePath, dir, dirent) {
   let value = fs.readFileSync(path.resolve(dir, dirent.name), 'utf8', function (err, data) {
   });
-  if (dirent.name === 'properties.txt') {
+  // Splits .txt files on newlines to parse properties and expectedTypes.
+  if (dirent.name.split('.')[1] === 'txt') {
     value = value.split('\n').filter(function (e) {
       return e !== '';
     });
   }
-  typeHierarchy[type] = typeHierarchy[type] || {};
-  typeHierarchy[type][dirent.name.split('.')[0]] = value;
+  // Stores data both under full path as single name to enable easy lookup
+  // (TODO use a name2path object to not store the data twice)
+  hierarchy[filePath] = hierarchy[filePath] || {};
+  hierarchy[filePath][dirent.name.split('.')[0]] = value;
+  hierarchy[filePath.split('/').slice(-1)[0]] = hierarchy[filePath.split('/').slice(-1)[0]] || {};
+  hierarchy[filePath.split('/').slice(-1)[0]][dirent.name.split('.')[0]] = value;
+  hierarchy[filePath.split('/').slice(-1)[0]]['path'] = filePath;
 }
 
-async function getTypeHierarchy(dir, typeHierarchy) {
+async function getHierarchy(dir, hierarchy, splitPath) {
+  // Recursively read the directory structure.
   const dirents = await readdir(dir, {withFileTypes: true});
   for (const dirent of dirents) {
-    let type = dir.split(typeHierarchyPath)[1];
+    let filePath = dir.split(splitPath)[1];
     if (dirent.isDirectory()) {
-      typeHierarchy[type] = typeHierarchy[type] || {};
-      typeHierarchy[type]['children'] = typeHierarchy[type]['children'] || []
-      typeHierarchy[type]['children'].push(dirent.name)
-      await getTypeHierarchy(path.resolve(dir, dirent.name), typeHierarchy);
+      hierarchy[filePath] = hierarchy[filePath] || {};
+      hierarchy[filePath]['children'] = hierarchy[filePath]['children'] || [];
+      hierarchy[filePath]['children'].push(dirent.name);
+      await getHierarchy(path.resolve(dir, dirent.name), hierarchy, splitPath);
     } else if (dataFiles.includes(dirent.name)) {
-      addToHierarchyFromFile(typeHierarchy, type, dir, dirent);
+      addToHierarchyFromFile(hierarchy, filePath, dir, dirent);
     }
   }
 }
 
 function getAncestry(path) {
+  // Returns ancestry as subpaths of the full path, i.e. [/x/y/z, /x/y, /x]
   let ancestry = {};
   for (let i = 1; i < path.length; i++) {
     ancestry[path[i]] = (path.slice(0, i + 1).join('/'));
@@ -59,9 +68,11 @@ function getAncestry(path) {
   return ancestry;
 }
 
-let typeHierarchy = {};
+let entityHierarchy = {};
+let predicateHierarchy = {};
 (async () => {
-  await getTypeHierarchy(typeHierarchyPath, typeHierarchy);
+  await getHierarchy(entityHierarchyPath, entityHierarchy, entityHierarchyPath);
+  await getHierarchy(predicateHierarchyPath, predicateHierarchy, predicateHierarchyPath);
 })();
 
 app.listen(port, (err) => {
@@ -79,14 +90,18 @@ app.get('/*', (request, response) => {
   let path = request.originalUrl;
   let pathList = path.split('/');
   pathList.shift();
-  if (!Object.keys(typeHierarchy).includes(path)) {
-    response.render('404', {name: path});
+  let data = {
+    name: pathList.slice(-1)[0],
+    path: path,
+    pathLinks: getAncestry(path.split('/')),
+    entityHierarchy: entityHierarchy,
+    predicateHierarchy: predicateHierarchy,
+  };
+  if (Object.keys(entityHierarchy).includes(path)) {
+    response.render('entity', data);
+  } else if (Object.keys(predicateHierarchy).includes(path)) {
+    response.render('predicate', data);
   } else {
-    response.render('home', {
-      name: pathList.slice(-1)[0],
-      path: path,
-      pathLinks: getAncestry(path.split('/')),
-      data: typeHierarchy,
-    });
+    response.render('404', {name: path});
   }
 });
