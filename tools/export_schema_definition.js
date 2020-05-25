@@ -6,7 +6,7 @@ const entityHierarchyPath = path.resolve('../entityHierarchy/thing/entity');
 const predicateHierarchyPath = path.resolve('../predicateHierarchy');
 const dataFiles = ['description.md', 'properties.txt', 'expectedTypes.txt'];
 const outputFile = './schema_definition.rs';
-const primitiveTypes = ['string', 'int', 'float', 'datetime'];
+const primitiveTypes = ['bool', 'int', 'float', 'string', '[string]', 'datetime'];
 
 function path2dir(filePath) {
   if (!filePath.split('/').slice(-1)[0]) {
@@ -46,13 +46,17 @@ async function getHierarchy(dir, hierarchy, splitPath) {
 }
 
 function getEdgeProps() {
-  // TODO 1:1 VS 1:many
   const predicates = Object.keys(predicateHierarchy);
   let output = "";
   let length = 0;
   for (const predicate of predicates) {
     if (!primitiveTypes.includes(predicateHierarchy[predicate]['expectedTypes'])) {
-      output += "        \"" + predicate + ": [uid] \",\n";
+      // TODO create better abstraction for 1:1 VS 1:many
+      if (predicateHierarchy[predicate]['expectedTypes'] === 'uid') {
+        output += "        \"" + predicate + ": uid \",\n";
+      } else {
+        output += "        \"" + predicate + ": [uid] \",\n";
+      }
       length += 1;
     }
   }
@@ -78,15 +82,25 @@ function getOtherProps() {
   let output = "pub fn get_other_props() -> Vec<&'static str> {\n    let other_props: Vec<&str> = vec![\n";
   const predicates = Object.keys(predicateHierarchy);
   for (const predicate of predicates) {
+    // console.log('--------------------------------------------');
+    // console.log(predicateHierarchy[predicate]['expectedTypes']);
+    // console.log(primitiveTypes.includes(predicateHierarchy[predicate]['expectedTypes']));
+    // console.log(predicateHierarchy[predicate]['expectedTypes'] !== 'string');
     if (primitiveTypes.includes(predicateHierarchy[predicate]['expectedTypes']) &&
       predicateHierarchy[predicate]['expectedTypes'] !== 'string') {
       let expectedType;
       switch (predicateHierarchy[predicate]['expectedTypes']) {
+        case 'bool':
+          expectedType = 'bool';
+          break;
         case 'int':
           expectedType = 'int @index(int)';
           break;
         case 'float':
           expectedType = 'float @index(float)';
+          break;
+        case '[string]':
+          expectedType = '[string] @index(term)';
           break;
         default:
           expectedType = predicateHierarchy[predicate]['expectedTypes'];
@@ -128,8 +142,6 @@ let predicateHierarchy = {};
   output += getStringProps();
   output += getOtherProps();
   output += getAllTypes();
-  // output += getTypeName();
-  // output += getTypeField();
 
   // console.log(output);
   fs.writeFile(outputFile, output, (err) => {
@@ -138,5 +150,3 @@ let predicateHierarchy = {};
   });
 
 })();
-
-

@@ -1,5 +1,16 @@
+changelog
+computeTitle
+dateAccessed
+dateCreated
+dateModified
+deleted
 description
+functions
+genericType
 identifier
+memriID
 name
 path
 sharedWith
+starred
+version
