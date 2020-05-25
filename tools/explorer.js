@@ -60,7 +60,8 @@ async function getHierarchy(dir, hierarchy, splitPath) {
 }
 
 function getAncestry(path) {
-  // Returns ancestry as subpaths of the full path, i.e. [/x/y/z, /x/y, /x]
+  // Returns ancestry of a node in the hierarchy as a mapping from the node name to the node path,
+  // e.g. '/thing/entity' -> { thing: '/thing', entity: '/thing/entity' }
   let ancestry = {};
   for (let i = 1; i < path.length; i++) {
     ancestry[path[i]] = (path.slice(0, i + 1).join('/'));
@@ -82,10 +83,6 @@ app.listen(port, (err) => {
   console.log(`server is listening on http://localhost:${port}`);
 });
 
-app.get('/', (request, response) => {
-  response.redirect('/thing');
-});
-
 app.get('/*', (request, response) => {
   let path = request.originalUrl;
   let pathList = path.split('/');
@@ -97,7 +94,9 @@ app.get('/*', (request, response) => {
     entityHierarchy: entityHierarchy,
     predicateHierarchy: predicateHierarchy,
   };
-  if (Object.keys(entityHierarchy).includes(path)) {
+  if (path === '/') {
+    response.render('home');
+  } else if (Object.keys(entityHierarchy).includes(path)) {
     response.render('entity', data);
   } else if (Object.keys(predicateHierarchy).includes(path)) {
     response.render('predicate', data);

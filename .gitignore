@@ -1,5 +1,9 @@
 *.swp
 .idea/
+entityHierarchy.json
+predicateHierarchy.json
+*schema_definition.rs
+*schema_definition_target.rs
 
 # Logs
 logs

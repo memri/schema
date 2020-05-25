@@ -1,1 +1,1 @@
-Data type: Floating number.
+Double precision floating point number.

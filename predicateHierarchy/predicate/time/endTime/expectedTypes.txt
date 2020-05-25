@@ -1,2 +1,1 @@
-dateTime
-time
+datetime

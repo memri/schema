@@ -1,1 +1,1 @@
-Data type: Integer.
+Signed 64 bit integer.

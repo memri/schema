@@ -2,7 +2,7 @@
   "name": "schemaexplorer",
   "version": "1.0.0",
   "description": "Simple web interface to explore the schema.",
-  "main": "index.js",
+  "main": "explorer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

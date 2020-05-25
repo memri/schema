@@ -1,7 +1,6 @@
 abstract
 associatedMedia
 audio
-author
 citation
 contentLocation
 dateCreated
@@ -13,3 +12,4 @@ locationCreated
 text
 version
 video
+writtenBy
