@@ -1,2 +1,2 @@
-geoCoordinates
-address
+GeoCoordinates
+Address

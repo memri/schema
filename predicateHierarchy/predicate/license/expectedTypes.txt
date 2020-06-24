@@ -1,2 +1,2 @@
-creativeWork
-url
+CreativeWork
+Url

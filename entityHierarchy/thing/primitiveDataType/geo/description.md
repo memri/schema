@@ -1,1 +1,0 @@
-Geometries stored using go-geom.

@@ -1,0 +1,12 @@
+address
+areaServed
+contactPoint
+email
+employee
+faxNumber
+founder
+location
+logo
+review
+slogan
+phoneNumbers

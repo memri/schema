@@ -61,7 +61,7 @@ async function getHierarchy(dir, hierarchy, splitPath) {
 
 function getAncestry(path) {
   // Returns ancestry of a node in the hierarchy as a mapping from the node name to the node path,
-  // e.g. '/thing/entity' -> { thing: '/thing', entity: '/thing/entity' }
+  // e.g. '/thing/Entity' -> { thing: '/thing', Entity: '/thing/Entity' }
   let ancestry = {};
   for (let i = 1; i < path.length; i++) {
     ancestry[path[i]] = (path.slice(0, i + 1).join('/'));

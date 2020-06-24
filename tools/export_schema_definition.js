@@ -2,17 +2,16 @@ const fs = require('fs');
 const helpers = require('./helpers');
 const path = require('path');
 
-const entityHierarchyPath = path.resolve('../entityHierarchy/thing/entity');
+const entityHierarchyPath = path.resolve('../entityHierarchy/thing/Entity');
 const predicateHierarchyPath = path.resolve('../predicateHierarchy');
 const outputFile = './schema_definition.rs';
-const primitiveTypes = ['bool', 'int', 'float', 'string', '[string]', 'datetime'];
 
 function getEdgeProps() {
   const predicates = Object.keys(predicateHierarchy);
   let output = "";
   let length = 0;
   for (const predicate of predicates) {
-    if (!primitiveTypes.includes(predicateHierarchy[predicate]['expectedTypes'])) {
+    if (!helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[predicate]['expectedTypes'])) {
       // TODO create better abstraction for 1:1 VS 1:many
       if (predicateHierarchy[predicate]['expectedTypes'] === 'uid') {
         output += "        \"" + predicate + ": uid \",\n";
@@ -44,7 +43,7 @@ function getOtherProps() {
   let output = "pub fn get_other_props() -> Vec<&'static str> {\n    let other_props: Vec<&str> = vec![\n";
   const predicates = Object.keys(predicateHierarchy);
   for (const predicate of predicates) {
-    if (primitiveTypes.includes(predicateHierarchy[predicate]['expectedTypes']) &&
+    if (helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[predicate]['expectedTypes']) &&
       predicateHierarchy[predicate]['expectedTypes'] !== 'string') {
       let expectedType;
       switch (predicateHierarchy[predicate]['expectedTypes']) {

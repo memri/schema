@@ -1,0 +1,7 @@
+city
+country
+location
+postalCode
+state
+street
+type
