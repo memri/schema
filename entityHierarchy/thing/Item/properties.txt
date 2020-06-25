@@ -1,5 +1,3 @@
-changelog
-computeTitle
 dateAccessed
 dateCreated
 dateModified
@@ -7,10 +5,9 @@ deleted
 description
 functions
 genericType
-identifier
+labels
 memriID
 name
-path
-sharedWith
 starred
+syncState
 version

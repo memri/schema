@@ -1,0 +1,6 @@
+currentViewIndex
+editMode
+screenshot
+showContextPane
+showFilterPane
+views
