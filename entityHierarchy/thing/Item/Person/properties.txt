@@ -13,7 +13,7 @@ height
 shoulderWidth
 armLength
 age
-profilePicture
+one_profilePicture
 relations
 phoneNumbers
 websites

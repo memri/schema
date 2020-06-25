@@ -1,7 +1,7 @@
 bitrate
 duration
 endTime
-file
+one_file
 fileLocation
 fileSize
 height

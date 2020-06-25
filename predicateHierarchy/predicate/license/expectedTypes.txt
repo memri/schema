@@ -1,2 +1,1 @@
-CreativeWork
-Url
+string

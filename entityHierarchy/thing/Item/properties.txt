@@ -1,3 +1,4 @@
+changelog
 dateAccessed
 dateCreated
 dateModified
@@ -9,5 +10,5 @@ labels
 memriID
 name
 starred
-syncState
+one_syncState
 version

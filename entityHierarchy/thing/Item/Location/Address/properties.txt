@@ -1,6 +1,6 @@
 city
-country
-location
+one_country
+one_location
 postalCode
 state
 street

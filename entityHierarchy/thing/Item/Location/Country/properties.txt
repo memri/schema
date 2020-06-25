@@ -1,2 +1,2 @@
-flag
-location
+one_flag
+one_location

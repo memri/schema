@@ -1,1 +1,1 @@
-TBD
+A comment on an item - for example, a comment on a blog post. 

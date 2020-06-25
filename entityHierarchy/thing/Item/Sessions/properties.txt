@@ -1,0 +1,2 @@
+currentSessionIndex
+sessions

@@ -2,10 +2,8 @@
 .idea/
 entityHierarchy.json
 predicateHierarchy.json
-*schema_definition.rs
-*schema_definition_target.rs
-*schema_target.swift
 *schema.swift
+*schema.json
 
 # Logs
 logs

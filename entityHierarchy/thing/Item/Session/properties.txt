@@ -3,4 +3,3 @@ editMode
 screenshot
 showContextPane
 showFilterPane
-views

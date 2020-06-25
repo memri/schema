@@ -3,9 +3,9 @@ const {readdir} = require('fs').promises;
 const path = require('path');
 
 const DATA_FILES = ['description.md', 'properties.txt', 'expectedTypes.txt'];
-const PRIMITIVE_TYPES = ['bool', 'int', 'float', 'string', 'datetime'];
+const PRIMITIVE_TYPES = ['bool', 'int', 'float', 'string', 'datetime']; // TODO update to match new DB
 
-const ENTITY_HIERARCHY_PATH = path.resolve('../entityHierarchy/thing/Entity');
+const ENTITY_HIERARCHY_PATH = path.resolve('../entityHierarchy/thing/Item');
 const PREDICATE_HIERARCHY_PATH = path.resolve('../predicateHierarchy');
 
 function path2dir(filePath, hierarchyType) {
