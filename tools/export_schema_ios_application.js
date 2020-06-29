@@ -150,10 +150,6 @@ function getDataItemClasses() {
       } else if (property.substring(0, 7) === 'linked_') {
         property = property.substring(7);
         let type = predicateHierarchy[property]['expectedTypes'];
-        console.log(property);
-        console.log(type);
-        console.log(entity);
-        console.log('--');
         let camelCased = entity.substring(0, 1).toLocaleLowerCase() + entity.substring(1);
         realmOptionals += `    let ${property} = LinkingObjects(fromType: ${type}.self, property: "${camelCased}")\n`;
         realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
