@@ -2,5 +2,4 @@ datasource
 name
 session
 userState
-viewArguments
 viewDefinition

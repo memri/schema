@@ -26,11 +26,12 @@ function getHeader() {
     'public typealias List = RealmSwift.List\n\n';
 }
 
-function getDataItemFamily() {
-  // Data item family.
+function getItemFamily() {
+  // The Item family.
   let output = '// The family of all data item classes\n' +
-    'enum DataItemFamily: String, ClassFamily, CaseIterable {\n';
+    'enum ItemFamily: String, ClassFamily, CaseIterable {\n';
   for (const entity of Object.keys(entityHierarchy)) {
+    if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
     output += `    case type${entity} = "${entity}"\n`;
   }
   output += '\n    static var discriminator: Discriminator = .type\n\n';
@@ -39,6 +40,7 @@ function getDataItemFamily() {
   output += '    var backgroundColor: Color {\n' +
     '        switch self {\n';
   for (const entity of Object.keys(entityHierarchy)) {
+    if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
     // output += `        case .type${entity}: return Color(hex: '${entityHierarchy[entity]['backgroundColor']}')\n`; // TODO
     output += `        case .type${entity}: return Color(hex: "#93c47d")\n`;
   }
@@ -49,6 +51,7 @@ function getDataItemFamily() {
   output += '    var foregroundColor: Color {\n' +
     '        switch self {\n';
   for (const entity of Object.keys(entityHierarchy)) {
+    if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
     // output += `        case .type${entity}: return Color(hex: '${entityHierarchy[entity]['foregroundColor']}')\n`; // TODO
     output += `        case .type${entity}: return Color(hex: "#fff")\n`;
   }
@@ -64,6 +67,7 @@ function getDataItemFamily() {
   output += '    func getType() -> AnyObject.Type {\n' +
     '        switch self {\n';
   for (const entity of Object.keys(entityHierarchy)) {
+    if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
     output += `        case .type${entity}: return ${entity}.self\n`;
   }
   output += '        }\n' +
@@ -75,7 +79,10 @@ function getDataItemFamily() {
 function getDataItemClasses() {
   let output = '';
   for (const entity of Object.keys(entityHierarchy)) {
+    if (['Datasource', 'UserState'].includes(entity)) continue; // Datasource and UserState are defined elsewhere.
     output += `\n/// ${entityHierarchy[entity]['description']}\n`;
+
+    // A set of Items needs to be prepended with 'Schema' for front end functionality
     switch (entity) {
       case 'Item':
         output += `public class SchemaItem: Object, Codable, Identifiable, ObservableObject {\n`;
@@ -86,10 +93,17 @@ function getDataItemClasses() {
       case 'Sessions':
         output += `class SchemaSessions : Item {\n`;
         break;
+      case 'Datasource':
+      case 'UserState':
+        continue;
       default:
         output += `class ${entity} : Item {\n`;
     }
-    output += `    override var genericType:String { "${entity}" }\n\n`;
+    if (entity === 'Item') {
+      output += `    var genericType: String { "unknown" }\n\n`;
+    } else {
+      output += `    override var genericType:String { "${entity}" }\n\n`;
+    }
 
     // Properties.
     let dynamicVars = "";
@@ -99,10 +113,9 @@ function getDataItemClasses() {
     let realmOptionalsDecoder = "";
     let relationsDecoder = "";
 
-    for (const property of entityHierarchy[entity]['properties']) {
-      // Skip properties already defined in 'Item', as in swift the only inheritance is that every
-      // Item extends 'Item'.
-      if (entityHierarchy['Item']['properties'].includes(property) && entity !== 'Item') { // TODO make global const
+    for (let property of entityHierarchy[entity]['properties']) {
+      // Skip properties already defined in 'Item', as in swift the only inheritance is that every Item extends 'Item'.
+      if (entityHierarchy['Item']['properties'].includes(property) && entity !== 'Item' || property === 'genericType') {
         continue;
       }
       if (Object.keys(predicateHierarchy).includes(property)) {
@@ -129,42 +142,57 @@ function getDataItemClasses() {
           relations += `    let ${property} = List<${type}>()\n`;
           relationsDecoder += `            decodeIntoList(decoder, "${property}", self.${property})\n`;
         }
+      } else if (property.substring(0, 4) === 'one_') {
+        property = property.substring(4);
+        let type = predicateHierarchy[property]['expectedTypes'];
+        dynamicVars += `    @objc dynamic var ${property}:${type}? = nil\n`;
+        dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+      } else if (property.substring(0, 7) === 'linked_') {
+        property = property.substring(7);
+        let type = predicateHierarchy[property]['expectedTypes'];
+        console.log(property);
+        console.log(type);
+        console.log(entity);
+        console.log('--');
+        let camelCased = entity.substring(0, 1).toLocaleLowerCase() + entity.substring(1);
+        realmOptionals += `    let ${property} = LinkingObjects(fromType: ${type}.self, property: "${camelCased}")\n`;
+        realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
       } else {
-        if (property.substring(0, 4) === 'one_') {
-          let _property = property.substring(4);
-          let type = predicateHierarchy[_property]['expectedTypes'];
-          dynamicVars += `    @objc dynamic var ${_property}:${type}? = nil\n`;
-          dynamicVarsDecoder += `            ${_property} = try decoder.decodeIfPresent("${_property}") ?? ${_property}\n`;
-        }
+        console.log(`Error while processing: ${entity}`);
       }
     }
     output += dynamicVars;
     output += realmOptionals;
     output += relations;
-    if (dynamicVars || realmOptionals || relations) output += '\n'
+    if (dynamicVars || realmOptionals || relations) output += '\n';
 
     // Decoder
     output += '    required init () {\n' +
       '        super.init()\n' +
       '    }\n\n';
 
-    output += '    public convenience required init(from decoder: Decoder) throws {\n' +
-      '        super.init()\n' +
-      '        \n' +
-      '        jsonErrorHandling(decoder) {\n';
+    if (entity === 'Item') {
+      output += '    public func superDecode(from decoder: Decoder) throws {\n';
+    } else {
+      output += '    public convenience required init(from decoder: Decoder) throws {\n' +
+        '        super.init()\n' +
+        '        \n' +
+        '        jsonErrorHandling(decoder) {\n';
+    }
     if (entityHierarchy[entity]['properties']) {
       output += dynamicVarsDecoder;
       output += realmOptionalsDecoder;
       output += relationsDecoder;
     }
-    if (dynamicVarsDecoder || realmOptionalsDecoder || relationsDecoder) output += '\n'
-    output += '            try self.superDecode(from: decoder)\n' +
-      '        }\n' +
+    if (entity !== 'Item') {
+      if (dynamicVarsDecoder || realmOptionalsDecoder || relationsDecoder) output += '\n';
+      output += '            try self.superDecode(from: decoder)\n';
+    }
+    output += '        }\n' +
       '    }\n' +
       '}\n';
   }
 
-  output += '}\n';
   return output;
 }
 
@@ -173,11 +201,9 @@ let predicateHierarchy = {};
 (async () => {
   await helpers.getHierarchy(entityHierarchyPath, entityHierarchy, entityHierarchyPath, 'Item');
   await helpers.getHierarchy(predicateHierarchyPath, predicateHierarchy, predicateHierarchyPath, 'predicate');
-  // console.log(entityHierarchy);
-  // console.log(predicateHierarchy);
 
   let output = getHeader();
-  output += getDataItemFamily();
+  output += getItemFamily();
   output += getDataItemClasses();
 
   fs.writeFile(outputFile, output, (err) => {

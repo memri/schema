@@ -12,7 +12,10 @@ let predicateHierarchy = {};
 
   console.log('Check if properties of entities exist...');
   for (entity of Object.keys(entityHierarchy)) {
-    for (const property of entityHierarchy[entity]['properties']) {
+    for (let property of entityHierarchy[entity]['properties']) {
+      if (property.substring(0, 4) === 'one_') {
+        property = property.substring(4);
+      }
       if (!Object.keys(predicateHierarchy).includes(property)) {
         console.log(`-> Entity: '${entity}', has non-existent property: '${property}'`);
       }
@@ -34,11 +37,8 @@ let predicateHierarchy = {};
   }
 
   // TODO check if a predicate expects all types that its children expect.
-
-  // TODO check if lower cased properties and relations don't clash: don't have different types
-
+  // TODO check if lower cased properties and relations don't clash: they can't have different types
   // TODO check if props are `double`, i.e. already inherited and redefined
-
-  // TODO check unused Items
-  // TODO check unused relationships/properties
+  // TODO check if there are unused Items
+  // TODO check if there are unused relationships/properties
 })();

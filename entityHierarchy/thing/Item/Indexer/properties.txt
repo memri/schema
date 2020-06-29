@@ -1,0 +1,6 @@
+name
+icon
+query
+description
+bundleImage
+linked_indexerRuns
