@@ -1,5 +1,6 @@
 currentViewIndex
 editMode
-screenshot
+name
+one_screenshot
 showContextPane
 showFilterPane

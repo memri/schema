@@ -23,7 +23,7 @@ function getHeader() {
     'import SwiftUI\n' +
     'import RealmSwift\n' +
     '\n' +
-    'public typeAlias List = RealmSwift.List\n\n';
+    'public typealias List = RealmSwift.List\n\n';
 }
 
 function getDataItemFamily() {
@@ -78,17 +78,19 @@ function getDataItemClasses() {
     output += `\n/// ${entityHierarchy[entity]['description']}\n`;
     switch (entity) {
       case 'Item':
-        output += `class Item {\n`;
+        output += `public class SchemaItem: Object, Codable, Identifiable, ObservableObject {\n`;
         break;
       case 'Session':
-        output += `class SchemaSession:Item {\n`;
+        output += `class SchemaSession : Item {\n`;
         break;
       case 'Sessions':
-        output += `class SchemaSessionsItem {\n`;
+        output += `class SchemaSessions : Item {\n`;
         break;
       default:
-        output += `class ${entity}:Item {\n`;
+        output += `class ${entity} : Item {\n`;
     }
+    output += `    override var genericType:String { "${entity}" }\n\n`;
+
     // Properties.
     let dynamicVars = "";
     let realmOptionals = "";
@@ -96,6 +98,7 @@ function getDataItemClasses() {
     let dynamicVarsDecoder = "";
     let realmOptionalsDecoder = "";
     let relationsDecoder = "";
+
     for (const property of entityHierarchy[entity]['properties']) {
       // Skip properties already defined in 'Item', as in swift the only inheritance is that every
       // Item extends 'Item'.
@@ -110,38 +113,38 @@ function getDataItemClasses() {
         } else if (type === 'datetime') {
           dynamicVars += `    @objc dynamic var ${property}:Date? = nil\n`;
           dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+        } else if (type === 'bool') {
+          dynamicVars += `    @objc dynamic var ${property}:Bool = false\n`;
+          dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
         } else if (type === 'int') {
           realmOptionals += `    let ${property} = RealmOptional<Int>()\n`;
           realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
         } else if (type === 'float') {
           realmOptionals += `    let ${property} = RealmOptional<Double>()\n`;
           realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
-        } else if (type === 'boolean') {
-          realmOptionals += `    let ${property} = RealmOptional<Bool>()\n`;
-          realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
         } else if (type === 'any') {
           realmOptionals += `    let ${property} = List<Relationship>()\n`;
-          realmOptionalsDecoder += `    decodeRelationships(decoder, "${property}", Item.self, self.${property}, self)`;
+          realmOptionalsDecoder += `            decodeRelationships(decoder, "${property}", Item.self, self.${property}, self)\n`;
         } else {
           relations += `    let ${property} = List<${type}>()\n`;
           relationsDecoder += `            decodeIntoList(decoder, "${property}", self.${property})\n`;
         }
       } else {
         if (property.substring(0, 4) === 'one_') {
-          let _property = property.substring(4)
+          let _property = property.substring(4);
           let type = predicateHierarchy[_property]['expectedTypes'];
           dynamicVars += `    @objc dynamic var ${_property}:${type}? = nil\n`;
-          dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+          dynamicVarsDecoder += `            ${_property} = try decoder.decodeIfPresent("${_property}") ?? ${_property}\n`;
         }
       }
     }
-    if (dynamicVars !== "") output += dynamicVars + '\n';
-    if (realmOptionals !== "") output += realmOptionals + '\n';
-    if (relations !== "") output += relations + '\n';
+    output += dynamicVars;
+    output += realmOptionals;
+    output += relations;
+    if (dynamicVars || realmOptionals || relations) output += '\n'
 
     // Decoder
-    output += `    override var genericType:String { "${entity}" }\n\n` +
-      '    required init () {\n' +
+    output += '    required init () {\n' +
       '        super.init()\n' +
       '    }\n\n';
 
@@ -150,10 +153,11 @@ function getDataItemClasses() {
       '        \n' +
       '        jsonErrorHandling(decoder) {\n';
     if (entityHierarchy[entity]['properties']) {
-      if (dynamicVarsDecoder !== "") output += dynamicVarsDecoder + '\n';
-      if (realmOptionalsDecoder !== "") output += realmOptionalsDecoder + '\n';
-      if (relationsDecoder !== "") output += relationsDecoder + '\n';
+      output += dynamicVarsDecoder;
+      output += realmOptionalsDecoder;
+      output += relationsDecoder;
     }
+    if (dynamicVarsDecoder || realmOptionalsDecoder || relationsDecoder) output += '\n'
     output += '            try self.superDecode(from: decoder)\n' +
       '        }\n' +
       '    }\n' +
@@ -169,8 +173,8 @@ let predicateHierarchy = {};
 (async () => {
   await helpers.getHierarchy(entityHierarchyPath, entityHierarchy, entityHierarchyPath, 'Item');
   await helpers.getHierarchy(predicateHierarchyPath, predicateHierarchy, predicateHierarchyPath, 'predicate');
-  console.log(entityHierarchy);
-  console.log(predicateHierarchy);
+  // console.log(entityHierarchy);
+  // console.log(predicateHierarchy);
 
   let output = getHeader();
   output += getDataItemFamily();

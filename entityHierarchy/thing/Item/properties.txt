@@ -8,7 +8,6 @@ functions
 genericType
 labels
 memriID
-name
 starred
 one_syncState
 version
