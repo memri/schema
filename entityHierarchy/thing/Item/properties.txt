@@ -1,9 +1,10 @@
+allEdges
 changelog
 dateAccessed
 dateCreated
 dateModified
 deleted
-description
+itemDescription
 functions
 genericType
 labels

@@ -12,9 +12,7 @@ function getHeader() {
     '//  Visit https://gitlab.memri.io/memri/schema to learn more\n' +
     '//\n' +
     '//  schema.swift\n' +
-    '//  memri\n' +
     '//\n' +
-    '//  Created by Ruben Daniels on 4/1/20.\n' +
     '//  Copyright © 2020 memri. All rights reserved.\n' +
     '//\n' +
     '\n' +
@@ -93,6 +91,12 @@ function getDataItemClasses() {
       case 'Sessions':
         output += `class SchemaSessions : Item {\n`;
         break;
+      case 'SyncState':
+        output += `class SyncState: Object, Codable {\n`;
+        break;
+      case 'Edge':
+        output += `class Edge : Object, Codable {\n`;
+        break;
       case 'Datasource':
       case 'UserState':
         continue;
@@ -115,7 +119,7 @@ function getDataItemClasses() {
 
     for (let property of entityHierarchy[entity]['properties']) {
       // Skip properties already defined in 'Item', as in swift the only inheritance is that every Item extends 'Item'.
-      if (entityHierarchy['Item']['properties'].includes(property) && entity !== 'Item' || property === 'genericType') {
+      if (entityHierarchy['Item']['properties'].includes(property) && entity !== 'Item' || ['genericType', 'functions'].includes(property)) {
         continue;
       }
       if (Object.keys(predicateHierarchy).includes(property)) {
@@ -182,10 +186,22 @@ function getDataItemClasses() {
     }
     if (entity !== 'Item') {
       if (dynamicVarsDecoder || realmOptionalsDecoder || relationsDecoder) output += '\n';
-      output += '            try self.superDecode(from: decoder)\n';
+      output += '            try self.superDecode(from: decoder)\n' +
+        '        }\n';
+    } else {
+      output += '    }\n\n' +
+        '    /// Deserializes Item from json decoder\n' +
+        '    /// - Parameter decoder: Decoder object\n' +
+        '    /// - Throws: Decoding error\n' +
+        '    required public convenience init(from decoder: Decoder) throws {\n' +
+        '        self.init()\n' +
+        '        try superDecode(from: decoder)\n' +
+        '    }\n\n' +
+        '    private enum CodingKeys: String, CodingKey {\n' +
+        '        case uid, memriID, deleted, starred, dateCreated, dateModified, dateAccessed, changelog,\n' +
+        '            labels, syncState\n';
     }
-    output += '        }\n' +
-      '    }\n' +
+    output += '    }\n' +
       '}\n';
   }
 

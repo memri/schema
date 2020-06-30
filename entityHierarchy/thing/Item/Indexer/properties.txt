@@ -1,6 +1,6 @@
 name
 icon
 query
-description
+itemDescription
 bundleImage
 linked_indexerRuns
