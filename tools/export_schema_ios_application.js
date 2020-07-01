@@ -144,9 +144,12 @@ function getDataItemClasses() {
           realmOptionals += `    let ${property} = RealmOptional<Double>()\n`;
           realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
         } else if (type === 'any') {
-          relations += `    var ${property}: Results<Edge> {\n` +
-            `        edges("${property}").items(type:Edge.self)\n` +
-            '    }\n\n';
+          // relations += `    var ${property}: Results<Edge> {\n` +
+          //   `        edges("${property}").items(type:Edge.self)\n` +
+          //   '    }\n\n';
+          relations += `    var ${property}: [Item] {\n` +
+            `        edges("${property}").itemsArray()\n` +
+            `    }\n\n`;
         } else {
           relations += `    var ${property}: Results<${type}> {\n` +
             `        edges("${property}").items(type:${type}.self)\n` +
@@ -211,9 +214,58 @@ function getDataItemClasses() {
         '            labels, syncState\n';
     }
     output += '    }\n' +
-      '}\n';
+      '}\n\n';
   }
 
+  return output;
+}
+
+function getDataItemListToArray() {
+  let output = 'func dataItemListToArray(_ object: Any) -> [Item] {\n' +
+    '    var collection: [Item] = []\n\n';
+  for (const [index, entity] of Object.keys(entityHierarchy).entries()) {
+    if (index !== 0) {
+      output += '    else '
+    } else {
+      output += '    '
+    }
+    if (entity === 'Edge') {
+      output += 'if let list = object as? Results<Edge> { return list.itemsArray() }\n'
+    } else {
+      output += `if let list = object as? Results<${entity}> { list.forEach { collection.append($0) } }\n`
+    }
+    console.log(index, entity);
+  }
+  output += '\n    return collection\n' +
+    '}\n'
+
+  // 	if     let list = object as? Results<Note> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Label> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Photo> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Video> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Audio> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<File> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Person> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<AuditItem> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Sessions> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<PhoneNumber> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Website> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Location> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Address> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Country> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Company> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<PublicKey> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<OnlineProfile> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Diet> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<MedicalCondition> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Session> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<SessionView> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<CVUStoredDefinition> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Importer> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<Indexer> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<ImporterInstance> { list.forEach { collection.append($0) } }
+	// else if let list = object as? Results<IndexerInstance> { list.forEach { collection.append($0) } }
+  //   else if let list = object as? Results<Edge> { return list.itemsArray() }
   return output;
 }
 
@@ -226,6 +278,7 @@ let predicateHierarchy = {};
   let output = getHeader();
   output += getItemFamily();
   output += getDataItemClasses();
+  output += getDataItemListToArray();
 
   fs.writeFile(outputFile, output, (err) => {
     if (err) throw err;
