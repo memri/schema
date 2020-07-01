@@ -5,8 +5,8 @@ const path = require('path');
 const DATA_FILES = ['description.md', 'properties.txt', 'expectedTypes.txt'];
 const PRIMITIVE_TYPES = ['bool', 'int', 'float', 'string', 'datetime']; // TODO update to match new DB
 
-const ENTITY_HIERARCHY_PATH = path.resolve('../entityHierarchy/thing/Item');
-const PREDICATE_HIERARCHY_PATH = path.resolve('../predicateHierarchy');
+// const ENTITY_HIERARCHY_PATH = path.resolve('../entityHierarchy/thing/Item');
+// const PREDICATE_HIERARCHY_PATH = path.resolve('../predicateHierarchy');
 
 function path2dir(filePath, hierarchyType) {
   if (!filePath.split('/').slice(-1)[0]) {
@@ -45,7 +45,22 @@ async function getHierarchy(dir, hierarchy, rootDir, hierarchyType) {
   }
 }
 
+function wrapText(str, width, spaceReplacer) {
+  if (str.length > width) {
+    let p = width;
+    for (; p > 0 && str[p] != ' '; p--) {
+    }
+    if (p > 0) {
+      let left = str.substring(0, p);
+      let right = str.substring(p + 1);
+      return left + spaceReplacer + wrapText(right, width, spaceReplacer);
+    }
+  }
+  return str;
+}
+
 module.exports = {
   getHierarchy,
+  wrapText,
   PRIMITIVE_TYPES
 };

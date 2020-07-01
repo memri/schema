@@ -2,8 +2,8 @@ addresses
 birthDate
 email
 deathDate
-birthPlace
-deathPlace
+one_birthPlace
+one_deathPlace
 firstName
 lastName
 gender
