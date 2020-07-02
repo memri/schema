@@ -3,5 +3,5 @@ editMode
 name
 one_screenshot
 showContextPane
-showFilterPane
-views
+showFilterPanel
+sequenced_views

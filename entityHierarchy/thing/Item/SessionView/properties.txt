@@ -3,4 +3,4 @@ one_datasource
 one_session
 one_userState
 one_viewDefinition
-viewArguments
+one_viewArguments

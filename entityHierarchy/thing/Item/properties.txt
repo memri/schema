@@ -4,11 +4,11 @@ dateAccessed
 dateCreated
 dateModified
 deleted
+externalID
 functions
 genericType
 itemDescription
 labels
-memriID
 starred
 one_syncState
 version

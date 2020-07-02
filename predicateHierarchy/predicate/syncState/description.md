@@ -1,1 +1,1 @@
-TBD
+Object describing syncing information about this object like loading state, versioning, etc.

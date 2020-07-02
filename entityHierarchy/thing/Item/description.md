@@ -1,1 +1,1 @@
-The most generic type of item.
+Item is the baseclass for all of the data classes.

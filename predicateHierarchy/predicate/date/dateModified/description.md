@@ -1,1 +1,1 @@
-The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
+Last modification date of the Item.

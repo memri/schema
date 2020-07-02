@@ -77,7 +77,7 @@ function getItemFamily() {
 function getDataItemClasses() {
   let output = '';
   for (const entity of Object.keys(entityHierarchy)) {
-    if (['Datasource', 'UserState'].includes(entity)) continue; // Datasource and UserState are defined elsewhere.
+    if (['Datasource', 'UserState', 'ViewArguments'].includes(entity)) continue; // Datasource and UserState are defined elsewhere.
     let description = `\n/// ${entityHierarchy[entity]['description']}\n`;
     output += helpers.wrapText(description, 100, '\n/// ');
 
@@ -123,17 +123,17 @@ function getDataItemClasses() {
     let relations = "";
     let relationsDecoder = "";
 
-    let codingKeys = []
+    let codingKeys = [];
 
     for (let property of entityHierarchy[entity]['properties']) {
       // Skip properties already defined in 'Item', as in swift the only inheritance is that every Item extends 'Item'.
-      if (entityHierarchy['Item']['properties'].includes(property) && entity !== 'Item' || ['genericType', 'functions'].includes(property)) {
+      if (entityHierarchy['Item']['properties'].includes(property) && !['Item', 'Edge'].includes(entity) || ['genericType', 'functions'].includes(property)) {
         continue;
+      } else if (entity === 'Edge') {
+        // console.log(entity, property) // TODO remove scaffolding
       }
       if (Object.keys(predicateHierarchy).includes(property)) {
-        if (!['changelog', 'labels'].includes(property)){
-          codingKeys.push(property);
-        }
+        if (!['changelog', 'labels'].includes(property)) codingKeys.push(property);
         let type = predicateHierarchy[property]['expectedTypes'];
         if (property === 'allEdges') {
           output += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
@@ -141,11 +141,11 @@ function getDataItemClasses() {
           relationsDecoder += '            decodeEdges(decoder, "allEdges", self as! Item)\n';
         } else if (property === 'updatedFields') {
           output += '    let updatedFields = List<String>()\n';
-        } else if (property === 'memriID') {
-          dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-          dynamicVars += '    @objc dynamic var memriID:String = Item.generateUUID()\n';
-          dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
-        } else if (['version', 'uid'].includes(property)) {
+        // } else if (property === 'uid') {
+        //   dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+        //   dynamicVars += '    @objc dynamic var uid:String = Item.generateUUID()\n';
+        //   dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+        } else if (['version', 'currentViewIndex', 'currentSessionIndex'].includes(property)) {
           dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           dynamicVars += `    @objc dynamic var ${property}:Int = 0\n`;
           dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
@@ -184,9 +184,9 @@ function getDataItemClasses() {
         }
       } else if (property.substring(0, 4) === 'one_') {
         property = property.substring(4);
-        codingKeys.push(property);
         let type = predicateHierarchy[property]['expectedTypes'];
-        if (entity === 'Item') {
+        codingKeys.push(property);
+        if (['Item', 'Edge'].includes(entity)) {
           dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           dynamicVars += `    @objc dynamic var ${property}:${type}? = ${type}()\n`;
           dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
@@ -203,11 +203,17 @@ function getDataItemClasses() {
         //   realmOptionals += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
         //   realmOptionals += `    let ${property} = LinkingObjects(fromType: ${type}.self, property: "${camelCased}")\n`;
         //   realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
+      } else if (property.substring(0, 10) === 'sequenced_') {
+        property = property.substring(10);
+        let type = predicateHierarchy[property]['expectedTypes'];
+        relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+        relations += `    var ${property}: Results<${type}>? {\n` +
+          `        edges("${property}")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
+          '    }\n\n';
       } else {
-        console.log(`Error while processing: ${entity}`);
+        console.log(`Error while processing, item "${entity}" has non existent field "${property}"`);
       }
     }
-
     output += dynamicVars;
     output += realmOptionals;
     if (dynamicVars || realmOptionals) output += '\n';
@@ -241,9 +247,9 @@ function getDataItemClasses() {
       output += '\n            try self.superDecode(from: decoder)\n';
       output += '        }\n';
     } else if (['SyncState', 'Edge'].includes(entity)) {
-      output += '        }\n'
+      output += '        }\n';
     } else {
-        output += '    }\n\n' +
+      output += '    }\n\n' +
         '    private enum CodingKeys: String, CodingKey {\n' +
         '        ' + helpers.wrapText('case ' + codingKeys.join(', ') + '\n', 92, '\n            ');
     }
@@ -257,7 +263,7 @@ function getDataItemListToArray() {
   let output = 'func dataItemListToArray(_ object: Any) -> [Item] {\n' +
     '    var collection: [Item] = []\n\n';
   for (const [index, entity] of Object.keys(entityHierarchy).entries()) {
-    if (['Datasource', 'SyncState', 'UserState', 'ViewArguments'].includes(entity)) continue
+    if (['Datasource', 'SyncState', 'UserState', 'ViewArguments'].includes(entity)) continue;
     if (index !== 0) {
       output += '    else ';
     } else {

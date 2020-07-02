@@ -3,3 +3,8 @@ targetItemType
 targetItemID
 sourceItemType
 sourceItemID
+label
+sequence
+one_syncState
+deleted
+version

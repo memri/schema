@@ -1,1 +1,1 @@
-The version of the CreativeWork embodied by a specified resource.
+The last version loaded from the server.
