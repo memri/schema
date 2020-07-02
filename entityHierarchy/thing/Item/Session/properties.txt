@@ -4,3 +4,4 @@ name
 one_screenshot
 showContextPane
 showFilterPane
+views

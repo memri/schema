@@ -46,6 +46,7 @@ async function getHierarchy(dir, hierarchy, rootDir, hierarchyType) {
 }
 
 function wrapText(str, width, spaceReplacer) {
+  spaceReplacer = spaceReplacer || '\n    /// '
   if (str.length > width) {
     let p = width;
     for (; p > 0 && str[p] != ' '; p--) {

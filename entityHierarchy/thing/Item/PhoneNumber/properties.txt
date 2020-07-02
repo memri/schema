@@ -1,2 +1,2 @@
 phoneNumber
-phoneNumberType
+type

@@ -3,4 +3,4 @@ icon
 query
 itemDescription
 bundleImage
-linked_indexerRuns
+indexerRuns

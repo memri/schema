@@ -1,2 +1,4 @@
-type
-url
+isPartiallyLoaded
+actionNeeded
+updatedFields
+changedInThisSession

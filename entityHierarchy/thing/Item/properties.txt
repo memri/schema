@@ -4,11 +4,12 @@ dateAccessed
 dateCreated
 dateModified
 deleted
-itemDescription
 functions
 genericType
+itemDescription
 labels
 memriID
 starred
 one_syncState
 version
+uid

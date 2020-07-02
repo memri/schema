@@ -80,7 +80,6 @@ function getDataItemClasses() {
     if (['Datasource', 'UserState'].includes(entity)) continue; // Datasource and UserState are defined elsewhere.
     let description = `\n/// ${entityHierarchy[entity]['description']}\n`;
     output += helpers.wrapText(description, 100, '\n/// ');
-    // output += `\n/// ${entityHierarchy[entity]['description']}\n`;
 
     // A set of Items needs to be prepended with 'Schema' for front end functionality
     switch (entity) {
@@ -88,25 +87,28 @@ function getDataItemClasses() {
         output += `public class SchemaItem: Object, Codable, Identifiable, ObservableObject {\n`;
         break;
       case 'Session':
-        output += `class SchemaSession : Item {\n`;
+        output += `public class SchemaSession : Item {\n`;
         break;
       case 'Sessions':
-        output += `class SchemaSessions : Item {\n`;
+        output += `public class SchemaSessions : Item {\n`;
+        break;
+      case 'Person':
+        output += `public class SchemaPerson : Item {\n`;
         break;
       case 'SyncState':
-        output += `class SyncState: Object, Codable {\n`;
+        output += `public class SyncState: Object, Codable {\n`;
         break;
       case 'Edge':
-        output += `class Edge : Object, Codable {\n`;
+        output += `public class Edge : Object, Codable {\n`;
         break;
       case 'Datasource':
       case 'UserState':
         continue;
       default:
-        output += `class ${entity} : Item {\n`;
+        output += `public class ${entity} : Item {\n`;
     }
     if (entity === 'Item') {
-      output += `    var genericType: String { "unknown" }\n\n`;
+      output += `    override var genericType: String { "unknown" }\n\n`;
     } else {
       output += `    override var genericType:String { "${entity}" }\n\n`;
     }
@@ -121,53 +123,86 @@ function getDataItemClasses() {
     let relations = "";
     let relationsDecoder = "";
 
+    let codingKeys = []
+
     for (let property of entityHierarchy[entity]['properties']) {
       // Skip properties already defined in 'Item', as in swift the only inheritance is that every Item extends 'Item'.
       if (entityHierarchy['Item']['properties'].includes(property) && entity !== 'Item' || ['genericType', 'functions'].includes(property)) {
         continue;
       }
       if (Object.keys(predicateHierarchy).includes(property)) {
+        if (!['changelog', 'labels'].includes(property)){
+          codingKeys.push(property);
+        }
         let type = predicateHierarchy[property]['expectedTypes'];
-        if (type === 'string') {
+        if (property === 'allEdges') {
+          output += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+          output += '    let allEdges = List<Edge>()\n';
+          relationsDecoder += '            decodeEdges(decoder, "allEdges", self as! Item)\n';
+        } else if (property === 'updatedFields') {
+          output += '    let updatedFields = List<String>()\n';
+        } else if (property === 'memriID') {
+          dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+          dynamicVars += '    @objc dynamic var memriID:String = Item.generateUUID()\n';
+          dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+        } else if (['version', 'uid'].includes(property)) {
+          dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+          dynamicVars += `    @objc dynamic var ${property}:Int = 0\n`;
+          dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+        } else if (type === 'string') {
+          dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           dynamicVars += `    @objc dynamic var ${property}:String? = nil\n`;
           dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
         } else if (type === 'datetime') {
+          dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           dynamicVars += `    @objc dynamic var ${property}:Date? = nil\n`;
           dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
         } else if (type === 'bool') {
+          dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           dynamicVars += `    @objc dynamic var ${property}:Bool = false\n`;
           dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
         } else if (type === 'int') {
+          realmOptionals += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           realmOptionals += `    let ${property} = RealmOptional<Int>()\n`;
           realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
         } else if (type === 'float') {
+          realmOptionals += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           realmOptionals += `    let ${property} = RealmOptional<Double>()\n`;
           realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
         } else if (type === 'any') {
-          // relations += `    var ${property}: Results<Edge> {\n` +
-          //   `        edges("${property}").items(type:Edge.self)\n` +
-          //   '    }\n\n';
-          relations += `    var ${property}: [Item] {\n` +
-            `        edges("${property}").itemsArray()\n` +
+          if (entity === 'Item') continue;
+          relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+          relations += `    var ${property}: [Item]? {\n` +
+            `        edges("${property}")?.itemsArray()\n` +
             `    }\n\n`;
         } else {
-          relations += `    var ${property}: Results<${type}> {\n` +
-            `        edges("${property}").items(type:${type}.self)\n` +
+          if (entity === 'Item') continue;
+          relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+          relations += `    var ${property}: Results<${type}>? {\n` +
+            `        edges("${property}")?.items(type:${type}.self)\n` +
             '    }\n\n';
         }
       } else if (property.substring(0, 4) === 'one_') {
         property = property.substring(4);
+        codingKeys.push(property);
         let type = predicateHierarchy[property]['expectedTypes'];
-        relations += `    var ${property}: ${type} {\n` +
-          `        edge("${property}").item(type:${type}.self)\n` +
-          '    }\n\n';
-
-      } else if (property.substring(0, 7) === 'linked_') {
-        property = property.substring(7);
-        let type = predicateHierarchy[property]['expectedTypes'];
-        let camelCased = entity.substring(0, 1).toLocaleLowerCase() + entity.substring(1);
-        realmOptionals += `    let ${property} = LinkingObjects(fromType: ${type}.self, property: "${camelCased}")\n`;
-        realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
+        if (entity === 'Item') {
+          dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+          dynamicVars += `    @objc dynamic var ${property}:${type}? = ${type}()\n`;
+          dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+        } else {
+          relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+          relations += `    var ${property}: ${type}? {\n` +
+            `        edge("${property}")?.target(type:${type}.self)\n` +
+            '    }\n\n';
+        }
+        // } else if (property.substring(0, 7) === 'linked_') {
+        //   property = property.substring(7);
+        //   let type = predicateHierarchy[property]['expectedTypes'];
+        //   let camelCased = entity.substring(0, 1).toLocaleLowerCase() + entity.substring(1);
+        //   realmOptionals += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+        //   realmOptionals += `    let ${property} = LinkingObjects(fromType: ${type}.self, property: "${camelCased}")\n`;
+        //   realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
       } else {
         console.log(`Error while processing: ${entity}`);
       }
@@ -186,37 +221,35 @@ function getDataItemClasses() {
     if (entity === 'Item') {
       output += '    public func superDecode(from decoder: Decoder) throws {\n';
     } else {
-      output += '    public convenience required init(from decoder: Decoder) throws {\n' +
-        '        super.init()\n' +
-        '        \n' +
+      output += '    public required convenience init(from decoder: Decoder) throws {\n';
+    }
+    if (['Item'].includes(entity)) {
+      // output += '        self.init()\n\n'; // TODO
+    } else {
+      output += '        self.init()\n';
+    }
+    if (entity !== 'Item') {
+      output += '        \n' +
         '        jsonErrorHandling(decoder) {\n';
     }
     if (entityHierarchy[entity]['properties']) {
+      output += relationsDecoder;
       output += dynamicVarsDecoder;
       output += realmOptionalsDecoder;
-      output += relationsDecoder;
     }
-    if (entity !== 'Item') {
-      if (dynamicVarsDecoder || realmOptionalsDecoder || relationsDecoder) output += '\n';
-      output += '            try self.superDecode(from: decoder)\n' +
-        '        }\n';
+    if (!['Item', 'SyncState', 'Edge'].includes(entity)) {
+      output += '\n            try self.superDecode(from: decoder)\n';
+      output += '        }\n';
+    } else if (['SyncState', 'Edge'].includes(entity)) {
+      output += '        }\n'
     } else {
-      output += '    }\n\n' +
-        '    /// Deserializes Item from json decoder\n' +
-        '    /// - Parameter decoder: Decoder object\n' +
-        '    /// - Throws: Decoding error\n' +
-        '    required public convenience init(from decoder: Decoder) throws {\n' +
-        '        self.init()\n' +
-        '        try superDecode(from: decoder)\n' +
-        '    }\n\n' +
+        output += '    }\n\n' +
         '    private enum CodingKeys: String, CodingKey {\n' +
-        '        case uid, memriID, deleted, starred, dateCreated, dateModified, dateAccessed, changelog,\n' +
-        '            labels, syncState\n';
+        '        ' + helpers.wrapText('case ' + codingKeys.join(', ') + '\n', 92, '\n            ');
     }
     output += '    }\n' +
-      '}\n\n';
+      '}\n';
   }
-
   return output;
 }
 
@@ -224,48 +257,21 @@ function getDataItemListToArray() {
   let output = 'func dataItemListToArray(_ object: Any) -> [Item] {\n' +
     '    var collection: [Item] = []\n\n';
   for (const [index, entity] of Object.keys(entityHierarchy).entries()) {
+    if (['Datasource', 'SyncState', 'UserState', 'ViewArguments'].includes(entity)) continue
     if (index !== 0) {
-      output += '    else '
+      output += '    else ';
     } else {
-      output += '    '
+      output += '    ';
     }
     if (entity === 'Edge') {
-      output += 'if let list = object as? Results<Edge> { return list.itemsArray() }\n'
+      output += 'if let list = object as? Results<Edge> { return list.itemsArray() }\n';
     } else {
-      output += `if let list = object as? Results<${entity}> { list.forEach { collection.append($0) } }\n`
+      output += `if let list = object as? Results<${entity}> { list.forEach { collection.append($0) } }\n`;
     }
-    console.log(index, entity);
   }
   output += '\n    return collection\n' +
-    '}\n'
+    '}\n';
 
-  // 	if     let list = object as? Results<Note> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Label> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Photo> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Video> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Audio> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<File> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Person> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<AuditItem> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Sessions> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<PhoneNumber> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Website> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Location> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Address> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Country> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Company> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<PublicKey> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<OnlineProfile> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Diet> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<MedicalCondition> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Session> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<SessionView> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<CVUStoredDefinition> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Importer> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<Indexer> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<ImporterInstance> { list.forEach { collection.append($0) } }
-	// else if let list = object as? Results<IndexerInstance> { list.forEach { collection.append($0) } }
-  //   else if let list = object as? Results<Edge> { return list.itemsArray() }
   return output;
 }
 
