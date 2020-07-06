@@ -1,1 +1,1 @@
-The date on which the CreativeWork was last accessed.
+Last access date of the Item.

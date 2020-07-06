@@ -1,2 +1,1 @@
-creativeWork
-url
+string

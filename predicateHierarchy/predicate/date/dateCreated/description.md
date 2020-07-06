@@ -1,1 +1,1 @@
-The date on which the CreativeWork was created or the item was added to a DataFeed.
+Creation date of the Item.
