@@ -42,7 +42,6 @@ function getItemFamily() {
   for (const entity of Object.keys(entityHierarchy)) {
     if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
     output += `        case .type${entity}: return Color(hex: "${entityHierarchy[entity]['backgroundColor']}")\n`; // TODO
-    // output += `        case .type${entity}: return Color(hex: "#93c47d")\n`;
   }
   output += '        }\n' +
     '    }\n\n';
@@ -53,7 +52,6 @@ function getItemFamily() {
   for (const entity of Object.keys(entityHierarchy)) {
     if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
     output += `        case .type${entity}: return Color(hex: "${entityHierarchy[entity]['foregroundColor']}")\n`; // TODO
-    // output += `        case .type${entity}: return Color(hex: "#fff")\n`;
   }
   output += '        }\n' +
     '    }\n\n';
@@ -138,7 +136,7 @@ function getDataItemClasses() {
           relationsDecoder += '            decodeEdges(decoder, "allEdges", self as! Item)\n';
         } else if (property === 'updatedFields') {
           output += '    let updatedFields = List<String>()\n';
-        } else if (['version', 'currentViewIndex', 'currentSessionIndex', 'sequence'].includes(property)) {
+        } else if (['version', 'currentViewIndex', 'currentSessionIndex'].includes(property)) {
           dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           dynamicVars += `    @objc dynamic var ${property}:Int = 0\n`;
           dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
@@ -242,7 +240,7 @@ function getDataItemClasses() {
 }
 
 function getDataItemListToArray() {
-  let output = 'func dataItemListToArray(_ object: Any) -> [Item] {\n' +
+  let output = '\nfunc dataItemListToArray(_ object: Any) -> [Item] {\n' +
     '    var collection: [Item] = []\n\n';
   for (const [index, entity] of Object.keys(entityHierarchy).entries()) {
     if (['Datasource', 'SyncState', 'UserState', 'ViewArguments'].includes(entity)) continue;
