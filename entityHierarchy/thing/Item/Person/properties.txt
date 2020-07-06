@@ -11,7 +11,6 @@ sexualOrientation
 height
 shoulderWidth
 armLength
-age
 one_profilePicture
 relationships
 phoneNumbers

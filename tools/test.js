@@ -15,6 +15,8 @@ let predicateHierarchy = {};
     for (let property of entityHierarchy[entity]['properties']) {
       if (property.substring(0, 4) === 'one_') {
         property = property.substring(4);
+      } else if (property.substring(0, 10) === 'sequenced_') {
+        property = property.substring(10);
       }
       if (!Object.keys(predicateHierarchy).includes(property)) {
         console.log(`-> Entity: '${entity}', has non-existent property: '${property}'`);
@@ -32,7 +34,7 @@ let predicateHierarchy = {};
         }
       }
     } else {
-      console.log(`-> Predicate: '${predicateHierarchy[predicate]['path']}', has no expected types`);
+      // console.log(`-> Predicate: '${predicateHierarchy[predicate]['path']}', has no expected types`);
     }
   }
 

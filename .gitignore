@@ -3,6 +3,7 @@
 entityHierarchy.json
 predicateHierarchy.json
 *schema.swift
+*schema_target.swift
 *schema.json
 
 # Logs
