@@ -41,8 +41,8 @@ function getItemFamily() {
     '        switch self {\n';
   for (const entity of Object.keys(entityHierarchy)) {
     if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
-    // output += `        case .type${entity}: return Color(hex: '${entityHierarchy[entity]['backgroundColor']}')\n`; // TODO
-    output += `        case .type${entity}: return Color(hex: "#93c47d")\n`;
+    output += `        case .type${entity}: return Color(hex: "${entityHierarchy[entity]['backgroundColor']}")\n`; // TODO
+    // output += `        case .type${entity}: return Color(hex: "#93c47d")\n`;
   }
   output += '        }\n' +
     '    }\n\n';
@@ -52,8 +52,8 @@ function getItemFamily() {
     '        switch self {\n';
   for (const entity of Object.keys(entityHierarchy)) {
     if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
-    // output += `        case .type${entity}: return Color(hex: '${entityHierarchy[entity]['foregroundColor']}')\n`; // TODO
-    output += `        case .type${entity}: return Color(hex: "#fff")\n`;
+    output += `        case .type${entity}: return Color(hex: "${entityHierarchy[entity]['foregroundColor']}")\n`; // TODO
+    // output += `        case .type${entity}: return Color(hex: "#fff")\n`;
   }
   output += '        }\n' +
     '    }\n\n';
@@ -109,11 +109,6 @@ function getDataItemClasses() {
       default:
         output += `public class ${entity} : Item {\n`;
     }
-    if (entity === 'Item') {
-      output += `    override var genericType: String { "unknown" }\n\n`;
-    } else {
-      output += `    override var genericType:String { "${entity}" }\n\n`;
-    }
 
     // Properties.
     let dynamicVars = "";
@@ -143,11 +138,7 @@ function getDataItemClasses() {
           relationsDecoder += '            decodeEdges(decoder, "allEdges", self as! Item)\n';
         } else if (property === 'updatedFields') {
           output += '    let updatedFields = List<String>()\n';
-        // } else if (property === 'uid') {
-        //   dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-        //   dynamicVars += '    @objc dynamic var uid:String = Item.generateUUID()\n';
-        //   dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
-        } else if (['version', 'currentViewIndex', 'currentSessionIndex'].includes(property)) {
+        } else if (['version', 'currentViewIndex', 'currentSessionIndex', 'sequence'].includes(property)) {
           dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           dynamicVars += `    @objc dynamic var ${property}:Int = 0\n`;
           dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
@@ -277,7 +268,7 @@ let predicateHierarchy = {};
 (async () => {
   await helpers.getHierarchy(entityHierarchyPath, entityHierarchy, entityHierarchyPath, 'Item');
   await helpers.getHierarchy(predicateHierarchyPath, predicateHierarchy, predicateHierarchyPath, 'predicate');
-
+ 
   let output = getHeader();
   output += getItemFamily();
   output += getDataItemClasses();

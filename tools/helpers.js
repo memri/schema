@@ -2,7 +2,7 @@ const fs = require('fs');
 const {readdir} = require('fs').promises;
 const path = require('path');
 
-const DATA_FILES = ['description.md', 'properties.txt', 'expectedTypes.txt'];
+const DATA_FILES = ['description.md', 'properties.txt', 'expectedTypes.txt', 'backgroundColor.txt', 'foregroundColor.txt'];
 const PRIMITIVE_TYPES = ['bool', 'int', 'float', 'string', 'datetime']; // TODO update to match new DB
 
 // const ENTITY_HIERARCHY_PATH = path.resolve('../entityHierarchy/thing/Item');
@@ -49,7 +49,7 @@ function wrapText(str, width, spaceReplacer) {
   spaceReplacer = spaceReplacer || '\n    /// '
   if (str.length > width) {
     let p = width;
-    for (; p > 0 && str[p] != ' '; p--) {
+    for (; p > 0 && str[p] !== ' '; p--) {
     }
     if (p > 0) {
       let left = str.substring(0, p);
