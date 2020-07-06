@@ -56,12 +56,12 @@ function getItemFamily() {
   output += '        }\n' +
     '    }\n\n';
 
-  // Get primary key function.
+  // Get primary key functions.
   output += '    func getPrimaryKey() -> String {\n' +
     '        return self.getType().primaryKey() ?? \"\"\n' +
     '    }\n\n';
 
-  // Get type function.
+  // Get type functions.
   output += '    func getType() -> AnyObject.Type {\n' +
     '        switch self {\n';
   for (const entity of Object.keys(entityHierarchy)) {

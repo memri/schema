@@ -1,4 +1,4 @@
 date
-contents
+content
 action
 appliesTo

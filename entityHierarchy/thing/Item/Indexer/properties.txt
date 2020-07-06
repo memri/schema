@@ -3,5 +3,5 @@ icon
 query
 itemDescription
 bundleImage
-indexerRuns
+indexerRun
 runDestination

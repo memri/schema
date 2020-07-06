@@ -4,4 +4,4 @@ name
 one_screenshot
 showContextPane
 showFilterPanel
-sequenced_views
+sequenced_view

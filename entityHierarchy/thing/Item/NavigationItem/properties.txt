@@ -1,4 +1,4 @@
 title
-view
+sessionName
 sequence
 type

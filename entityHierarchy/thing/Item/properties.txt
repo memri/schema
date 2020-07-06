@@ -5,10 +5,9 @@ dateCreated
 dateModified
 deleted
 externalID
-functions
 genericType
 itemDescription
-labels
+label
 starred
 one_syncState
 version

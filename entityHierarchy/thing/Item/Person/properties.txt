@@ -1,4 +1,4 @@
-addresses
+address
 birthDate
 email
 deathDate
@@ -12,11 +12,11 @@ height
 shoulderWidth
 armLength
 one_profilePicture
-relationships
-phoneNumbers
-websites
-companies
-publicKeys
-onlineProfiles
-diets
-medicalConditions
+relationship
+phoneNumber
+website
+company
+publicKey
+onlineProfile
+diet
+medicalCondition

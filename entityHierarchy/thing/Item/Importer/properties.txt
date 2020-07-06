@@ -2,4 +2,4 @@ name
 dataType
 icon
 bundleImage
-importerRuns
+importerRun

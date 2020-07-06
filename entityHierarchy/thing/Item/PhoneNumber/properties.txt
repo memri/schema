@@ -1,2 +1,2 @@
-phoneNumber
+phoneNumberWithAreaCode
 type

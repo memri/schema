@@ -6,7 +6,7 @@ contentLocation
 dateCreated
 dateModified
 datePublished
-keywords
+keyword
 license
 locationCreated
 text
