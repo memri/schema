@@ -3,6 +3,7 @@ const path = require('path');
 const {readdir} = require('fs').promises;
 const express = require('express');
 const exphbs = require('express-handlebars');
+const helpers = require('./helpers');
 
 // Defines the Express + Handlebars app.
 const app = express();
@@ -59,15 +60,15 @@ async function getHierarchy(dir, hierarchy, splitPath) {
   }
 }
 
-function getAncestry(path) {
-  // Returns ancestry of a node in the hierarchy as a mapping from the node name to the node path,
-  // e.g. '/thing/Item' -> { thing: '/thing', Item: '/thing/Item' }
-  let ancestry = {};
-  for (let i = 1; i < path.length; i++) {
-    ancestry[path[i]] = (path.slice(0, i + 1).join('/'));
-  }
-  return ancestry;
-}
+// function getAncestry(path) {
+//   // Returns ancestry of a node in the hierarchy as a mapping from the node name to the node path,
+//   // e.g. '/thing/Item' -> { thing: '/thing', Item: '/thing/Item' }
+//   let ancestry = {};
+//   for (let i = 1; i < path.length; i++) {
+//     ancestry[path[i]] = (path.slice(0, i + 1).join('/'));
+//   }
+//   return ancestry;
+// }
 
 let entityHierarchy = {};
 let predicateHierarchy = {};
@@ -90,7 +91,7 @@ app.get('/*', (request, response) => {
   let data = {
     name: pathList.slice(-1)[0],
     path: path,
-    pathLinks: getAncestry(path.split('/')),
+    pathLinks: helpers.getAncestry(path.split('/')),
     entityHierarchy: entityHierarchy,
     predicateHierarchy: predicateHierarchy,
   };

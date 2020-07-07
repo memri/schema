@@ -1,1 +1,1 @@
-A phone number.
+A phone number with an area code.

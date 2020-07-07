@@ -13,7 +13,7 @@ shoulderWidth
 armLength
 one_profilePicture
 relationship
-phoneNumber
+hasPhoneNumber
 website
 company
 publicKey
