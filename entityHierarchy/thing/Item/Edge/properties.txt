@@ -7,4 +7,4 @@ sequence
 one_syncState
 deleted
 version
-one_label
+one_edgeLabel
