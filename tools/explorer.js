@@ -7,7 +7,7 @@ const helpers = require('./helpers');
 
 // Defines the Express + Handlebars app.
 const app = express();
-const port = 3000;
+const port = 3001;
 app.engine('.hbs', exphbs({
   helpers: {
     log: function (value) {
