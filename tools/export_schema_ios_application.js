@@ -34,13 +34,13 @@ function getItemFamily() {
     if (['Item'].includes(entity)) continue; // TODO global
     output += `    case type${entity} = "${entity}"\n`;
   }
-  output += '\n    static var discriminator: Discriminator = .type\n\n';
+  output += '\n    static var discriminator: Discriminator = ._type\n\n';
 
   // Background colors.
   output += '    var backgroundColor: Color {\n' +
     '        switch self {\n';
   for (const entity of Object.keys(entityHierarchy)) {
-    if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
+    if (['Item'].includes(entity)) continue; // TODO global
     output += `        case .type${entity}: return Color(hex: "${entityHierarchy[entity]['backgroundColor']}")\n`; // TODO
   }
   output += '        }\n' +
@@ -50,7 +50,7 @@ function getItemFamily() {
   output += '    var foregroundColor: Color {\n' +
     '        switch self {\n';
   for (const entity of Object.keys(entityHierarchy)) {
-    if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
+    if (['Item'].includes(entity)) continue; // TODO global
     output += `        case .type${entity}: return Color(hex: "${entityHierarchy[entity]['foregroundColor']}")\n`; // TODO
   }
   output += '        }\n' +
@@ -65,7 +65,7 @@ function getItemFamily() {
   output += '    func getType() -> AnyObject.Type {\n' +
     '        switch self {\n';
   for (const entity of Object.keys(entityHierarchy)) {
-    if (['Item', 'Datasource', 'UserState'].includes(entity)) continue; // TODO global
+    if (['Item'].includes(entity)) continue; // TODO global
     output += `        case .type${entity}: return ${entity}.self\n`;
   }
   output += '        }\n' +
@@ -84,7 +84,7 @@ function getDataItemClasses() {
     // A set of Items needs to be prepended with 'Schema' for front end functionality
     switch (entity) {
       case 'Item':
-        output += `public class SchemaItem: Object, Codable, Identifiable, ObservableObject {\n`;
+        output += `public class SchemaItem: Object, Codable, Identifiable {\n`;
         break;
       case 'Session':
         output += `public class SchemaSession : Item {\n`;
@@ -128,7 +128,7 @@ function getDataItemClasses() {
         // console.log(entity, property) // TODO remove scaffolding
       }
       if (Object.keys(predicateHierarchy).includes(property)) {
-        if (!['changelog', 'labels'].includes(property)) codingKeys.push(property);
+        if (!['changelog', 'label'].includes(property)) codingKeys.push(property);
         let type = predicateHierarchy[property]['expectedTypes'];
         if (property === 'allEdges') {
           output += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
@@ -143,7 +143,11 @@ function getDataItemClasses() {
         } else if (type === 'string') {
           dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           dynamicVars += `    @objc dynamic var ${property}:String? = nil\n`;
-          dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+          if (property === 'targetItemType') {
+            dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("itemType") ?? ${property}\n`;
+          } else if (property !== 'sourceItemType') {
+            dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+          }
         } else if (type === 'datetime') {
           dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           dynamicVars += `    @objc dynamic var ${property}:Date? = nil\n`;
@@ -155,7 +159,11 @@ function getDataItemClasses() {
         } else if (type === 'int') {
           realmOptionals += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           realmOptionals += `    let ${property} = RealmOptional<Int>()\n`;
-          realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
+          if (property === 'targetItemID') {
+            realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("uid") ?? ${property}.value\n`;
+          } else if (property !== 'sourceItemID') {
+            realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
+          }
         } else if (type === 'float') {
           realmOptionals += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           realmOptionals += `    let ${property} = RealmOptional<Double>()\n`;
@@ -178,9 +186,15 @@ function getDataItemClasses() {
         let type = predicateHierarchy[property]['expectedTypes'];
         codingKeys.push(property);
         if (['Item', 'Edge'].includes(entity)) {
-          dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-          dynamicVars += `    @objc dynamic var ${property}:${type}? = ${type}()\n`;
-          dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+          if (property === 'edgeLabel') {
+            dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+            dynamicVars += `    @objc dynamic var ${property}:String? = nil\n`;
+            dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+          } else {
+            dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+            dynamicVars += `    @objc dynamic var ${property}:${type}? = ${type}()\n`;
+            dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+          }
         } else {
           relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           relations += `    var ${property}: ${type}? {\n` +
@@ -191,9 +205,19 @@ function getDataItemClasses() {
         property = property.substring(10);
         let type = predicateHierarchy[property]['expectedTypes'];
         relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-        relations += `    var ${property}: Results<${type}>? {\n` +
-          `        edges("${property}")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
-          '    }\n\n';
+        if (property === 'views') {
+          relations += `    var ${property}: Results<${type}>? {\n` +
+            `        edges("view")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
+            '    }\n\n';
+        } else if (property === 'sessions') {
+          relations += `    var ${property}: Results<${type}>? {\n` +
+            `        edges("session")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
+            '    }\n\n';
+        } else {
+          relations += `    var ${property}: Results<${type}>? {\n` +
+            `        edges("${property}")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
+            '    }\n\n';
+        }
       } else {
         console.log(`Error while processing, item "${entity}" has non existent field "${property}"`);
       }
@@ -223,15 +247,18 @@ function getDataItemClasses() {
       output += dynamicVarsDecoder;
       output += realmOptionalsDecoder;
     }
-    if (!['Item', 'SyncState', 'Edge'].includes(entity)) {
-      output += '\n            try self.superDecode(from: decoder)\n';
-      output += '        }\n';
-    } else if (['SyncState', 'Edge'].includes(entity)) {
-      output += '        }\n';
-    } else {
+    if (entity === 'Item') {
       output += '    }\n\n' +
         '    private enum CodingKeys: String, CodingKey {\n' +
         '        ' + helpers.wrapText('case ' + codingKeys.join(', ') + '\n', 92, '\n            ');
+    } else if (entity === 'Edge') {
+      output += '\n            try parseTargetDict(try decoder.decodeIfPresent("target"))\n'
+      output += '        }\n';
+    } else if (entity === 'SyncState') {
+      output += '        }\n';
+    } else {
+      output += '\n            try self.superDecode(from: decoder)\n';
+      output += '        }\n';
     }
     output += '    }\n' +
       '}\n';
@@ -266,7 +293,7 @@ let predicateHierarchy = {};
 (async () => {
   await helpers.getHierarchy(entityHierarchyPath, entityHierarchy, entityHierarchyPath, 'Item');
   await helpers.getHierarchy(predicateHierarchyPath, predicateHierarchy, predicateHierarchyPath, 'predicate');
- 
+
   let output = getHeader();
   output += getItemFamily();
   output += getDataItemClasses();

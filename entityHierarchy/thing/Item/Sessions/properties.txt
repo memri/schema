@@ -1,2 +1,2 @@
 currentSessionIndex
-sequenced_session
+sequenced_sessions
