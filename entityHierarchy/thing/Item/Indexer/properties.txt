@@ -5,3 +5,4 @@ itemDescription
 bundleImage
 indexerRun
 runDestination
+indexerClass

@@ -17,13 +17,10 @@ let predicateHierarchy = {};
     if (entity === 'Item') continue;
     let ancestry = helpers.getAncestry2(entityHierarchy[entity]['path'].split('/'));
 
-    console.log('\n----------------', entity, ancestry)
     let propertiesIncludingInherited = []
     for (const _entity in ancestry) {
-      console.log(_entity, entityHierarchy[_entity]['properties'])
       propertiesIncludingInherited.push(entityHierarchy[_entity]['properties'])
     }
-    console.log(propertiesIncludingInherited.flat())
 
     let properties = [];
     for (const property of propertiesIncludingInherited.flat()) {
@@ -42,6 +39,10 @@ let predicateHierarchy = {};
           case 'float':
             dbtype = 'Real';
             break;
+          case 'datetime':
+          case 'date':
+            dbtype = 'DateTime';
+            break;
           default:
             dbtype = false;
         }
@@ -53,7 +54,7 @@ let predicateHierarchy = {};
     types.push({'name': entity, 'properties': properties});
   }
 
-  console.log(JSON.stringify({'types': types}, null, 2));
+  // console.log(JSON.stringify({'types': types}, null, 2));
   fs.writeFile(outputFile, JSON.stringify({'types': types}, null, 2), (err) => {
     if (err) throw err;
     console.log('File saved as ' + outputFile);
