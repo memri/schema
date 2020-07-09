@@ -136,9 +136,13 @@ function getDataItemClasses() {
           relationsDecoder += '            decodeEdges(decoder, "allEdges", self as! Item)\n';
         } else if (property === 'updatedFields') {
           output += '    let updatedFields = List<String>()\n';
-        } else if (['version', 'currentViewIndex', 'currentSessionIndex'].includes(property)) {
+        } else if (['currentViewIndex', 'currentSessionIndex'].includes(property)) {
           dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
           dynamicVars += `    @objc dynamic var ${property}:Int = 0\n`;
+          dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+        } else if ('version' === property) {
+          dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+          dynamicVars += `    @objc dynamic var ${property}:Int = 1\n`;
           dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
         } else if (type === 'string') {
           dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
