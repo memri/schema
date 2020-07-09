@@ -5,15 +5,18 @@
 
 <h4>Item hierarchy</h4>
 <p>
-  The <a href="/thing">Item hierarchy</a> dictates how types of nodes are related. For instance, to find all
-  <i>ImageObjects</i> and <i>VideoObjects</i> related to some Item, we can query them using their parent Item type
-  <i>MediaObject</i>.
+  The <a href="/thing">Item hierarchy</a> defines what types of Items can exist in the database, what Properties and
+  Edges they can have, and how the Items are related. As the database is a graph database, Items can be be seen as nodes
+  in the graph. The Items are in a hierarchy to enable smart retrieval. For instance, to find all <i>ImageObjects</i>
+  and <i>VideoObjects</i> related to some Item, we can query them using their parent Item type <i>MediaObject</i>.
 </p>
 
 <h4>Edge &#38; Property hierarchy</h4>
 <p>
-  The <a href="/predicate">Edge and Property hierarchy</a> dictates how types of edges and properties are related. For
-  instance, to find all family members of an item of type <i>Person</i>, all edges that are of the <i>familyRelation</i>
-  type can be queried, retrieving all its children in the edge and property hierarchy, including <i>mothers</i>,
-  <i>fathers</i>, <i>sisters</i>, etc.
+  The <a href="/predicate">Edge and Property hierarchy</a> defines what Edges and Properties can exist in the database,
+  what type of data they refer to, and how the Edges and Properties are related. The expected types of properties are
+  primitive data types, like strings and ints, and are always one-to-one relations. Edges point to other Items, and are
+  one-to-many relations. Again, we use an hierarchy to enable smart retrieval. For instance, to find all family members
+  of an item of type <i>Person</i>, all Edges that are of the <i>familyRelation</i>-type can be queried, retrieving all
+  its children in the Edge and Property hierarchy, including <i>mothers</i>, <i>fathers</i>, <i>sisters</i>, etc.
 </p>
