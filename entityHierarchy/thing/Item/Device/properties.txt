@@ -3,5 +3,5 @@ make
 manufacturer
 model
 name
-dateAquired
+dateAcquired
 dateLost
