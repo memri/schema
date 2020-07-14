@@ -21,52 +21,40 @@ function getItemFamily() {
 function getDataItemClasses() {
   let dataItemClasses = [];
   for (const entity of Object.keys(entityHierarchy)) {
-    let output = '';
     if (['Datasource', 'UserState', 'ViewArguments'].includes(entity)) continue;
 
     let classDescription = `\n/// ${entityHierarchy[entity]['description']}\n`;
-    output += helpers.wrapText(classDescription, 100, '\n/// ');
     classDescription = helpers.wrapText(`/// ${entityHierarchy[entity]['description']}`, 100, '\n/// ');
 
     let classDefinition;
     switch (entity) {
       case 'Item':
-        output += `public class SchemaItem: Object, Codable, Identifiable {\n`;
         classDefinition = `public class SchemaItem: Object, Codable, Identifiable {`;
         break;
       case 'Session':
-        output += `public class SchemaSession : Item {\n`;
         classDefinition = `public class SchemaSession : Item {`;
         break;
       case 'Sessions':
-        output += `public class SchemaSessions : Item {\n`;
         classDefinition = `public class SchemaSessions : Item {`;
         break;
       case 'Person':
-        output += `public class SchemaPerson : Item {\n`;
         classDefinition = `public class SchemaPerson : Item {`;
         break;
       case 'SyncState':
-        output += 'public class SyncState: Object, Codable {\n    let updatedFields = List<String>()\n';
         classDefinition = 'public class SyncState: Object, Codable {\n    let updatedFields = List<String>()';
         break;
       case 'Edge':
-        output += `public class Edge : Object, Codable {\n`;
         classDefinition = `public class Edge : Object, Codable {`;
         break;
       default:
-        output += `public class ${entity} : Item {\n`;
         classDefinition = `public class ${entity} : Item {`;
     }
 
-    // Properties.
     let properties = "";
     let propertiesDecoder = "";
     let relations = "";
     let relationsDecoder = "";
     let codingKeys = [];
-
-    let propertiesList = [], relationsList = [];
 
     for (let property of entityHierarchy[entity]['properties']) {
       if (['genericType', 'functions', 'updatedFields'].includes(property)) continue;
@@ -87,7 +75,6 @@ function getDataItemClasses() {
       if (Object.keys(predicateHierarchy).includes(property)) {
         if (!['changelog', 'label'].includes(property)) codingKeys.push(property);
 
-        // Add description of property/relation.
         let type = predicateHierarchy[property]['expectedTypes'];
         if (property === 'syncState' || helpers.PRIMITIVE_TYPES.includes(type) || type === 'Edge') {
           properties += helpers.wrapText(`    /// ${predicateHierarchy[property]['description']}\n`, 96);
@@ -95,7 +82,6 @@ function getDataItemClasses() {
           relations += helpers.wrapText(`    /// ${predicateHierarchy[property]['description']}\n`, 96);
         }
 
-        // Special cases.
         if (['allEdges', 'currentViewIndex', 'currentSessionIndex', 'version', 'views', 'sessions', 'syncState'].includes(property)) {
           switch (property) {
             case 'allEdges':
@@ -162,7 +148,7 @@ function getDataItemClasses() {
                 `        edges("${property}")?.itemsArray()\n` +
                 `    }\n\n`;
               break;
-            default:
+            default: // Relations are defined here, as they are not one of the primitive types (see cases above)
               if (entity === 'Item') continue;
               relations += `    var ${property}: ${singular ? `${type}` : `Results<${type}>`}? {\n` +
                 `        edge${singular ? '' : 's'}("${property}")?${sequenced ? '.sorted(byKeyPath: "sequence")' : ''}.${singular ? 'target' : 'items'}(type:${type}.self)\n` +
@@ -171,68 +157,42 @@ function getDataItemClasses() {
         }
       }
     }
-    output += properties;
-    if (properties) output += '\n';
-    output += relations;
 
-    // Decoder
     let decoderFunction;
     if (entity === 'Item') {
-      output += '    public func superDecode(from decoder: Decoder) throws {\n';
       decoderFunction = '    public func superDecode(from decoder: Decoder) throws {';
     } else {
-      output += `    public required convenience init(from decoder: Decoder) throws {
-        self.init()
-   
-        jsonErrorHandling(decoder) {
-`;
       decoderFunction = `    public required convenience init(from decoder: Decoder) throws {
         self.init()
 
         jsonErrorHandling(decoder) {`;
     }
 
-    output += relationsDecoder;
-    output += propertiesDecoder;
-
-    let closingThing;
+    // Additional functionality, and the right closing braces for the item.
+    let additionalFunctionality;
     if (entity === 'Item') {
-      output += '    }\n\n' +
-        '    private enum CodingKeys: String, CodingKey {\n' +
-        '        ' + helpers.wrapText('case ' + codingKeys.join(', ') + '\n', 92, '\n            ');
-      closingThing = `    }
+      additionalFunctionality = `    }
       
     private enum CodingKeys: String, CodingKey {
         ${helpers.wrapText('case ' + codingKeys.join(', '), 92, '\n            ')}`;
     } else if (entity === 'Edge') {
-      output += '\n            try parseTargetDict(try decoder.decodeIfPresent("target"))\n';
-      output += '        }\n';
-      closingThing = '\n            try parseTargetDict(try decoder.decodeIfPresent("target"))\n        }';
+      additionalFunctionality = '\n            try parseTargetDict(try decoder.decodeIfPresent("target"))\n        }';
     } else if (entity === 'SyncState') {
-      output += '        }\n';
-      closingThing = '        }';
+      additionalFunctionality = '        }';
     } else {
-      output += '\n            try self.superDecode(from: decoder)\n';
-      output += '        }\n';
-      closingThing = '\n            try self.superDecode(from: decoder)\n        }';
+      additionalFunctionality = '\n            try self.superDecode(from: decoder)\n        }';
     }
-    output += '    }\n' +
-      '}';
-    // dataItemClasses.push(output);
 
-    let test = `${classDescription}
+    let dataItemClass = `${classDescription}
 ${classDefinition}
 ${properties}${properties ? '\n' : ''}${relations}${decoderFunction}
-${propertiesDecoder}${relationsDecoder}${closingThing}
+${propertiesDecoder}${relationsDecoder}${additionalFunctionality}
     }
 }
 `;
-
-    dataItemClasses.push(test);
-    console.log(test);
+    dataItemClasses.push(dataItemClass);
   }
-
-  return helpers.insertList(dataItemClasses);
+  return dataItemClasses;
 }
 
 function getDataItemListToArray() {
@@ -302,8 +262,7 @@ enum ItemFamily: String, ClassFamily, CaseIterable {
     }
 }
 
-${dataItemClasses}
-
+${helpers.insertList(dataItemClasses)}
 func dataItemListToArray(_ object: Any) -> [Item] {
     var collection: [Item] = []
 
