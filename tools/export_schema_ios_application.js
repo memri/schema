@@ -87,10 +87,8 @@ function getDataItemClasses() {
     }
 
     // Properties.
-    let dynamicVars = "";
-    let dynamicVarsDecoder = "";
-    let realmOptionals = "";
-    let realmOptionalsDecoder = "";
+    let properties = "";
+    let propertiesDecoder = "";
     let relations = "";
     let relationsDecoder = "";
     let codingKeys = [];
@@ -105,60 +103,60 @@ function getDataItemClasses() {
         if (!['changelog', 'label'].includes(property)) codingKeys.push(property);
         let type = predicateHierarchy[property]['expectedTypes'];
 
-        switch (property) {
-          case 'allEdges':
-            output += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            output += '    let allEdges = List<Edge>()\n';
-            relationsDecoder += '            decodeEdges(decoder, "allEdges", self as! Item)\n';
-            break;
-          case 'updatedFields':
-            output += '    let updatedFields = List<String>()\n';
-            break;
-          case 'currentViewIndex':
-          case 'currentSessionIndex':
-            dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            dynamicVars += `    @objc dynamic var ${property}:Int = 0\n`;
-            dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
-            break;
-          case 'version':
-            dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            dynamicVars += `    @objc dynamic var ${property}:Int = 1\n`;
-            dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
-            break;
-        }
-        
-        if (!['allEdges', 'updatedFields', 'currentViewIndex', 'currentSessionIndex', 'version'].includes(property)) {
+        if (['allEdges', 'updatedFields', 'currentViewIndex', 'currentSessionIndex', 'version'].includes(property)) {
+          switch (property) {
+            case 'allEdges':
+              output += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+              output += '    let allEdges = List<Edge>()\n';
+              relationsDecoder += '            decodeEdges(decoder, "allEdges", self as! Item)\n';
+              break;
+            case 'updatedFields':
+              output += '    let updatedFields = List<String>()\n';
+              break;
+            case 'currentViewIndex':
+            case 'currentSessionIndex':
+              properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+              properties += `    @objc dynamic var ${property}:Int = 0\n`;
+              propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+              break;
+            case 'version':
+              properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+              properties += `    @objc dynamic var ${property}:Int = 1\n`;
+              propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+              break;
+          }
+        } else {
           if (type === 'string') {
-            dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            dynamicVars += `    @objc dynamic var ${property}:String? = nil\n`;
+            properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+            properties += `    @objc dynamic var ${property}:String? = nil\n`;
 
             propertiesList.push(helpers.wrapText(`/// ${predicateHierarchy[property]['description']}`, 96));
             propertiesList.push(helpers.wrapText(`@objc dynamic var ${property}:String? = nil`));
             if (property === 'targetItemType') {
-              dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("itemType") ?? ${property}\n`;
+              propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("itemType") ?? ${property}\n`;
             } else if (property !== 'sourceItemType') {
-              dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+              propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
             }
           } else if (type === 'datetime') {
-            dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            dynamicVars += `    @objc dynamic var ${property}:Date? = nil\n`;
-            dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+            properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+            properties += `    @objc dynamic var ${property}:Date? = nil\n`;
+            propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
           } else if (type === 'bool') {
-            dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            dynamicVars += `    @objc dynamic var ${property}:Bool = false\n`;
-            dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+            properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+            properties += `    @objc dynamic var ${property}:Bool = false\n`;
+            propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
           } else if (type === 'int') {
-            realmOptionals += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            realmOptionals += `    let ${property} = RealmOptional<Int>()\n`;
+            properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+            properties += `    let ${property} = RealmOptional<Int>()\n`;
             if (property === 'targetItemID') {
-              realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("uid") ?? ${property}.value\n`;
+              propertiesDecoder += `            ${property}.value = try decoder.decodeIfPresent("uid") ?? ${property}.value\n`;
             } else if (property !== 'sourceItemID') {
-              realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
+              propertiesDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
             }
           } else if (type === 'float') {
-            realmOptionals += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            realmOptionals += `    let ${property} = RealmOptional<Double>()\n`;
-            realmOptionalsDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
+            properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+            properties += `    let ${property} = RealmOptional<Double>()\n`;
+            propertiesDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
           } else if (type === 'any') {
             if (entity === 'Item') continue;
             relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
@@ -179,13 +177,13 @@ function getDataItemClasses() {
         codingKeys.push(property);
         if (['Item', 'Edge'].includes(entity)) {
           if (property === 'edgeLabel') {
-            dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            dynamicVars += `    @objc dynamic var ${property}:String? = nil\n`;
-            dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+            properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+            properties += `    @objc dynamic var ${property}:String? = nil\n`;
+            propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
           } else {
-            dynamicVars += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            dynamicVars += `    @objc dynamic var ${property}:${type}? = ${type}()\n`;
-            dynamicVarsDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+            properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+            properties += `    @objc dynamic var ${property}:${type}? = ${type}()\n`;
+            propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
           }
         } else {
           relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
@@ -212,9 +210,8 @@ function getDataItemClasses() {
         }
       }
     }
-    output += dynamicVars;
-    output += realmOptionals;
-    if (dynamicVars || realmOptionals) output += '\n';
+    output += properties;
+    if (properties) output += '\n';
     output += relations;
 
     // Decoder
@@ -234,8 +231,7 @@ function getDataItemClasses() {
     }
     if (entityHierarchy[entity]['properties']) {
       output += relationsDecoder;
-      output += dynamicVarsDecoder;
-      output += realmOptionalsDecoder;
+      output += propertiesDecoder;
     }
     if (entity === 'Item') {
       output += '    }\n\n' +
@@ -252,7 +248,7 @@ function getDataItemClasses() {
     }
     output += '    }\n' +
       '}';
-    dataItemClasses.push(output)
+    dataItemClasses.push(output);
 
     let test = `
 ${classDescription}
