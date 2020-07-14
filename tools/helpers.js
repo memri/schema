@@ -46,7 +46,7 @@ async function getHierarchy(dir, hierarchy, rootDir, hierarchyType) {
 }
 
 function wrapText(str, width, spaceReplacer) {
-  spaceReplacer = spaceReplacer || '\n    /// '
+  spaceReplacer = spaceReplacer || '\n    /// ';
   if (str.length > width) {
     let p = width;
     for (; p > 0 && str[p] !== ' '; p--) {
@@ -81,11 +81,21 @@ function getAncestry2(path) {
   return ancestry;
 }
 
+function insertList(content, indent) {
+  let output = '';
+  for (const [i, line] of content.entries()) {
+    if (i !== 0) output += ' '.repeat(indent);
+    output += line;
+    if (i !== (content.length - 1)) output += '\n';
+  }
+  return output;
+}
 
 module.exports = {
   getHierarchy,
   wrapText,
   getAncestry,
   getAncestry2,
+  insertList: insertList,
   PRIMITIVE_TYPES
 };
