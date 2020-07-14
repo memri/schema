@@ -9,10 +9,10 @@ const PRIMITIVE_TYPES = ['bool', 'int', 'float', 'string', 'datetime']; // TODO 
 // const PREDICATE_HIERARCHY_PATH = path.resolve('../predicateHierarchy');
 
 function path2dir(filePath, hierarchyType) {
-  if (!filePath.split('/').slice(-1)[0]) {
+  if (!filePath.split((/[\\\/]/)).slice(-1)[0]) {
     return hierarchyType;
   }
-  return filePath.split('/').slice(-1)[0];
+  return filePath.split((/[\\\/]/)).slice(-1)[0];
 }
 
 function addToHierarchyFromFile(hierarchy, filePath, dir, dirent, hierarchyType) {
