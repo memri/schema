@@ -48,7 +48,7 @@ function getDataItemClasses() {
         break;
       case 'SyncState':
         output += 'public class SyncState: Object, Codable {\n    let updatedFields = List<String>()\n';
-        classDefinition = 'public class SyncState: Object, Codable {\n let updatedFields = List<String>()';
+        classDefinition = 'public class SyncState: Object, Codable {\n    let updatedFields = List<String>()';
         break;
       case 'Edge':
         output += `public class Edge : Object, Codable {\n`;
@@ -72,17 +72,31 @@ function getDataItemClasses() {
       if (['genericType', 'functions', 'updatedFields'].includes(property)) continue;
       if (entityHierarchy['Item']['properties'].includes(property) && !['Item', 'Edge'].includes(entity)) continue;
 
+      let sequenced;
+      if (property.substring(0, 10) === 'sequenced_') {
+        property = property.substring(10);
+        sequenced = true;
+      }
+
+      let singular;
+      if (property.substring(0, 4) === 'one_') {
+        property = property.substring(4);
+        singular = true;
+      }
+
       if (Object.keys(predicateHierarchy).includes(property)) {
         if (!['changelog', 'label'].includes(property)) codingKeys.push(property);
 
+        // Add description of property/relation.
         let type = predicateHierarchy[property]['expectedTypes'];
-        if (helpers.PRIMITIVE_TYPES.includes(type) || type === 'Edge') {
-          properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+        if (property === 'syncState' || helpers.PRIMITIVE_TYPES.includes(type) || type === 'Edge') {
+          properties += helpers.wrapText(`    /// ${predicateHierarchy[property]['description']}\n`, 96);
         } else if (!['changelog', 'label'].includes(property)) {
-          relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
+          relations += helpers.wrapText(`    /// ${predicateHierarchy[property]['description']}\n`, 96);
         }
 
-        if (['allEdges', 'currentViewIndex', 'currentSessionIndex', 'version'].includes(property)) {
+        // Special cases.
+        if (['allEdges', 'currentViewIndex', 'currentSessionIndex', 'version', 'views', 'sessions', 'syncState'].includes(property)) {
           switch (property) {
             case 'allEdges':
               properties += '    let allEdges = List<Edge>()\n';
@@ -97,79 +111,63 @@ function getDataItemClasses() {
               properties += `    @objc dynamic var ${property}:Int = 1\n`;
               propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
               break;
-          }
-        } else {
-          if (type === 'string') {
-            properties += `    @objc dynamic var ${property}:String? = nil\n`;
-            if (property === 'targetItemType') {
-              propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("itemType") ?? ${property}\n`;
-            } else if (property !== 'sourceItemType') {
+            case 'views':
+              relations += `    var ${property}: Results<${type}>? {\n` +
+                `        edges("view")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
+                '    }\n\n';
+              break;
+            case 'sessions':
+              relations += `    var ${property}: Results<${type}>? {\n` +
+                `        edges("session")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
+                '    }\n\n';
+              break;
+            case 'syncState':
+              properties += `    @objc dynamic var ${property}:${type}? = ${type}()\n`;
               propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
-            }
-          } else if (type === 'datetime') {
-            properties += `    @objc dynamic var ${property}:Date? = nil\n`;
-            propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
-          } else if (type === 'bool') {
-            properties += `    @objc dynamic var ${property}:Bool = false\n`;
-            propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
-          } else if (type === 'int') {
-            properties += `    let ${property} = RealmOptional<Int>()\n`;
-            if (property === 'targetItemID') {
-              propertiesDecoder += `            ${property}.value = try decoder.decodeIfPresent("uid") ?? ${property}.value\n`;
-            } else if (property !== 'sourceItemID') {
+              break;
+          }
+        } else {
+          switch (type) {
+            case 'string':
+              properties += `    @objc dynamic var ${property}:String? = nil\n`;
+              if (property === 'targetItemType') {
+                propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("itemType") ?? ${property}\n`;
+              } else if (property !== 'sourceItemType') {
+                propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+              }
+              break;
+            case 'datetime':
+              properties += `    @objc dynamic var ${property}:Date? = nil\n`;
+              propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+              break;
+            case 'bool':
+              properties += `    @objc dynamic var ${property}:Bool = false\n`;
+              propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
+              break;
+            case 'int':
+              properties += `    let ${property} = RealmOptional<Int>()\n`;
+              if (property === 'targetItemID') {
+                propertiesDecoder += `            ${property}.value = try decoder.decodeIfPresent("uid") ?? ${property}.value\n`;
+              } else if (property !== 'sourceItemID') {
+                propertiesDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
+              }
+              break;
+            case 'float':
+              properties += `    let ${property} = RealmOptional<Double>()\n`;
               propertiesDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
-            }
-          } else if (type === 'float') {
-            properties += `    let ${property} = RealmOptional<Double>()\n`;
-            propertiesDecoder += `            ${property}.value = try decoder.decodeIfPresent("${property}") ?? ${property}.value\n`;
-          } else if (type === 'any') {
-            if (entity === 'Item') continue;
-            relations += `    var ${property}: [Item]? {\n` +
-              `        edges("${property}")?.itemsArray()\n` +
-              `    }\n\n`;
-          } else {
-            if (entity === 'Item') continue;
-            relations += `    var ${property}: Results<${type}>? {\n` +
-              `        edges("${property}")?.items(type:${type}.self)\n` +
-              '    }\n\n';
+              break;
+            case 'any':
+              if (entity === 'Item') continue;
+              relations += `    var ${property}: [Item]? {\n` +
+                `        edges("${property}")?.itemsArray()\n` +
+                `    }\n\n`;
+              break;
+            default:
+              if (entity === 'Item') continue;
+              relations += `    var ${property}: ${singular ? `${type}` : `Results<${type}>`}? {\n` +
+                `        edge${singular ? '' : 's'}("${property}")?${sequenced ? '.sorted(byKeyPath: "sequence")' : ''}.${singular ? 'target' : 'items'}(type:${type}.self)\n` +
+                '    }\n\n';
           }
-        }
-      } else if (property.substring(0, 4) === 'one_') {
-        property = property.substring(4);
-        let type = predicateHierarchy[property]['expectedTypes'];
-        codingKeys.push(property);
-        if (['Item', 'Edge'].includes(entity)) {
-          if (property === 'edgeLabel') {
-            properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            properties += `    @objc dynamic var ${property}:String? = nil\n`;
-            propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
-          } else {
-            properties += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-            properties += `    @objc dynamic var ${property}:${type}? = ${type}()\n`;
-            propertiesDecoder += `            ${property} = try decoder.decodeIfPresent("${property}") ?? ${property}\n`;
-          }
-        } else {
-          relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-          relations += `    var ${property}: ${type}? {\n` +
-            `        edge("${property}")?.target(type:${type}.self)\n` +
-            '    }\n\n';
-        }
-      } else if (property.substring(0, 10) === 'sequenced_') {
-        property = property.substring(10);
-        let type = predicateHierarchy[property]['expectedTypes'];
-        relations += helpers.wrapText('    /// ' + predicateHierarchy[property]['description'] + '\n', 96);
-        if (property === 'views') {
-          relations += `    var ${property}: Results<${type}>? {\n` +
-            `        edges("view")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
-            '    }\n\n';
-        } else if (property === 'sessions') {
-          relations += `    var ${property}: Results<${type}>? {\n` +
-            `        edges("session")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
-            '    }\n\n';
-        } else {
-          relations += `    var ${property}: Results<${type}>? {\n` +
-            `        edges("${property}")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
-            '    }\n\n';
         }
       }
     }
@@ -191,7 +189,6 @@ function getDataItemClasses() {
     output += propertiesDecoder;
 
 
-
     if (entity === 'Item') {
       output += '    }\n\n' +
         '    private enum CodingKeys: String, CodingKey {\n' +
@@ -210,13 +207,11 @@ function getDataItemClasses() {
     dataItemClasses.push(output);
 
 
-
-
     let test = `
 ${classDescription}
 ${classDefinition}
-    ${helpers.insertList(propertiesList, 4)}
-    ${helpers.insertList(relationsList, 4)}
+    ${properties}
+    ${relations}
     public required convenience init(from decoder: Decoder) throws {
         self.init()
 
