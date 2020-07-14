@@ -268,25 +268,24 @@ ${classDefinition}
 }
 
 function getDataItemListToArray() {
-  let output = '\nfunc dataItemListToArray(_ object: Any) -> [Item] {\n' +
-    '    var collection: [Item] = []\n\n';
+  let dataItems = [];
   for (const [index, entity] of Object.keys(entityHierarchy).entries()) {
     if (['Datasource', 'SyncState', 'UserState', 'ViewArguments'].includes(entity)) continue;
-    if (index !== 0) {
-      output += '    else ';
-    } else {
-      output += '    ';
-    }
     if (entity === 'Edge') {
-      output += 'if let list = object as? Results<Edge> { return list.itemsArray() }\n';
+      dataItems.push(`else if let list = object as? Results<Edge> { return list.itemsArray() }`);
     } else {
-      output += `if let list = object as? Results<${entity}> { list.forEach { collection.append($0) } }\n`;
+      dataItems.push(`${index === 0 ? '' : 'else '}if let list = object as? Results<${entity}> { list.forEach { collection.append($0) } }`);
     }
   }
-  output += '\n    return collection\n' +
-    '}\n';
+  return `
+func dataItemListToArray(_ object: Any) -> [Item] {
+    var collection: [Item] = []
 
-  return output;
+    ${helpers.insertList(dataItems, 4)}
+
+    return collection
+}
+`
 }
 
 let entityHierarchy = {};
