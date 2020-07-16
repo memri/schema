@@ -1,0 +1,113 @@
+{
+  "description": "A person (alive, dead, undead, or fictional).",
+  "properties": {
+    "birthDate": {
+      "sequenced": false,
+      "singular": false
+    },
+    "email": {
+      "sequenced": false,
+      "singular": false
+    },
+    "deathDate": {
+      "sequenced": false,
+      "singular": false
+    },
+    "firstName": {
+      "sequenced": false,
+      "singular": false
+    },
+    "lastName": {
+      "sequenced": false,
+      "singular": false
+    },
+    "gender": {
+      "sequenced": false,
+      "singular": false
+    },
+    "sexualOrientation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "height": {
+      "sequenced": false,
+      "singular": false
+    },
+    "shoulderWidth": {
+      "sequenced": false,
+      "singular": false
+    },
+    "armLength": {
+      "sequenced": false,
+      "singular": false
+    },
+    "displayName": {
+      "sequenced": false,
+      "singular": false
+    },
+    "nameQuality": {
+      "sequenced": false,
+      "singular": false
+    },
+    "enablePresence": {
+      "sequenced": false,
+      "singular": false
+    },
+    "enableReceipts": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "address": {
+      "sequenced": false,
+      "singular": false
+    },
+    "birthPlace": {
+      "sequenced": false,
+      "singular": true
+    },
+    "deathPlace": {
+      "sequenced": false,
+      "singular": true
+    },
+    "profilePicture": {
+      "sequenced": false,
+      "singular": true
+    },
+    "relationship": {
+      "sequenced": false,
+      "singular": false
+    },
+    "hasPhoneNumber": {
+      "sequenced": false,
+      "singular": false
+    },
+    "website": {
+      "sequenced": false,
+      "singular": false
+    },
+    "company": {
+      "sequenced": false,
+      "singular": false
+    },
+    "publicKey": {
+      "sequenced": false,
+      "singular": false
+    },
+    "onlineProfile": {
+      "sequenced": false,
+      "singular": false
+    },
+    "diet": {
+      "sequenced": false,
+      "singular": false
+    },
+    "medicalCondition": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#3a5eb2"
+}

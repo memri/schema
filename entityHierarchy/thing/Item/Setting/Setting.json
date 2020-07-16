@@ -1,0 +1,16 @@
+{
+  "description": "TBD",
+  "properties": {
+    "key": {
+      "sequenced": false,
+      "singular": false
+    },
+    "json": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

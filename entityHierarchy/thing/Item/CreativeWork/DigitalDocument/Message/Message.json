@@ -1,0 +1,21 @@
+{
+  "description": "A single message.",
+  "properties": {
+    "textContent": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "sender": {
+      "sequenced": false,
+      "singular": false
+    },
+    "chat": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

@@ -1,0 +1,25 @@
+{
+  "description": "TBD",
+  "properties": {
+    "color": {
+      "sequenced": false,
+      "singular": false
+    },
+    "name": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "comment": {
+      "sequenced": false,
+      "singular": false
+    },
+    "appliesTo": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

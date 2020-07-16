@@ -1,0 +1,17 @@
+{
+  "description": "TBD",
+  "properties": {
+    "uri": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "usedBy": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

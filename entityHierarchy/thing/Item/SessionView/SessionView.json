@@ -1,0 +1,33 @@
+{
+  "description": "TBD",
+  "properties": {
+    "name": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "datasource": {
+      "sequenced": false,
+      "singular": true
+    },
+    "session": {
+      "sequenced": false,
+      "singular": true
+    },
+    "userState": {
+      "sequenced": false,
+      "singular": true
+    },
+    "viewDefinition": {
+      "sequenced": false,
+      "singular": true
+    },
+    "viewArguments": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

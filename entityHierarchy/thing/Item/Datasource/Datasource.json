@@ -1,0 +1,28 @@
+{
+  "description": "TBD",
+  "properties": {
+    "query": {
+      "sequenced": false,
+      "singular": false
+    },
+    "softProperty": {
+      "sequenced": false,
+      "singular": false
+    },
+    "sortAscending": {
+      "sequenced": false,
+      "singular": false
+    },
+    "pageCount": {
+      "sequenced": false,
+      "singular": false
+    },
+    "pageIndex": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

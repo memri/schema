@@ -1,0 +1,65 @@
+{
+  "description": "Item is the baseclass for all of the data classes.",
+  "properties": {
+    "dateAccessed": {
+      "sequenced": false,
+      "singular": false
+    },
+    "dateCreated": {
+      "sequenced": false,
+      "singular": false
+    },
+    "dateModified": {
+      "sequenced": false,
+      "singular": false
+    },
+    "deleted": {
+      "sequenced": false,
+      "singular": false
+    },
+    "externalId": {
+      "sequenced": false,
+      "singular": false
+    },
+    "genericType": {
+      "sequenced": false,
+      "singular": false
+    },
+    "itemDescription": {
+      "sequenced": false,
+      "singular": false
+    },
+    "starred": {
+      "sequenced": false,
+      "singular": false
+    },
+    "version": {
+      "sequenced": false,
+      "singular": false
+    },
+    "uid": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "allEdges": {
+      "sequenced": false,
+      "singular": false
+    },
+    "changelog": {
+      "sequenced": false,
+      "singular": false
+    },
+    "label": {
+      "sequenced": false,
+      "singular": false
+    },
+    "syncState": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

@@ -1,0 +1,21 @@
+{
+  "description": "TBD",
+  "properties": {
+    "name": {
+      "sequenced": false,
+      "singular": false
+    },
+    "dataType": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "importer": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

@@ -1,0 +1,69 @@
+{
+  "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
+  "properties": {
+    "abstract": {
+      "sequenced": false,
+      "singular": false
+    },
+    "dateCreated": {
+      "sequenced": false,
+      "singular": false
+    },
+    "dateModified": {
+      "sequenced": false,
+      "singular": false
+    },
+    "datePublished": {
+      "sequenced": false,
+      "singular": false
+    },
+    "keyword": {
+      "sequenced": false,
+      "singular": false
+    },
+    "license": {
+      "sequenced": false,
+      "singular": false
+    },
+    "text": {
+      "sequenced": false,
+      "singular": false
+    },
+    "version": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "associatedMedia": {
+      "sequenced": false,
+      "singular": false
+    },
+    "audio": {
+      "sequenced": false,
+      "singular": false
+    },
+    "citation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "contentLocation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "locationCreated": {
+      "sequenced": false,
+      "singular": false
+    },
+    "video": {
+      "sequenced": false,
+      "singular": false
+    },
+    "writtenBy": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

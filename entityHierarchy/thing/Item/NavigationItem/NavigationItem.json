@@ -1,0 +1,24 @@
+{
+  "description": "TBD",
+  "properties": {
+    "title": {
+      "sequenced": false,
+      "singular": false
+    },
+    "sessionName": {
+      "sequenced": false,
+      "singular": false
+    },
+    "sequence": {
+      "sequenced": false,
+      "singular": false
+    },
+    "type": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

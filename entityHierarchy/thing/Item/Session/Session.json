@@ -1,0 +1,37 @@
+{
+  "description": "TBD",
+  "properties": {
+    "currentViewIndex": {
+      "sequenced": false,
+      "singular": false
+    },
+    "editMode": {
+      "sequenced": false,
+      "singular": false
+    },
+    "name": {
+      "sequenced": false,
+      "singular": false
+    },
+    "showContextPane": {
+      "sequenced": false,
+      "singular": false
+    },
+    "showFilterPanel": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "screenshot": {
+      "sequenced": false,
+      "singular": true
+    },
+    "views": {
+      "sequenced": true,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

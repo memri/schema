@@ -1,0 +1,25 @@
+{
+  "description": "A file containing a note.",
+  "properties": {
+    "title": {
+      "sequenced": false,
+      "singular": false
+    },
+    "content": {
+      "sequenced": false,
+      "singular": false
+    },
+    "textContent": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "comment": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

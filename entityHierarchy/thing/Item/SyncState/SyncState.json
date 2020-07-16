@@ -1,0 +1,24 @@
+{
+  "description": "TBD",
+  "properties": {
+    "isPartiallyLoaded": {
+      "sequenced": false,
+      "singular": false
+    },
+    "actionNeeded": {
+      "sequenced": false,
+      "singular": false
+    },
+    "updatedFields": {
+      "sequenced": false,
+      "singular": false
+    },
+    "changedInThisSession": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

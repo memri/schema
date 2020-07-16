@@ -1,0 +1,41 @@
+{
+  "description": "A postal address.",
+  "properties": {
+    "city": {
+      "sequenced": false,
+      "singular": false
+    },
+    "postalCode": {
+      "sequenced": false,
+      "singular": false
+    },
+    "state": {
+      "sequenced": false,
+      "singular": false
+    },
+    "street": {
+      "sequenced": false,
+      "singular": false
+    },
+    "type": {
+      "sequenced": false,
+      "singular": false
+    },
+    "locationWasAutomaticLookupWithHash": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "country": {
+      "sequenced": false,
+      "singular": true
+    },
+    "location": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

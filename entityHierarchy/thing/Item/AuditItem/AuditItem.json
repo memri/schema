@@ -1,0 +1,25 @@
+{
+  "description": "TBD",
+  "properties": {
+    "date": {
+      "sequenced": false,
+      "singular": false
+    },
+    "content": {
+      "sequenced": false,
+      "singular": false
+    },
+    "action": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "appliesTo": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

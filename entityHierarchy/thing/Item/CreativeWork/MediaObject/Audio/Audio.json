@@ -1,0 +1,37 @@
+{
+  "description": "An audio file.",
+  "properties": {
+    "caption": {
+      "sequenced": false,
+      "singular": false
+    },
+    "transcript": {
+      "sequenced": false,
+      "singular": false
+    },
+    "name": {
+      "sequenced": false,
+      "singular": false
+    },
+    "bitrate": {
+      "sequenced": false,
+      "singular": false
+    },
+    "duration": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "file": {
+      "sequenced": false,
+      "singular": true
+    },
+    "includes": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

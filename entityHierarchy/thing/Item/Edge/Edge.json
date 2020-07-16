@@ -1,0 +1,49 @@
+{
+  "description": "TBD",
+  "properties": {
+    "type": {
+      "sequenced": false,
+      "singular": false
+    },
+    "targetItemType": {
+      "sequenced": false,
+      "singular": false
+    },
+    "targetItemID": {
+      "sequenced": false,
+      "singular": false
+    },
+    "sourceItemType": {
+      "sequenced": false,
+      "singular": false
+    },
+    "sourceItemID": {
+      "sequenced": false,
+      "singular": false
+    },
+    "sequence": {
+      "sequenced": false,
+      "singular": false
+    },
+    "deleted": {
+      "sequenced": false,
+      "singular": false
+    },
+    "version": {
+      "sequenced": false,
+      "singular": false
+    },
+    "edgeLabel": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "relations": {
+    "syncState": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

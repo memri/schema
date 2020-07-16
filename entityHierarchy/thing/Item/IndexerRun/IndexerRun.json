@@ -1,0 +1,29 @@
+{
+  "description": "A run of a certain Indexer.",
+  "properties": {
+    "name": {
+      "sequenced": false,
+      "singular": false
+    },
+    "query": {
+      "sequenced": false,
+      "singular": false
+    },
+    "progress": {
+      "sequenced": false,
+      "singular": false
+    },
+    "targetDataType": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "indexer": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

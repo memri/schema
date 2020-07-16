@@ -1,0 +1,16 @@
+{
+  "description": "TBD",
+  "properties": {
+    "phoneNumber": {
+      "sequenced": false,
+      "singular": false
+    },
+    "type": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#eccf23"
+}

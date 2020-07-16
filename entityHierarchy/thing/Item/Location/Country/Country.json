@@ -1,0 +1,21 @@
+{
+  "description": "TBD",
+  "properties": {
+    "name": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {
+    "flag": {
+      "sequenced": false,
+      "singular": true
+    },
+    "location": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

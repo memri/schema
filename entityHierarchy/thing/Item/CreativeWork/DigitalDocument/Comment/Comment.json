@@ -1,0 +1,16 @@
+{
+  "description": "A comment.",
+  "properties": {
+    "content": {
+      "sequenced": false,
+      "singular": false
+    },
+    "textContent": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}
