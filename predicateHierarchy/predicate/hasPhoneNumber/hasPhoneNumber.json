@@ -1,0 +1,4 @@
+{
+  "description": "A phone number.",
+  "type": "PhoneNumber"
+}

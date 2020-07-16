@@ -1,0 +1,4 @@
+{
+  "description": "Email address.",
+  "type": "string"
+}

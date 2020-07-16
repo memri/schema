@@ -65,7 +65,7 @@ function getDataItemClasses() {
       if (Object.keys(predicateHierarchy).includes(field)) {
         if (!['changelog', 'label'].includes(field)) codingKeys.push(field);
 
-        let type = predicateHierarchy[field]['expectedTypes'];
+        let type = predicateHierarchy[field]['type'];
         if (field === 'syncState' || helpers.PRIMITIVE_TYPES.includes(type) || type === 'Edge') {
           properties += helpers.wrapText(`    /// ${predicateHierarchy[field]['description']}\n`, 96);
         } else if (!['changelog', 'label'].includes(field)) {
@@ -206,7 +206,7 @@ function getDataItemListToArray() {
 let entityHierarchy = {};
 let predicateHierarchy = {};
 (async () => {
-  await helpers.getHierarchy2(entityHierarchyPath, entityHierarchy, entityHierarchyPath, 'Item');
+  await helpers.getHierarchy(entityHierarchyPath, entityHierarchy, entityHierarchyPath, 'Item');
   await helpers.getHierarchy(predicateHierarchyPath, predicateHierarchy, predicateHierarchyPath, 'predicate');
 
   const [itemFamily, bgColors, fgColors, typeFunctions] = getItemFamily();

@@ -1,0 +1,4 @@
+{
+  "description": "Physical address of the event or place.",
+  "type": "Address"
+}

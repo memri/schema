@@ -60,16 +60,6 @@ async function getHierarchy(dir, hierarchy, splitPath) {
   }
 }
 
-// function getAncestry(path) {
-//   // Returns ancestry of a node in the hierarchy as a mapping from the node name to the node path,
-//   // e.g. '/thing/Item' -> { thing: '/thing', Item: '/thing/Item' }
-//   let ancestry = {};
-//   for (let i = 1; i < path.length; i++) {
-//     ancestry[path[i]] = (path.slice(0, i + 1).join('/'));
-//   }
-//   return ancestry;
-// }
-
 let entityHierarchy = {};
 let predicateHierarchy = {};
 (async () => {

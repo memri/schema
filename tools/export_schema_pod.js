@@ -26,7 +26,7 @@ let predicateHierarchy = {};
     for (const property of propertiesIncludingInherited.flat()) {
       if (predicateHierarchy[property]) {
         let dbtype;
-        switch (predicateHierarchy[property]['expectedTypes']) {
+        switch (predicateHierarchy[property]['type']) {
           case 'string':
             dbtype = 'Text';
             break;
@@ -54,7 +54,6 @@ let predicateHierarchy = {};
     types.push({'name': entity, 'properties': properties});
   }
 
-  // console.log(JSON.stringify({'types': types}, null, 2));
   fs.writeFile(outputFile, JSON.stringify({'types': types}, null, 2), (err) => {
     if (err) throw err;
     console.log('File saved as ' + outputFile);

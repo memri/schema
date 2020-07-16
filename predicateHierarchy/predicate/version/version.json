@@ -1,0 +1,4 @@
+{
+  "description": "The last version loaded from the server.",
+  "type": "int"
+}

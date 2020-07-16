@@ -1,0 +1,4 @@
+{
+  "description": "The size of the item.",
+  "type": "string"
+}

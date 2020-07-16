@@ -1,0 +1,4 @@
+{
+  "description": "Date of first broadcast/publication.",
+  "type": "datetime"
+}

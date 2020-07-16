@@ -1,0 +1,4 @@
+{
+  "description": "A state or province of a country.",
+  "type": "string"
+}

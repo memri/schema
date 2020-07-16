@@ -2,7 +2,6 @@ const fs = require('fs');
 const {readdir} = require('fs').promises;
 const path = require('path');
 
-const DATA_FILES = ['description.md', 'properties.txt', 'expectedTypes.txt', 'backgroundColor.txt', 'foregroundColor.txt'];
 const PRIMITIVE_TYPES = ['bool', 'int', 'float', 'string', 'datetime']; // TODO update to match new DB
 
 // const ENTITY_HIERARCHY_PATH = path.resolve('../entityHierarchy/thing/Item');
@@ -15,20 +14,6 @@ function path2dir(filePath, hierarchyType) {
   return filePath.split((/[\\\/]/)).slice(-1)[0];
 }
 
-function addToHierarchyFromFile(hierarchy, filePath, dir, dirent, hierarchyType) {
-  let value = fs.readFileSync(path.resolve(dir, dirent.name), 'utf8', function (err, data) {
-  });
-  // Splits .txt files on newlines to parse properties and expectedTypes.
-  if (dirent.name.split('.')[0] === 'properties') {
-    value = value.split('\n').filter(function (e) {
-      return e !== '';
-    });
-  }
-  hierarchy[path2dir(filePath, hierarchyType)] = hierarchy[path2dir(filePath, hierarchyType)] || {};
-  hierarchy[path2dir(filePath, hierarchyType)][dirent.name.split('.')[0]] = value;
-  hierarchy[path2dir(filePath, hierarchyType)]['path'] = hierarchyType + filePath || hierarchyType;
-}
-
 async function getHierarchy(dir, hierarchy, rootDir, hierarchyType) {
   // Recursively read the directory structure.
   const dirents = await readdir(dir, {withFileTypes: true});
@@ -39,22 +24,6 @@ async function getHierarchy(dir, hierarchy, rootDir, hierarchyType) {
       hierarchy[path2dir(filePath, hierarchyType)]['children'] = hierarchy[path2dir(filePath, hierarchyType)]['children'] || [];
       hierarchy[path2dir(filePath, hierarchyType)]['children'].push(dirent.name);
       await getHierarchy(path.resolve(dir, dirent.name), hierarchy, rootDir, hierarchyType);
-    } else if (DATA_FILES.includes(dirent.name)) {
-      addToHierarchyFromFile(hierarchy, filePath, dir, dirent, hierarchyType);
-    }
-  }
-}
-
-async function getHierarchy2(dir, hierarchy, rootDir, hierarchyType) {
-  // Recursively read the directory structure.
-  const dirents = await readdir(dir, {withFileTypes: true});
-  for (const dirent of dirents) {
-    let filePath = dir.split(rootDir)[1];
-    if (dirent.isDirectory()) {
-      hierarchy[path2dir(filePath, hierarchyType)] = hierarchy[path2dir(filePath, hierarchyType)] || {};
-      hierarchy[path2dir(filePath, hierarchyType)]['children'] = hierarchy[path2dir(filePath, hierarchyType)]['children'] || [];
-      hierarchy[path2dir(filePath, hierarchyType)]['children'].push(dirent.name);
-      await getHierarchy2(path.resolve(dir, dirent.name), hierarchy, rootDir, hierarchyType);
     } else if (dirent.name.split('.')[1] === 'json') {
       let data = fs.readFileSync(`${dir}/${dirent.name}`);
       hierarchy[path2dir(filePath, hierarchyType)] = {...hierarchy[path2dir(filePath, hierarchyType)], ...JSON.parse(data)};
@@ -112,7 +81,6 @@ function insertList(content, indent) {
 
 module.exports = {
   getHierarchy,
-  getHierarchy2,
   wrapText,
   getAncestry,
   getAncestry2,
