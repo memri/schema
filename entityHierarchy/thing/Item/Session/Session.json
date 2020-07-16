@@ -1,27 +1,12 @@
 {
   "description": "TBD",
-  "properties": {
-    "currentViewIndex": {
-      "sequenced": false,
-      "singular": false
-    },
-    "editMode": {
-      "sequenced": false,
-      "singular": false
-    },
-    "name": {
-      "sequenced": false,
-      "singular": false
-    },
-    "showContextPane": {
-      "sequenced": false,
-      "singular": false
-    },
-    "showFilterPanel": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "currentViewIndex",
+    "editMode",
+    "name",
+    "showContextPane",
+    "showFilterPanel"
+  ],
   "relations": {
     "screenshot": {
       "sequenced": false,

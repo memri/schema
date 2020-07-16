@@ -1,35 +1,14 @@
 {
   "description": "An indexer enhances your personal data by inferring facts over existing data and adding those to the database.",
-  "properties": {
-    "name": {
-      "sequenced": false,
-      "singular": false
-    },
-    "icon": {
-      "sequenced": false,
-      "singular": false
-    },
-    "query": {
-      "sequenced": false,
-      "singular": false
-    },
-    "itemDescription": {
-      "sequenced": false,
-      "singular": false
-    },
-    "bundleImage": {
-      "sequenced": false,
-      "singular": false
-    },
-    "runDestination": {
-      "sequenced": false,
-      "singular": false
-    },
-    "indexerClass": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "name",
+    "icon",
+    "query",
+    "itemDescription",
+    "bundleImage",
+    "runDestination",
+    "indexerClass"
+  ],
   "relations": {
     "indexerRun": {
       "sequenced": false,

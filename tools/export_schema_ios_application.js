@@ -56,7 +56,8 @@ function getDataItemClasses() {
     let relations = "";
     let relationsDecoder = "";
     let codingKeys = [];
-    let propertiesAndRelations = Object.keys(entityHierarchy[entity]['properties']).concat(Object.keys(entityHierarchy[entity]['relations']))
+    let propertiesAndRelations = entityHierarchy[entity]['properties'].concat(Object.keys(entityHierarchy[entity]['relations']))
+    let propertiesAndRelationsItem = entityHierarchy['Item']['properties'].concat(Object.keys(entityHierarchy['Item']['relations']))
 
     for (let field of propertiesAndRelations) {
       if (['genericType', 'functions', 'updatedFields'].includes(field)) continue;

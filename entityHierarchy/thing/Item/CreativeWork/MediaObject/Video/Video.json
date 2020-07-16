@@ -1,31 +1,13 @@
 {
   "description": "A video file.",
-  "properties": {
-    "caption": {
-      "sequenced": false,
-      "singular": false
-    },
-    "exifData": {
-      "sequenced": false,
-      "singular": false
-    },
-    "name": {
-      "sequenced": false,
-      "singular": false
-    },
-    "width": {
-      "sequenced": false,
-      "singular": false
-    },
-    "height": {
-      "sequenced": false,
-      "singular": false
-    },
-    "duration": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "caption",
+    "exifData",
+    "name",
+    "width",
+    "height",
+    "duration"
+  ],
   "relations": {
     "thumbnail": {
       "sequenced": false,

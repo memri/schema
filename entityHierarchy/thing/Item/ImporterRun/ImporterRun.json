@@ -1,15 +1,9 @@
 {
   "description": "TBD",
-  "properties": {
-    "name": {
-      "sequenced": false,
-      "singular": false
-    },
-    "dataType": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "name",
+    "dataType"
+  ],
   "relations": {
     "importer": {
       "sequenced": false,

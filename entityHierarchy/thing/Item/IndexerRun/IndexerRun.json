@@ -1,23 +1,11 @@
 {
   "description": "A run of a certain Indexer.",
-  "properties": {
-    "name": {
-      "sequenced": false,
-      "singular": false
-    },
-    "query": {
-      "sequenced": false,
-      "singular": false
-    },
-    "progress": {
-      "sequenced": false,
-      "singular": false
-    },
-    "targetDataType": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "name",
+    "query",
+    "progress",
+    "targetDataType"
+  ],
   "relations": {
     "indexer": {
       "sequenced": false,

@@ -1,39 +1,15 @@
 {
   "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
-  "properties": {
-    "abstract": {
-      "sequenced": false,
-      "singular": false
-    },
-    "dateCreated": {
-      "sequenced": false,
-      "singular": false
-    },
-    "dateModified": {
-      "sequenced": false,
-      "singular": false
-    },
-    "datePublished": {
-      "sequenced": false,
-      "singular": false
-    },
-    "keyword": {
-      "sequenced": false,
-      "singular": false
-    },
-    "license": {
-      "sequenced": false,
-      "singular": false
-    },
-    "text": {
-      "sequenced": false,
-      "singular": false
-    },
-    "version": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "abstract",
+    "dateCreated",
+    "dateModified",
+    "datePublished",
+    "keyword",
+    "license",
+    "text",
+    "version"
+  ],
   "relations": {
     "associatedMedia": {
       "sequenced": false,

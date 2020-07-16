@@ -1,15 +1,9 @@
 {
   "description": "TBD",
-  "properties": {
-    "type": {
-      "sequenced": false,
-      "singular": false
-    },
-    "url": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "type",
+    "url"
+  ],
   "relations": {},
   "foregroundColor": "#ffffff",
   "backgroundColor": "#3d57e2"

@@ -1,31 +1,13 @@
 {
   "description": "TBD",
-  "properties": {
-    "definition": {
-      "sequenced": false,
-      "singular": false
-    },
-    "domain": {
-      "sequenced": false,
-      "singular": false
-    },
-    "name": {
-      "sequenced": false,
-      "singular": false
-    },
-    "query": {
-      "sequenced": false,
-      "singular": false
-    },
-    "selector": {
-      "sequenced": false,
-      "singular": false
-    },
-    "type": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "definition",
+    "domain",
+    "name",
+    "query",
+    "selector",
+    "type"
+  ],
   "relations": {},
   "foregroundColor": "#ffffff",
   "backgroundColor": "#93c47d"

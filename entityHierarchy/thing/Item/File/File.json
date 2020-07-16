@@ -1,11 +1,8 @@
 {
   "description": "TBD",
-  "properties": {
-    "uri": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "uri"
+  ],
   "relations": {
     "usedBy": {
       "sequenced": false,

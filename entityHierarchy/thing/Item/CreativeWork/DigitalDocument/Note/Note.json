@@ -1,19 +1,10 @@
 {
   "description": "A file containing a note.",
-  "properties": {
-    "title": {
-      "sequenced": false,
-      "singular": false
-    },
-    "content": {
-      "sequenced": false,
-      "singular": false
-    },
-    "textContent": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "title",
+    "content",
+    "textContent"
+  ],
   "relations": {
     "comment": {
       "sequenced": false,

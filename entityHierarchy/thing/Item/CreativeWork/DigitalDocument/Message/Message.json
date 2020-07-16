@@ -1,11 +1,8 @@
 {
   "description": "A single message.",
-  "properties": {
-    "textContent": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "textContent"
+  ],
   "relations": {
     "sender": {
       "sequenced": false,

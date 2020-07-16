@@ -1,35 +1,14 @@
 {
   "description": "A business corporation.",
-  "properties": {
-    "deviceID": {
-      "sequenced": false,
-      "singular": false
-    },
-    "make": {
-      "sequenced": false,
-      "singular": false
-    },
-    "manufacturer": {
-      "sequenced": false,
-      "singular": false
-    },
-    "model": {
-      "sequenced": false,
-      "singular": false
-    },
-    "name": {
-      "sequenced": false,
-      "singular": false
-    },
-    "dateAcquired": {
-      "sequenced": false,
-      "singular": false
-    },
-    "dateLost": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "deviceID",
+    "make",
+    "manufacturer",
+    "model",
+    "name",
+    "dateAcquired",
+    "dateLost"
+  ],
   "relations": {},
   "foregroundColor": "#ffffff",
   "backgroundColor": "#93c47d"

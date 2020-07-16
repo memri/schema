@@ -1,27 +1,12 @@
 {
   "description": "An audio file.",
-  "properties": {
-    "caption": {
-      "sequenced": false,
-      "singular": false
-    },
-    "transcript": {
-      "sequenced": false,
-      "singular": false
-    },
-    "name": {
-      "sequenced": false,
-      "singular": false
-    },
-    "bitrate": {
-      "sequenced": false,
-      "singular": false
-    },
-    "duration": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "caption",
+    "transcript",
+    "name",
+    "bitrate",
+    "duration"
+  ],
   "relations": {
     "file": {
       "sequenced": false,

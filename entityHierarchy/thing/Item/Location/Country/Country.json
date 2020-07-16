@@ -1,11 +1,8 @@
 {
   "description": "TBD",
-  "properties": {
-    "name": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "name"
+  ],
   "relations": {
     "flag": {
       "sequenced": false,

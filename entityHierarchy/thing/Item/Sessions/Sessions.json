@@ -1,11 +1,8 @@
 {
   "description": "TBD",
-  "properties": {
-    "currentSessionIndex": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "currentSessionIndex"
+  ],
   "relations": {
     "sessions": {
       "sequenced": true,

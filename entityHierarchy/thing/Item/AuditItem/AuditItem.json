@@ -1,19 +1,10 @@
 {
   "description": "TBD",
-  "properties": {
-    "date": {
-      "sequenced": false,
-      "singular": false
-    },
-    "content": {
-      "sequenced": false,
-      "singular": false
-    },
-    "action": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "date",
+    "content",
+    "action"
+  ],
   "relations": {
     "appliesTo": {
       "sequenced": false,

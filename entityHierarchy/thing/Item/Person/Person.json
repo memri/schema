@@ -1,63 +1,21 @@
 {
   "description": "A person (alive, dead, undead, or fictional).",
-  "properties": {
-    "birthDate": {
-      "sequenced": false,
-      "singular": false
-    },
-    "email": {
-      "sequenced": false,
-      "singular": false
-    },
-    "deathDate": {
-      "sequenced": false,
-      "singular": false
-    },
-    "firstName": {
-      "sequenced": false,
-      "singular": false
-    },
-    "lastName": {
-      "sequenced": false,
-      "singular": false
-    },
-    "gender": {
-      "sequenced": false,
-      "singular": false
-    },
-    "sexualOrientation": {
-      "sequenced": false,
-      "singular": false
-    },
-    "height": {
-      "sequenced": false,
-      "singular": false
-    },
-    "shoulderWidth": {
-      "sequenced": false,
-      "singular": false
-    },
-    "armLength": {
-      "sequenced": false,
-      "singular": false
-    },
-    "displayName": {
-      "sequenced": false,
-      "singular": false
-    },
-    "nameQuality": {
-      "sequenced": false,
-      "singular": false
-    },
-    "enablePresence": {
-      "sequenced": false,
-      "singular": false
-    },
-    "enableReceipts": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "birthDate",
+    "email",
+    "deathDate",
+    "firstName",
+    "lastName",
+    "gender",
+    "sexualOrientation",
+    "height",
+    "shoulderWidth",
+    "armLength",
+    "displayName",
+    "nameQuality",
+    "enablePresence",
+    "enableReceipts"
+  ],
   "relations": {
     "address": {
       "sequenced": false,

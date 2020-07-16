@@ -1,21 +1,13 @@
 {
   "description": "A chat is a collection of messages.",
-  "properties": {
-    "name": {
-      "sequenced": false,
-      "singular": false
-    },
-    "topic": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "name",
+    "topic",
+    "receiver",
+    "encrypted"
+  ],
   "relations": {
     "photo": {
-      "sequenced": false,
-      "singular": false
-    },
-    "receiver": {
       "sequenced": false,
       "singular": false
     }

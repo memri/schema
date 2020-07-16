@@ -1,31 +1,13 @@
 {
   "description": "A postal address.",
-  "properties": {
-    "city": {
-      "sequenced": false,
-      "singular": false
-    },
-    "postalCode": {
-      "sequenced": false,
-      "singular": false
-    },
-    "state": {
-      "sequenced": false,
-      "singular": false
-    },
-    "street": {
-      "sequenced": false,
-      "singular": false
-    },
-    "type": {
-      "sequenced": false,
-      "singular": false
-    },
-    "locationWasAutomaticLookupWithHash": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "properties": [
+    "city",
+    "postalCode",
+    "state",
+    "street",
+    "type",
+    "locationWasAutomaticLookupWithHash"
+  ],
   "relations": {
     "country": {
       "sequenced": false,
