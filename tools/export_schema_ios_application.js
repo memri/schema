@@ -20,7 +20,6 @@ function getItemFamily() {
 
 function getDataItemClasses() {
   let dataItemClasses = [];
-  const propertiesAndRelationsItem = Object.keys(entityHierarchy['Item']['properties']).concat(Object.keys(entityHierarchy['Item']['relations']))
   for (const entity of Object.keys(entityHierarchy)) {
     if (['Datasource', 'UserState', 'ViewArguments'].includes(entity)) continue;
 
