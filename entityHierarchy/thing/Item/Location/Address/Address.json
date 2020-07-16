@@ -6,7 +6,7 @@
     "state",
     "street",
     "type",
-    "locationWasAutomaticLookupWithHash"
+    "locationAutoLookupHash"
   ],
   "relations": {
     "country": {

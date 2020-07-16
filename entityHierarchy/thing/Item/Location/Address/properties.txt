@@ -5,4 +5,4 @@ postalCode
 state
 street
 type
-locationWasAutomaticLookupWithHash
+locationAutoLookupHash
