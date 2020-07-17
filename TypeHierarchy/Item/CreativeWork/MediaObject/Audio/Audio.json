@@ -1,0 +1,22 @@
+{
+  "description": "An audio file.",
+  "properties": [
+    "caption",
+    "transcript",
+    "name",
+    "bitrate",
+    "duration"
+  ],
+  "relations": {
+    "file": {
+      "sequenced": false,
+      "singular": true
+    },
+    "includes": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

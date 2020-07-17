@@ -1,0 +1,3 @@
+{
+  "description": "An Edge or Property, used to define the attributes of Items. Edges point to an Item type, Properties are values of a primitive type."
+}

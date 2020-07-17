@@ -1,1 +1,0 @@
-The unique identifier of the Item set by the pod.

@@ -1,0 +1,22 @@
+{
+  "description": "TBD",
+  "properties": [
+    "type",
+    "targetItemType",
+    "targetItemID",
+    "sourceItemType",
+    "sourceItemID",
+    "sequence",
+    "deleted",
+    "version",
+    "edgeLabel"
+  ],
+  "relations": {
+    "syncState": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

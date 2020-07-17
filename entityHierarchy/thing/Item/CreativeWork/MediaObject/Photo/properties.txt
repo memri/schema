@@ -1,8 +1,0 @@
-caption
-exifData
-one_thumbnail
-name
-one_file
-width
-height
-includes

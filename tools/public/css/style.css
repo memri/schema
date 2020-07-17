@@ -7,20 +7,43 @@ html {
     scroll-behavior: smooth;
 }
 
+.warning{
+    background-color:rgb(189, 0, 0);
+    text-align: center;
+    font-family: Arial, serif;
+    padding: 10px 0;
+    font-size: 16px !important;
+    color: white;
+    line-height: initial;
+}
+
+.navbar-img {
+    vertical-align: middle
+}
+
+.gitlab {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
 
 .all {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - 24px);
 }
 
 .alpha-access {
-    padding: 10px;
+    margin-top: 20px !important;
+    padding:10px;
     width: 70%;
     margin: 0 auto;
     font-size: 20px !important;
+
     background-color: rgba(89, 89, 165, 0.8);
-    border: 1px solid rgb(212, 214, 218) !important;
+    border: 1px !important;
+    border-style: solid !important;
+    border-color: rgb(212, 214, 218) !important;
     border-radius: 3em;
 }
 
@@ -30,16 +53,28 @@ html {
 }
 
 .header {
-    flex-basis: 130px;
+    flex-basis: 80px;
     background-color: rgb(249, 250, 251);
-    border-bottom-color: rgba(229, 231, 235, 1);
+    border-bottom-color: rgba(229,231,235,1);
     border-bottom-style: solid;
     border-bottom-width: 1px;
     text-align: center;
+    position: relative;
 }
 
 .header1 {
-    border-bottom: 0 !important;
+    flex-basis: 130px;
+    border-bottom: 0px !important;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.grid-item {
+    text-align: center;
+    padding-bottom: 15px;
 }
 
 .logo {
@@ -65,18 +100,20 @@ html {
 .header ul {
     display: inline-block;
     vertical-align: top;
+    margin-top: 16px;
 }
 
 .header ul li {
     display: inline-block;
     font-family: Arial, serif;
     font-size: 17px;
-    margin: 35px 20px 0 20px;
+    margin: 35px 0px 0 30px;
 }
 
 .header ul li a {
     color: #555;
     text-decoration: none;
+    line-height: initial;
 }
 
 .header ul li a.active {
@@ -111,6 +148,7 @@ html {
     font-family: Arial, serif;
     font-size: 17px;
     width: 246px;
+    line-height: 10px;
 }
 
 a {
@@ -272,6 +310,7 @@ form {
     white-space: nowrap;
     list-style-type: none;
     padding: 10px 0 0 0;
+    line-height: initial;
 }
 
 .footer ul li a {
@@ -316,15 +355,23 @@ button {
 }
 
 .table th, td {
-    padding: 10px 10px 10px 10px;
+    padding: 5px 10px 5px 10px;
 }
+
+.table td {
+    padding: 5px 10px 5px 10px;
+}
+
 .table th {
     background-color: rgb(249, 250, 251);
 }
 
+.gitlab {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
 
 .breadcrumb {
-    background-color: white;
-    font-size: 22px;
-    padding: 0;
+    background: none;
 }

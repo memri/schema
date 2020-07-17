@@ -1,0 +1,17 @@
+{
+  "description": "A chat is a collection of messages.",
+  "properties": [
+    "name",
+    "topic",
+    "receiver",
+    "encrypted"
+  ],
+  "relations": {
+    "photo": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

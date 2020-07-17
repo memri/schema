@@ -1,0 +1,12 @@
+{
+  "description": "TBD",
+  "properties": [
+    "title",
+    "sessionName",
+    "sequence",
+    "type"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

@@ -1,4 +1,0 @@
-isPartiallyLoaded
-actionNeeded
-updatedFields
-changedInThisSession

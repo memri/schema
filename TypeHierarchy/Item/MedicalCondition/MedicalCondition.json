@@ -1,0 +1,10 @@
+{
+  "description": "TBD",
+  "properties": [
+    "type",
+    "name"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#3dc8e2"
+}

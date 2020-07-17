@@ -1,1 +1,0 @@
-Location of the actual bytes of the media object, for example the image file or video file.

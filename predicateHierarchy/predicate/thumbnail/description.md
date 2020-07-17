@@ -1,1 +1,0 @@
-Thumbnail image for an image or video.

@@ -1,1 +1,0 @@
-The identifier property represents any kind of identifier for any kind of Thing.

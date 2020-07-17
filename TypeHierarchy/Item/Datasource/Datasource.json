@@ -1,0 +1,13 @@
+{
+  "description": "TBD",
+  "properties": [
+    "query",
+    "softProperty",
+    "sortAscending",
+    "pageCount",
+    "pageIndex"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

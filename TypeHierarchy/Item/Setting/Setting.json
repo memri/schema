@@ -1,0 +1,10 @@
+{
+  "description": "TBD",
+  "properties": [
+    "key",
+    "json"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

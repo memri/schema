@@ -1,1 +1,0 @@
-An indexer enhances your personal data by inferring facts over existing data and adding those to the database.

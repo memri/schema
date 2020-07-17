@@ -1,1 +1,0 @@
-A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.

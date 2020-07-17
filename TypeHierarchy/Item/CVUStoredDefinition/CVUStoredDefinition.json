@@ -1,0 +1,14 @@
+{
+  "description": "TBD",
+  "properties": [
+    "definition",
+    "domain",
+    "name",
+    "query",
+    "selector",
+    "type"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

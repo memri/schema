@@ -1,1 +1,0 @@
-A predicate, used to indicate attributes and relationships of some Thing.

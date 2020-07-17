@@ -1,0 +1,35 @@
+{
+  "description": "Item is the baseclass for all of the data classes.",
+  "properties": [
+    "dateAccessed",
+    "dateCreated",
+    "dateModified",
+    "deleted",
+    "externalId",
+    "genericType",
+    "itemDescription",
+    "starred",
+    "version",
+    "uid"
+  ],
+  "relations": {
+    "allEdges": {
+      "sequenced": false,
+      "singular": false
+    },
+    "changelog": {
+      "sequenced": false,
+      "singular": false
+    },
+    "label": {
+      "sequenced": false,
+      "singular": false
+    },
+    "syncState": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

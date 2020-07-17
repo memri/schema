@@ -1,0 +1,15 @@
+{
+  "description": "A business corporation.",
+  "properties": [
+    "deviceID",
+    "make",
+    "manufacturer",
+    "model",
+    "name",
+    "dateAcquired",
+    "dateLost"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

@@ -1,1 +1,0 @@
-The identifier of an external source.

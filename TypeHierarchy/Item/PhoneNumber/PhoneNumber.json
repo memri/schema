@@ -1,0 +1,10 @@
+{
+  "description": "TBD",
+  "properties": [
+    "phoneNumber",
+    "type"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#eccf23"
+}

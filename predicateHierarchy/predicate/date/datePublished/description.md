@@ -1,1 +1,0 @@
-Date of first broadcast/publication.

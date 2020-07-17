@@ -1,1 +1,0 @@
-Physical address of the event or place.

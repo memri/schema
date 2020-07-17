@@ -1,5 +1,0 @@
-name
-query
-one_indexer
-progress
-targetDataType

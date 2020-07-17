@@ -1,0 +1,10 @@
+{
+  "description": "A business corporation.",
+  "properties": [
+    "type",
+    "name"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

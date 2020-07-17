@@ -1,0 +1,4 @@
+{
+  "description": "A collection of all edges this Item is connected to.",
+  "type": "Edge"
+}

@@ -1,0 +1,4 @@
+{
+  "description": "Last modification date of the Item.",
+  "type": "datetime"
+}

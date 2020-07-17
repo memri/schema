@@ -1,0 +1,26 @@
+{
+  "description": "An image file.",
+  "properties": [
+    "caption",
+    "exifData",
+    "name",
+    "width",
+    "height"
+  ],
+  "relations": {
+    "thumbnail": {
+      "sequenced": false,
+      "singular": true
+    },
+    "file": {
+      "sequenced": false,
+      "singular": true
+    },
+    "includes": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

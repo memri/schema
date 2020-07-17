@@ -1,0 +1,4 @@
+{
+  "description": "URL of the item.",
+  "type": "string"
+}

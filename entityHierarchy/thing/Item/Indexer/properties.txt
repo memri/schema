@@ -1,8 +1,0 @@
-name
-icon
-query
-itemDescription
-bundleImage
-indexerRun
-runDestination
-indexerClass

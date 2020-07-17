@@ -1,0 +1,4 @@
+{
+  "description": "The identifier of an external source.",
+  "type": "string"
+}

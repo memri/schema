@@ -1,0 +1,4 @@
+{
+  "description": "A phone number with an area code.",
+  "type": "string"
+}

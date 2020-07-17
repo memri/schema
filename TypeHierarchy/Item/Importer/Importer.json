@@ -1,0 +1,17 @@
+{
+  "description": "TBD",
+  "properties": [
+    "name",
+    "dataType",
+    "icon",
+    "bundleImage"
+  ],
+  "relations": {
+    "importerRun": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

@@ -1,8 +1,0 @@
-city
-one_country
-one_location
-postalCode
-state
-street
-type
-locationWasAutomaticLookupWithHash

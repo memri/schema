@@ -1,1 +1,0 @@
-A relation between two persons.

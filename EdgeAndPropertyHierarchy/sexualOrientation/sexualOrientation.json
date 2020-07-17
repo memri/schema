@@ -1,0 +1,4 @@
+{
+  "description": "The gender of a person.",
+  "type": "string"
+}

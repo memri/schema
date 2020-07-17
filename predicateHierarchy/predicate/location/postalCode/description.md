@@ -1,1 +1,0 @@
-The postal code. For example, 94043.

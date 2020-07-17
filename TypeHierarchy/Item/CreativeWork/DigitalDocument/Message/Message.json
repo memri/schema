@@ -1,0 +1,17 @@
+{
+  "description": "A single message.",
+  "properties": [
+    "textContent",
+    "sender",
+    "chatJid",
+    "chatReceiver"
+  ],
+  "relations": {
+    "chat": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

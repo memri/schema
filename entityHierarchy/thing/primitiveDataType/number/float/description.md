@@ -1,1 +1,0 @@
-Double precision floating point number.

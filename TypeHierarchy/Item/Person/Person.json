@@ -1,0 +1,71 @@
+{
+  "description": "A person (alive, dead, undead, or fictional).",
+  "properties": [
+    "birthDate",
+    "email",
+    "deathDate",
+    "firstName",
+    "lastName",
+    "gender",
+    "sexualOrientation",
+    "height",
+    "shoulderWidth",
+    "armLength",
+    "displayName",
+    "nameQuality",
+    "enablePresence",
+    "enableReceipts"
+  ],
+  "relations": {
+    "address": {
+      "sequenced": false,
+      "singular": false
+    },
+    "birthPlace": {
+      "sequenced": false,
+      "singular": true
+    },
+    "deathPlace": {
+      "sequenced": false,
+      "singular": true
+    },
+    "profilePicture": {
+      "sequenced": false,
+      "singular": true
+    },
+    "relationship": {
+      "sequenced": false,
+      "singular": false
+    },
+    "hasPhoneNumber": {
+      "sequenced": false,
+      "singular": false
+    },
+    "website": {
+      "sequenced": false,
+      "singular": false
+    },
+    "company": {
+      "sequenced": false,
+      "singular": false
+    },
+    "publicKey": {
+      "sequenced": false,
+      "singular": false
+    },
+    "onlineProfile": {
+      "sequenced": false,
+      "singular": false
+    },
+    "diet": {
+      "sequenced": false,
+      "singular": false
+    },
+    "medicalCondition": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#3a5eb2"
+}

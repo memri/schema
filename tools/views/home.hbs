@@ -1,19 +1,19 @@
-<h1>The Memri Schema</h1>
 <p>
   This is the Schema used by Memri, dictating how information is stored in the database on your Pod.
 </p>
 
-<h4>Item hierarchy</h4>
+<h4>Type hierarchy</h4>
 <p>
-  The <a href="/thing">Item hierarchy</a> defines what types of Items can exist in the database, what Properties and
-  Edges they can have, and how the Items are related. As the database is a graph database, Items can be be seen as nodes
-  in the graph. The Items are in a hierarchy to enable smart retrieval. For instance, to find all <i>ImageObjects</i>
-  and <i>VideoObjects</i> related to some Item, we can query them using their parent Item type <i>MediaObject</i>.
+  The <a href="/Type">Type hierarchy</a> defines what types of data can exist in the database, divided into primitive
+  data types like strings and integers, and Items, which can have Properties and Edges. As the database is a graph
+  database, Items can be be seen as nodes in the graph. The hierarchy defines how the Items are related, as they inherit
+  properties and edges. This enables smart retrieval of data. For instance, to find all <i>ImageObjects</i> and
+  <i>VideoObjects</i> related to some Item, we can query them using their parent Item type <i>MediaObject</i>.
 </p>
 
 <h4>Edge &#38; Property hierarchy</h4>
 <p>
-  The <a href="/predicate">Edge and Property hierarchy</a> defines what Edges and Properties can exist in the database,
+  The <a href="/EdgeOrProperty">Edge &#38; Property hierarchy</a> defines what Edges and Properties can exist in the database,
   what type of data they refer to, and how the Edges and Properties are related. The expected types of properties are
   primitive data types, like strings and ints, and are always one-to-one relations. Edges point to other Items, and are
   one-to-many relations. Again, we use an hierarchy to enable smart retrieval. For instance, to find all family members

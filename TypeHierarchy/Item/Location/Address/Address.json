@@ -1,0 +1,23 @@
+{
+  "description": "A postal address.",
+  "properties": [
+    "city",
+    "postalCode",
+    "state",
+    "street",
+    "type",
+    "locationAutoLookupHash"
+  ],
+  "relations": {
+    "country": {
+      "sequenced": false,
+      "singular": true
+    },
+    "location": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

@@ -1,0 +1,12 @@
+{
+  "description": "TBD",
+  "properties": [
+    "isPartiallyLoaded",
+    "actionNeeded",
+    "updatedFields",
+    "changedInThisSession"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}
