@@ -1,4 +1,4 @@
 {
-  "description": "The color of this thing.",
+  "description": "The color of this Item.",
   "type": "string"
 }

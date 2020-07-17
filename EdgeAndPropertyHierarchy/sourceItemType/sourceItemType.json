@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The type of the source Item, or Item from where an edge points. Opposite of targetItemType.",
   "type": "string"
 }

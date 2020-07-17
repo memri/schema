@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The name to display, for Persons this could be a first or last name, both, or a phonenumber.",
   "type": "string"
 }

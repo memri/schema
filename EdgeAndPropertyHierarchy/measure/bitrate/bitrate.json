@@ -1,4 +1,4 @@
 {
-  "description": "The bitrate of the media object.",
+  "description": "The bitrate of a media object.",
   "type": "int"
 }

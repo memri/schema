@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Items included within this Item. Included Items can be of any type.",
   "type": "any"
 }

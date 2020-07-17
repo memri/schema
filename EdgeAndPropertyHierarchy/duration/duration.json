@@ -1,0 +1,4 @@
+{
+  "description": "The duration of the Item, for instance an event of a video.",
+  "type": "int"
+}

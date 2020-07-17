@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "A run of a certain Importer, that defines the details of the specific import.",
   "type": "ImporterRun"
 }

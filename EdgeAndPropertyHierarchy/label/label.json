@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Labels are used to tag Items enabling retrieval of Items based on Labels.",
   "type": "Label"
 }

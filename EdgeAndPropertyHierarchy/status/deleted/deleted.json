@@ -1,4 +1,4 @@
 {
-  "description": "Boolean whether the Item has been deleted.",
+  "description": "Whether the Item is deleted.",
   "type": "bool"
 }

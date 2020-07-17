@@ -1,4 +1,4 @@
 {
-  "description": "Object describing syncing information about this object like loading state, versioning, etc.",
+  "description": "Item describing syncing information about this Item, like loading state, versioning, etc.",
   "type": "SyncState"
 }

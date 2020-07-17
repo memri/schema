@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "An Importer is used to import data from an external source to the Pod databse.",
   "type": "Importer"
 }

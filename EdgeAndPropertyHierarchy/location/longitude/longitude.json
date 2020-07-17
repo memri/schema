@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The longitude of a location in WGS84 format.",
   "type": "float"
 }

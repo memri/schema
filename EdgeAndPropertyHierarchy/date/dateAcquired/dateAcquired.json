@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The date this item was acquired.",
   "type": "datetime"
 }

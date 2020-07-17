@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "A piece of information that determines the functional output of a cryptographic algorithm.",
   "type": "string"
 }

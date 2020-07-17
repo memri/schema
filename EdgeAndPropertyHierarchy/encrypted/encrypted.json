@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Whether the item is encrypted.",
   "type": "bool"
 }

@@ -1,4 +1,4 @@
 {
-  "description": "Persons that this item is shared with. ",
+  "description": "A Person that this item is shared with.",
   "type": "Person"
 }

@@ -1,4 +1,4 @@
 {
-  "description": "A media object that encodes this CreativeWork. This property is a synonym for encoding.",
+  "description": "A media object that encodes this Item.",
   "type": "MediaObject"
 }

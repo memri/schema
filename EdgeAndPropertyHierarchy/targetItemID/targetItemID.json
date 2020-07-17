@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The uid of the target Item, or Item to where an Edge points. Opposite of sourceItemID",
   "type": "int"
 }

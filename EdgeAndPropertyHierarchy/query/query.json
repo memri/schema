@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "A Memri query that retrieves a set of Items from the Pod database.",
   "type": "string"
 }

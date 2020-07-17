@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The duration of an Item, for instance an event or an Audio file.",
   "type": "int"
 }

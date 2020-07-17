@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Whether to show the context pane.",
   "type": "bool"
 }
