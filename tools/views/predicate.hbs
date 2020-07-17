@@ -1,23 +1,26 @@
-<a href="/"><h1>Schema</h1></a>
 <h2>Edge/Property: {{name}}</h2>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    {{#each pathLinks}}
-      <li class="breadcrumb-item"><a href="{{this}}">{{@key}}</a></li>
+    {{#each pathLinks as |pathLink|}}
+      <li class="breadcrumb-item"><a href="{{pathLink}}">{{@key}}</a></li>
     {{/each}}
   </ol>
 </nav>
 <p><i>{{lookup (lookup predicateHierarchy name) 'description'}}</i></p>
 
-{{#each (lookup (lookup predicateHierarchy name) 'expectedTypes') as |type|}}
-  <h4>Type: <a href="{{lookup (lookup ../entityHierarchy type) 'path'}}">{{type}}</a></h4><br/>
-{{/each}}
+{{#if (lookup (lookup predicateHierarchy name) 'type')}}
+  <h4>Type: <a href="/{{lookup (lookup entityHierarchy (lookup (lookup predicateHierarchy name) 'type')) 'path'}}">
+    {{lookup (lookup predicateHierarchy name) 'type'}}</a>
+  </h4><br/>
+{{/if}}
 
-<h4>Child nodes:</h4>
-<ul class="list-group">
-  {{#each (lookup (lookup predicateHierarchy path) 'children') as |child|}}
-    <li class="list-group-item">
-      <a href="{{../name}}/{{child}}">{{child}}</a>
-    </li>
-  {{/each}}
-</ul>
+{{#if (lookup (lookup predicateHierarchy name) 'children')}}
+  <h4>Child nodes:</h4>
+  <ul class="list-group">
+    {{#each (lookup (lookup predicateHierarchy name) 'children') as |child|}}
+      <li class="list-group-item">
+        <a href="{{../name}}/{{child}}">{{child}}</a>
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}

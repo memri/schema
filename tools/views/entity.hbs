@@ -1,9 +1,8 @@
-<a href="/"><h1>Schema</h1></a>
-<h2>Item: {{name}}</h2>
+<h2>Type: {{name}}</h2>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    {{#each pathLinks}}
-      <li class="breadcrumb-item"><a href="{{this}}">{{@key}}</a></li>
+    {{#each pathLinks as |pathLink|}}
+      <li class="breadcrumb-item"><a href="{{pathLink}}">{{@key}}</a></li>
     {{/each}}
   </ol>
 </nav>
@@ -22,12 +21,13 @@
     <tr>
       <th colspan="3"><b>from: <a href="{{path}}">{{@key}}</a></b></th>
     </tr>
-    {{#each (lookup (lookup ../entityHierarchy path) 'properties') as |prop|}}
+
+    {{#each (lookup (lookup ../entityHierarchy (path2name path)) 'properties') as |prop|}}
       <tr>
-        <td><a href="{{lookup (lookup ../../predicateHierarchy prop) 'path'}}">{{prop}}</a></td>
+        <td><a href="/{{lookup (lookup ../../predicateHierarchy prop) 'path'}}">{{prop}}</a></td>
         <td>
-          {{#each (lookup (lookup ../../predicateHierarchy prop) 'expectedTypes') as |expectedType|}}
-            <a href="{{lookup (lookup ../../../entityHierarchy expectedType) 'path'}}">{{expectedType}}</a> &nbsp;
+          {{#each (lookup (lookup ../../predicateHierarchy prop) 'type') as |expectedType|}}
+            <a href="/{{lookup (lookup ../../../entityHierarchy expectedType) 'path'}}">{{expectedType}}</a> &nbsp;
           {{/each}}
         </td>
         <td>{{lookup (lookup ../../predicateHierarchy prop) 'description'}}</td>
@@ -39,9 +39,9 @@
 
 <h4>Child nodes</h4>
 <ul class="list-group">
-  {{#each (lookup (lookup entityHierarchy path) 'children') as |child|}}
+  {{#each (lookup (lookup entityHierarchy name) 'children') as |child|}}
     <li class="list-group-item">
-      <a href="{{../name}}/{{child}}">{{child}}</a>
+      <a href="{{../path}}/{{child}}">{{child}}</a>
     </li>
   {{/each}}
 </ul>
