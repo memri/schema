@@ -1,1 +1,0 @@
-The street address. For example, 1600 Amphitheatre Pkwy.

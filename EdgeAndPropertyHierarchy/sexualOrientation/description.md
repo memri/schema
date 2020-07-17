@@ -1,1 +1,0 @@
-The gender of a person.

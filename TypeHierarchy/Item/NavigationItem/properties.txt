@@ -1,4 +1,0 @@
-title
-sessionName
-sequence
-type

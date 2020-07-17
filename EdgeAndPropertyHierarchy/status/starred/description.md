@@ -1,1 +1,0 @@
-Boolean whether the Item has been starred.

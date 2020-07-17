@@ -1,1 +1,0 @@
-The basic data types such as Integers, Strings, etc.

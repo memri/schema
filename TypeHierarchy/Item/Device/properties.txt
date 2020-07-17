@@ -1,7 +1,0 @@
-deviceID
-make
-manufacturer
-model
-name
-dateAcquired
-dateLost

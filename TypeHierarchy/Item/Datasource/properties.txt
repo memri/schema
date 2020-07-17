@@ -1,5 +1,0 @@
-query
-softProperty
-sortAscending
-pageCount
-pageIndex

@@ -1,5 +1,0 @@
-textContent
-sender
-chat
-chatJid
-chatReceiver

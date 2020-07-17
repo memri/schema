@@ -1,7 +1,0 @@
-caption
-transcript
-name
-one_file
-includes
-bitrate
-duration

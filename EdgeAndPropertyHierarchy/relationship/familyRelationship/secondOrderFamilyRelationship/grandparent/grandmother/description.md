@@ -1,1 +1,0 @@
-A grandmother of the person.

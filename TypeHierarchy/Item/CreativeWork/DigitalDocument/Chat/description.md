@@ -1,1 +1,0 @@
-A chat is a collection of messages.

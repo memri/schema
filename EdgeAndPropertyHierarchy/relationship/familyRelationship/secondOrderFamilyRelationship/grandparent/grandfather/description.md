@@ -1,1 +1,0 @@
-A grandfather of the person.

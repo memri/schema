@@ -1,1 +1,0 @@
-If this MediaObject is an AudioObject or VideoObject, the transcript of that object.

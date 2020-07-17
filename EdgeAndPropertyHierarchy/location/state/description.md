@@ -1,1 +1,0 @@
-A state or province of a country.

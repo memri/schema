@@ -1,1 +1,0 @@
-A license document that applies to this content, typically indicated by URL.

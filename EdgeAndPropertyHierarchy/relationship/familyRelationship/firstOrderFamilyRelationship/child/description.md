@@ -1,1 +1,0 @@
-A child of the person.

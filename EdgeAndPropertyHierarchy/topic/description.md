@@ -1,1 +1,0 @@
-The topic of some item, for instance a Chat. 
