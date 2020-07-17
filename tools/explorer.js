@@ -41,6 +41,7 @@ app.listen(port, (err) => {
   console.log(`server is listening on http://localhost:${port}`);
 });
 
+
 app.get('/*', (request, response) => {
   let path = request.originalUrl;
   if (path.length > 1 && path.slice(-1) === '/') path = path.slice(0, -1); // remove trailing '/'

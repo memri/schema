@@ -36,11 +36,14 @@
   </tbody>
 </table>
 
-<h4>Child nodes</h4>
-<ul class="list-group">
-  {{#each (lookup (lookup entityHierarchy name) 'children') as |child|}}
-    <li class="list-group-item">
-      <a href="{{../path}}/{{child}}">{{child}}</a>
-    </li>
-  {{/each}}
-</ul>
+
+{{#if (lookup (lookup entityHierarchy name) 'children')}}
+  <h4>Child nodes</h4>
+  <ul class="list-group">
+    {{#each (lookup (lookup entityHierarchy name) 'children') as |child|}}
+      <li class="list-group-item">
+        <a href="{{../path}}/{{child}}">{{child}}</a>
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}
