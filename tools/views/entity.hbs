@@ -1,8 +1,7 @@
-<h2>Type: {{name}}</h2>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     {{#each pathLinks as |pathLink|}}
-      <li class="breadcrumb-item"><a href="{{pathLink}}">{{@key}}</a></li>
+      <li class="breadcrumb-item"><a href="/{{pathLink}}">{{@key}}</a></li>
     {{/each}}
   </ol>
 </nav>
@@ -19,7 +18,7 @@
   <tbody>
   {{#each pathLinks as |path|}}
     <tr>
-      <th colspan="3"><b>from: <a href="{{path}}">{{@key}}</a></b></th>
+      <th colspan="3"><b>from: <a href="/{{path}}">{{@key}}</a></b></th>
     </tr>
 
     {{#each (lookup (lookup ../entityHierarchy (path2name path)) 'properties') as |prop|}}

@@ -2,8 +2,8 @@ const fs = require('fs');
 const helpers = require('./helpers');
 const path = require('path');
 
-const entityHierarchyPath = path.resolve('../entityHierarchy/thing/Item');
-const predicateHierarchyPath = path.resolve('../predicateHierarchy/predicate');
+const entityHierarchyPath = path.resolve('../TypeHierarchy/Item');
+const predicateHierarchyPath = path.resolve('../EdgeAndPropertyHierarchy');
 const outputFile = './schema.swift';
 
 function getItemFamily() {
@@ -55,8 +55,8 @@ function getDataItemClasses() {
     let relations = "";
     let relationsDecoder = "";
     let codingKeys = [];
-    let propertiesAndRelations = entityHierarchy[entity]['properties'].concat(Object.keys(entityHierarchy[entity]['relations']))
-    let propertiesAndRelationsItem = entityHierarchy['Item']['properties'].concat(Object.keys(entityHierarchy['Item']['relations']))
+    let propertiesAndRelations = entityHierarchy[entity]['properties'].concat(Object.keys(entityHierarchy[entity]['relations']));
+    let propertiesAndRelationsItem = entityHierarchy['Item']['properties'].concat(Object.keys(entityHierarchy['Item']['relations']));
 
     for (let field of propertiesAndRelations) {
       if (['genericType', 'functions', 'updatedFields'].includes(field)) continue;
@@ -142,8 +142,8 @@ function getDataItemClasses() {
               if (entity === 'Item') continue;
               let sequenced, singular;
               if (Object.keys(entityHierarchy[entity]['relations']).includes(field)) {
-                if (entityHierarchy[entity]['relations'][field]['sequenced']) sequenced = entityHierarchy[entity]['relations'][field]['sequenced']
-                if (entityHierarchy[entity]['relations'][field]['singular']) singular = entityHierarchy[entity]['relations'][field]['singular']
+                if (entityHierarchy[entity]['relations'][field]['sequenced']) sequenced = entityHierarchy[entity]['relations'][field]['sequenced'];
+                if (entityHierarchy[entity]['relations'][field]['singular']) singular = entityHierarchy[entity]['relations'][field]['singular'];
               }
               relations += `    var ${field}: ${singular ? `${type}` : `Results<${type}>`}? {\n` +
                 `        edge${singular ? '' : 's'}("${field}")?${sequenced ? '.sorted(byKeyPath: "sequence")' : ''}.${singular ? 'target' : 'items'}(type:${type}.self)\n` +
@@ -207,7 +207,7 @@ let entityHierarchy = {};
 let predicateHierarchy = {};
 (async () => {
   await helpers.getHierarchy(entityHierarchyPath, entityHierarchy, entityHierarchyPath, 'Item');
-  await helpers.getHierarchy(predicateHierarchyPath, predicateHierarchy, predicateHierarchyPath, 'predicate');
+  await helpers.getHierarchy(predicateHierarchyPath, predicateHierarchy, predicateHierarchyPath, 'EdgeOrProperty');
 
   const [itemFamily, bgColors, fgColors, typeFunctions] = getItemFamily();
   const dataItemClasses = getDataItemClasses();

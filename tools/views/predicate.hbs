@@ -1,8 +1,7 @@
-<h2>Edge/Property: {{name}}</h2>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     {{#each pathLinks as |pathLink|}}
-      <li class="breadcrumb-item"><a href="{{pathLink}}">{{@key}}</a></li>
+      <li class="breadcrumb-item"><a href="/{{pathLink}}">{{@key}}</a></li>
     {{/each}}
   </ol>
 </nav>

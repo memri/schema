@@ -2,10 +2,7 @@ const fs = require('fs');
 const {readdir} = require('fs').promises;
 const path = require('path');
 
-const PRIMITIVE_TYPES = ['bool', 'int', 'float', 'string', 'datetime']; // TODO update to match new DB
-
-// const ENTITY_HIERARCHY_PATH = path.resolve('../entityHierarchy/thing/Item');
-// const PREDICATE_HIERARCHY_PATH = path.resolve('../predicateHierarchy');
+const PRIMITIVE_TYPES = ['bool', 'int', 'float', 'string', 'datetime'];
 
 function path2dir(filePath, hierarchyType) {
   if (!filePath.split((/[\\\/]/)).slice(-1)[0]) {
@@ -15,7 +12,7 @@ function path2dir(filePath, hierarchyType) {
 }
 
 async function getHierarchy(dir, hierarchy, rootDir, hierarchyType) {
-  // Recursively read the directory structure.
+  // Recursively read json files from the directory tree, which is also the hierarchy.
   const dirents = await readdir(dir, {withFileTypes: true});
   for (const dirent of dirents) {
     let filePath = dir.split(rootDir)[1];
@@ -32,7 +29,6 @@ async function getHierarchy(dir, hierarchy, rootDir, hierarchyType) {
   }
 }
 
-
 function wrapText(str, width, spaceReplacer) {
   spaceReplacer = spaceReplacer || '\n    /// ';
   if (str.length > width) {
@@ -48,20 +44,9 @@ function wrapText(str, width, spaceReplacer) {
   return str;
 }
 
-
 function getAncestry(path) {
   // Returns ancestry of a node in the hierarchy as a mapping from the node name to the node path,
-  // e.g. '/thing/Item' -> { thing: '/thing', Item: '/thing/Item' }
-  let ancestry = {};
-  for (let i = 1; i < path.length; i++) {
-    ancestry[path[i]] = (path.slice(0, i + 1).join('/'));
-  }
-  return ancestry;
-}
-
-function getAncestry2(path) {
-  // Returns ancestry of a node in the hierarchy as a mapping from the node name to the node path,
-  // e.g. '/thing/Item' -> { thing: '/thing', Item: '/thing/Item' }
+  // e.g. '/TypeHierarchy/Item' -> { TypeHierarchy: '/TypeHierarchy', Item: '/TypeHierarchy/Item' }
   let ancestry = {};
   for (let i = 0; i < path.length; i++) {
     ancestry[path[i]] = (path.slice(0, i + 1).join('/'));
@@ -83,7 +68,6 @@ module.exports = {
   getHierarchy,
   wrapText,
   getAncestry,
-  getAncestry2,
-  insertList: insertList,
+  insertList,
   PRIMITIVE_TYPES
 };

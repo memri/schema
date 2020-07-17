@@ -1,0 +1,5 @@
+{
+  "description": "Primitive data types are native types of the database: boolean, string, integer, float and datetime.",
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}
