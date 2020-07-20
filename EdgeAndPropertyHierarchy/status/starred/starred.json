@@ -1,4 +1,4 @@
 {
-  "description": "Boolean whether the Item has been starred.",
+  "description": "Whether the Item is starred.",
   "type": "bool"
 }

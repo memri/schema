@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "An identification string that defines a realm of administrative autonomy, authority or control within the internet.",
   "type": "string"
 }

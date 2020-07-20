@@ -1,4 +1,4 @@
 {
-  "description": "Thumbnail image for an image or video.",
+  "description": "Thumbnail image for an Item, typically an image or video.",
   "type": "File"
 }

@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Used to define position in a sequence, enables ordering based on this number.",
   "type": "int"
 }

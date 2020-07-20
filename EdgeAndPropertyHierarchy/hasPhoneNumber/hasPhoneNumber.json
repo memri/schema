@@ -1,4 +1,4 @@
 {
-  "description": "A phone number.",
+  "description": "A phone number that belongs to an Item.",
   "type": "PhoneNumber"
 }

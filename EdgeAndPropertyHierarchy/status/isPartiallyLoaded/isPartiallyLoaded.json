@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Whether the Item is partially loaded.",
   "type": "bool"
 }

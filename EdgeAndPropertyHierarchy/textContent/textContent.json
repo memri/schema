@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The plain text content of an Item, without styling or syntax for Markdown, HTML, etc.",
   "type": "string"
 }

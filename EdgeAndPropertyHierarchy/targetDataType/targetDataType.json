@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The type of data this Item targets.",
   "type": "string"
 }

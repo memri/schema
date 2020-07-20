@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "A public key used in an asymmetric cryptography protocol.",
   "type": "PublicKey"
 }

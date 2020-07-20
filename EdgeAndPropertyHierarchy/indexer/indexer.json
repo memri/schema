@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "An Indexer is used to enrich data in the Pod database.",
   "type": "Indexer"
 }

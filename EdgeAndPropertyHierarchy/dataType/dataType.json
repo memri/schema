@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The type of the data this Item acts on.",
   "type": "string"
 }

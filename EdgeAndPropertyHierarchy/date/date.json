@@ -1,4 +1,4 @@
 {
-  "description": "Date of death.",
+  "description": "The date related to an Item.",
   "type": "datetime"
 }

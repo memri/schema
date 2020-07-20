@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Whether the Item should be displayed in the interfaces.",
   "type": "bool"
 }

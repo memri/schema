@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "A run of a certain Indexer, that defines the details of the specific indexing.",
   "type": "IndexerRun"
 }

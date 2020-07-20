@@ -1,4 +1,4 @@
 {
-  "description": "Exif data for this object.",
+  "description": "Exif data of an image file.",
   "type": "string"
 }

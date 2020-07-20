@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The Item this Item applies to.",
   "type": "any"
 }

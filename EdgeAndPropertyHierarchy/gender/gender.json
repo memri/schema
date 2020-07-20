@@ -1,4 +1,4 @@
 {
-  "description": "The sexual orientation of a person.",
+  "description": "Gender of something, typically a Person, but possibly also fictional characters, animals, etc.",
   "type": "string"
 }

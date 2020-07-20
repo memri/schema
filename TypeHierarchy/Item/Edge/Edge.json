@@ -1,5 +1,5 @@
 {
-  "description": "TBD",
+  "description": "Edge is the Item that stores the specifics of an edge, used by front ends.",
   "properties": [
     "type",
     "targetItemType",

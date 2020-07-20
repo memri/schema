@@ -1,4 +1,4 @@
 {
-  "description": "The topic of some item, for instance a Chat. ",
+  "description": "The topic of an item, for instance a Chat.",
   "type": "string"
 }

@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Whether to sort in ascending order, rather than the default descending order.",
   "type": "bool"
 }

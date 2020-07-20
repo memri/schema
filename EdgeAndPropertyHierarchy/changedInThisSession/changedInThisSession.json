@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Whether this Item was changed during this session.",
   "type": "bool"
 }
