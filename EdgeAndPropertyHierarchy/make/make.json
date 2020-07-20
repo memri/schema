@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The make number of a device, for instance a mobile phone.",
   "type": "string"
 }

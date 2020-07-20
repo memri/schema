@@ -1,5 +1,5 @@
 {
-  "description": "TBD",
+  "description": "A Downloader is used to download data from an external source, to be imported using an Importer.",
   "properties": [],
   "relations": {},
   "foregroundColor": "#ffffff",

@@ -1,5 +1,5 @@
 {
-  "description": "TBD",
+  "description": "Any type of file that can be stored on disk.",
   "properties": [
     "uri"
   ],

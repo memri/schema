@@ -1,5 +1,5 @@
 {
-  "description": "TBD",
+  "description": "An online profile, typically on social media.",
   "properties": [
     "type",
     "handle"

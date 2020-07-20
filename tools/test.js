@@ -45,4 +45,5 @@ let predicateHierarchy = {};
   // TODO check if props are `double`, i.e. already inherited
   // TODO check if there are unused Items
   // TODO check if there are unused relationships/properties
+  // TODO check if properties are shared over all children of an Item, so they could be inherited
 })();
