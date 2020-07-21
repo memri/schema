@@ -21,7 +21,7 @@ function getItemFamily() {
 function getDataItemClasses() {
   let dataItemClasses = [];
   for (const entity of Object.keys(entityHierarchy)) {
-    if (['Datasource', 'UserState', 'ViewArguments'].includes(entity)) continue;
+    if (['Datasource', 'UserState', 'ViewArguments', 'CVUStateDefinition'].includes(entity)) continue;
 
     let classDescription = `\n/// ${entityHierarchy[entity]['description']}\n`;
     classDescription = helpers.wrapText(`/// ${entityHierarchy[entity]['description']}`, 100, '\n/// ');
@@ -29,19 +29,10 @@ function getDataItemClasses() {
     let classDefinition;
     switch (entity) {
       case 'Item':
-        classDefinition = `public class SchemaItem: Object, Codable, Identifiable {`;
-        break;
-      case 'Session':
-        classDefinition = `public class SchemaSession : Item {`;
-        break;
-      case 'Sessions':
-        classDefinition = `public class SchemaSessions : Item {`;
+        classDefinition = `public class SchemaItem: SyncableItem, Codable, Identifiable {`;
         break;
       case 'Person':
         classDefinition = `public class SchemaPerson : Item {`;
-        break;
-      case 'SyncState':
-        classDefinition = 'public class SyncState: Object, Codable {\n    let updatedFields = List<String>()';
         break;
       case 'Edge':
         classDefinition = `public class Edge : Object, Codable {`;
@@ -72,7 +63,7 @@ function getDataItemClasses() {
           relations += helpers.wrapText(`    /// ${predicateHierarchy[field]['description']}\n`, 96);
         }
 
-        if (['allEdges', 'currentViewIndex', 'currentSessionIndex', 'version', 'views', 'sessions', 'syncState'].includes(field)) {
+        if (['allEdges', 'currentViewIndex', 'currentSessionIndex', 'version'].includes(field)) {
           switch (field) {
             case 'allEdges':
               properties += '    let allEdges = List<Edge>()\n';
@@ -85,20 +76,6 @@ function getDataItemClasses() {
               break;
             case 'version':
               properties += `    @objc dynamic var ${field}:Int = 1\n`;
-              propertiesDecoder += `            ${field} = try decoder.decodeIfPresent("${field}") ?? ${field}\n`;
-              break;
-            case 'views':
-              relations += `    var ${field}: Results<${type}>? {\n` +
-                `        edges("view")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
-                '    }\n\n';
-              break;
-            case 'sessions':
-              relations += `    var ${field}: Results<${type}>? {\n` +
-                `        edges("session")?.sorted(byKeyPath: "sequence").items(type:${type}.self)\n` +
-                '    }\n\n';
-              break;
-            case 'syncState':
-              properties += `    @objc dynamic var ${field}:${type}? = ${type}()\n`;
               propertiesDecoder += `            ${field} = try decoder.decodeIfPresent("${field}") ?? ${field}\n`;
               break;
           }
@@ -254,6 +231,22 @@ enum ItemFamily: String, ClassFamily, CaseIterable {
         switch self {
         ${helpers.insertList(typeFunctions, 8)}
         }
+    }
+}
+
+public class SyncableItem: Object {
+    let _updated = List<String>()
+    /// TBD
+    @objc dynamic var _partial:Bool = false
+    /// TBD
+    @objc dynamic var _action:String? = nil
+    /// TBD
+    @objc dynamic var _changedInSession:Bool = false
+}
+
+public class CVUStateDefinition : CVUStoredDefinition {
+    required init () {
+        super.init()
     }
 }
 

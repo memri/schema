@@ -11,12 +11,7 @@
     "version",
     "edgeLabel"
   ],
-  "relations": {
-    "syncState": {
-      "sequenced": false,
-      "singular": true
-    }
-  },
+  "relations": {},
   "foregroundColor": "#ffffff",
   "backgroundColor": "#93c47d"
 }
