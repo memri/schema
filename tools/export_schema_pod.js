@@ -14,7 +14,7 @@ let predicateHierarchy = {};
 
   let types = [];
   for (const entity of Object.keys(entityHierarchy)) {
-    if (entity === 'Item') continue;
+    if (['Item', 'SyncableItem', 'Edge'].includes(entity)) continue;
     let ancestry = helpers.getAncestry(entityHierarchy[entity]['path'].split('/'));
 
     let propertiesIncludingInherited = [];
