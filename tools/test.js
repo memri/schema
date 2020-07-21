@@ -37,10 +37,26 @@ let predicateHierarchy = {};
       }
     } else {
       if (!predicateHierarchy[predicate]['children']) {
-        console.log(`-> Predicate: '${predicateHierarchy[predicate]['path']}', has no type.`);
+        console.log(`-> Edge / Property: '${predicateHierarchy[predicate]['path']}', has no type.`);
       }
     }
   }
+
+  console.log('Check for duplicate properties and edges (inherited and redefined)...');
+  for (const entity of Object.keys(entityHierarchy)) {
+    if (entityHierarchy[entity]['children']) {
+      const fields = entityHierarchy[entity]['properties'].concat(Object.keys(entityHierarchy[entity]['relations']))
+      for (const child of entityHierarchy[entity]['children']) {
+        const childFields = entityHierarchy[child]['properties'].concat(Object.keys(entityHierarchy[child]['relations']))
+        for (const childField of childFields) {
+          if (fields.includes(childField)) {
+            console.log(`-> ${child} redefines ${childField} that is already in ${entity}.`)
+          }
+        }
+      }
+    }
+  }
+
   // TODO check if lower cased properties and relations don't clash: they can't have different types
   // TODO check if props are `double`, i.e. already inherited
   // TODO check if there are unused Items

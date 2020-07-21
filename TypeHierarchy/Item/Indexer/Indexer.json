@@ -4,7 +4,6 @@
     "name",
     "icon",
     "query",
-    "itemDescription",
     "bundleImage",
     "runDestination",
     "indexerClass"
