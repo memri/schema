@@ -3,20 +3,9 @@
   "properties": [
     "caption",
     "transcript",
-    "name",
-    "bitrate",
-    "duration"
+    "name"
   ],
-  "relations": {
-    "file": {
-      "sequenced": false,
-      "singular": true
-    },
-    "includes": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "relations": {},
   "foregroundColor": "#ffffff",
   "backgroundColor": "#93c47d"
 }
