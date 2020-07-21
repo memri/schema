@@ -1,0 +1,35 @@
+{
+  "description": "A single message.",
+  "properties": [
+    "textContent",
+    "sender",
+    "chatJid",
+    "chatReceiver",
+    "subject",
+    "date",
+    "importFrom",
+    "importTo",
+    "importCC",
+    "importReplyTo"
+  ],
+  "relations": {
+    "from": {
+      "sequenced": false,
+      "singular": false
+    },
+    "to": {
+      "sequenced": false,
+      "singular": false
+    },
+    "CC": {
+      "sequenced": false,
+      "singular": false
+    },
+    "replyTo": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}
