@@ -19,6 +19,7 @@ function getItemFamily() {
 }
 
 function getDataItemClasses() {
+  let propertiesAndRelationsItem = entityHierarchy['Item']['properties'].concat(Object.keys(entityHierarchy['Item']['relations']));
   let dataItemClasses = [];
   for (const entity of Object.keys(entityHierarchy)) {
     if (['Datasource', 'UserState', 'ViewArguments', 'CVUStateDefinition'].includes(entity)) continue;
@@ -35,10 +36,17 @@ function getDataItemClasses() {
         classDefinition = `public class SchemaPerson : Item {`;
         break;
       case 'Edge':
-        classDefinition = `public class Edge : Object, Codable {`;
+        classDefinition = `public class Edge : SyncableItem, Codable {`;
         break;
       default:
         classDefinition = `public class ${entity} : Item {`;
+    }
+
+    let ancestry = helpers.getAncestry(entityHierarchy[entity]['path'].split('/'));
+    let propertiesAndRelations = [];
+    for (const _item in ancestry) {
+      propertiesAndRelations = propertiesAndRelations.concat(entityHierarchy[_item]['properties']);
+      propertiesAndRelations = propertiesAndRelations.concat(Object.keys(entityHierarchy[_item]['relations']));
     }
 
     let properties = "";
@@ -46,10 +54,7 @@ function getDataItemClasses() {
     let relations = "";
     let relationsDecoder = "";
     let codingKeys = [];
-    let propertiesAndRelations = entityHierarchy[entity]['properties'].concat(Object.keys(entityHierarchy[entity]['relations']));
-    let propertiesAndRelationsItem = entityHierarchy['Item']['properties'].concat(Object.keys(entityHierarchy['Item']['relations']));
-
-    for (let field of propertiesAndRelations) {
+    for (const field of propertiesAndRelations) {
       if (['genericType', 'functions', 'updatedFields'].includes(field)) continue;
       if (propertiesAndRelationsItem.includes(field) && !['Item', 'Edge'].includes(entity)) continue;
 
