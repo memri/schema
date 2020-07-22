@@ -24,10 +24,6 @@
     "label": {
       "sequenced": false,
       "singular": false
-    },
-    "syncState": {
-      "sequenced": false,
-      "singular": true
     }
   },
   "foregroundColor": "#ffffff",
