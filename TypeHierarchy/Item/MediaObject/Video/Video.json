@@ -3,21 +3,10 @@
   "properties": [
     "caption",
     "exifData",
-    "name",
-    "width",
-    "height",
-    "duration"
+    "name"
   ],
   "relations": {
     "thumbnail": {
-      "sequenced": false,
-      "singular": false
-    },
-    "file": {
-      "sequenced": false,
-      "singular": true
-    },
-    "includes": {
       "sequenced": false,
       "singular": false
     }
