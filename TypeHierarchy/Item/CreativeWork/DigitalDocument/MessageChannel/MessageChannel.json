@@ -3,11 +3,14 @@
   "properties": [
     "name",
     "topic",
-    "receiver",
     "encrypted"
   ],
   "relations": {
     "photo": {
+      "sequenced": false,
+      "singular": false
+    },
+    "receiver": {
       "sequenced": false,
       "singular": false
     }

@@ -1,0 +1,4 @@
+{
+  "description": "Data that cannot directly be imported in the appropriate Items (yet), in JSON format ",
+  "type": "string"
+}

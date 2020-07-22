@@ -1,0 +1,4 @@
+{
+  "description": "A message channel this Item belongs to, for instance a WhatsApp chat.",
+  "type": "MessageChannel"
+}

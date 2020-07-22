@@ -1,0 +1,4 @@
+{
+  "description": "The Person this Item belongs to.",
+  "type": "Person"
+}
