@@ -1,4 +1,4 @@
 {
-  "description": "The Person that received, or is to receive, this Item.",
-  "type": "string"
+  "description": "The account that received, or is to receive, this Item.",
+  "type": "Account"
 }

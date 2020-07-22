@@ -2,12 +2,30 @@
   "description": "A single message.",
   "properties": [
     "textContent",
-    "sender",
-    "chatJid",
-    "chatReceiver"
+    "content",
+    "type",
+    "importJson",
+    "subject",
+    "datetimeSent"
   ],
   "relations": {
-    "chat": {
+    "messageChannel": {
+      "sequenced": false,
+      "singular": false
+    },
+    "sender": {
+      "sequenced": false,
+      "singular": false
+    },
+    "receiver": {
+      "sequenced": false,
+      "singular": false
+    },
+    "cc": {
+      "sequenced": false,
+      "singular": false
+    },
+    "replyTo": {
       "sequenced": false,
       "singular": false
     }
