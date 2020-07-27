@@ -10,7 +10,8 @@
     "itemDescription",
     "starred",
     "version",
-    "uid"
+    "uid",
+    "importJson"
   ],
   "relations": {
     "allEdges": {

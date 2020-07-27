@@ -47,6 +47,7 @@ let predicateHierarchy = {};
     if (entityHierarchy[entity]['children']) {
       const fields = entityHierarchy[entity]['properties'].concat(Object.keys(entityHierarchy[entity]['relations']));
       for (const child of entityHierarchy[entity]['children']) {
+        if(['Edge', 'UserState', 'ViewArguments'].includes(child)) continue
         const childFields = entityHierarchy[child]['properties'].concat(Object.keys(entityHierarchy[child]['relations']));
         for (const childField of childFields) {
           if (fields.includes(childField)) {
@@ -57,49 +58,49 @@ let predicateHierarchy = {};
     }
   }
 
-  console.log('\nCheck for unused Items...');
-  let usedTypes = new Set();
-  for (const predicate of Object.values(predicateHierarchy)) {
-    if (predicate['type']) usedTypes.add(predicate['type']);
-  }
-  for (const entity of Object.keys(entityHierarchy)) {
-    if (!usedTypes.has(entity)) {
-      console.log(`W: No Edge uses Item ${entity}`);
-    }
-  }
-
-  console.log('\nCheck for unused Edges...');
-  let usedEdges = new Set();
-  for (const entity of Object.values(entityHierarchy)) {
-    for (const relation of Object.keys(entity['relations'])) {
-      usedEdges.add(relation);
-    }
-  }
-  for (const edge of Object.keys(predicateHierarchy)) {
-    if (!(usedEdges.has(edge) || helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[edge]['type']))) {
-      console.log(`W: No Item uses Edge ${edge}`);
-    }
-  }
-
-  console.log('\nCheck for TBDs...');
-  for (const entity of Object.keys(entityHierarchy)) {
-    if (entityHierarchy[entity]['description']) {
-      if (entityHierarchy[entity]['description'].toLowerCase().includes('tbd')) {
-        console.log(`W: Item ${entity} has TBD in description.`);
-      }
-    } else {
-      console.log(`W: Item ${entity} is missing a description.`);
-    }
-  }
-  for (const predicate of Object.keys(predicateHierarchy)) {
-    if (predicateHierarchy[predicate]['description']) {
-      if (predicateHierarchy[predicate]['description'].toLowerCase().includes('tbd')) {
-        console.log(`W: Edge / Property ${predicate} has TBD in description.`);
-      }
-    } else {
-      console.log(`W: Edge / Property ${predicate} is missing a description.`);
-    }
-  }
-
+  // console.log('\nCheck for unused Items...');
+  // let usedTypes = new Set();
+  // for (const predicate of Object.values(predicateHierarchy)) {
+  //   if (predicate['type']) usedTypes.add(predicate['type']);
+  // }
+  // for (const entity of Object.keys(entityHierarchy)) {
+  //   if (!usedTypes.has(entity)) {
+  //     console.log(`W: No Edge uses Item ${entity}`);
+  //   }
+  // }
+  //
+  // console.log('\nCheck for unused Edges...');
+  // let usedEdges = new Set();
+  // for (const entity of Object.values(entityHierarchy)) {
+  //   for (const relation of Object.keys(entity['relations'])) {
+  //     usedEdges.add(relation);
+  //   }
+  // }
+  // for (const edge of Object.keys(predicateHierarchy)) {
+  //   if (!(usedEdges.has(edge) || helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[edge]['type']))) {
+  //     console.log(`W: No Item uses Edge ${edge}`);
+  //   }
+  // }
+  //
+  // console.log('\nCheck for TBDs...');
+  // for (const entity of Object.keys(entityHierarchy)) {
+  //   if (entityHierarchy[entity]['description']) {
+  //     if (entityHierarchy[entity]['description'].toLowerCase().includes('tbd')) {
+  //       console.log(`W: Item ${entity} has TBD in description.`);
+  //     }
+  //   } else {
+  //     console.log(`W: Item ${entity} is missing a description.`);
+  //   }
+  // }
+  // for (const predicate of Object.keys(predicateHierarchy)) {
+  //   if (predicateHierarchy[predicate]['description']) {
+  //     if (predicateHierarchy[predicate]['description'].toLowerCase().includes('tbd')) {
+  //       console.log(`W: Edge / Property ${predicate} has TBD in description.`);
+  //     }
+  //   } else {
+  //     console.log(`W: Edge / Property ${predicate} is missing a description.`);
+  //   }
+  // }
+  //
   // TODO check if properties are shared over all children of an Item, so they could be inherited
 })();

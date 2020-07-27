@@ -1,0 +1,18 @@
+{
+  "description": "Some object that exists in the real world. This could be used for ",
+  "properties": [
+    "displayName",
+    "nameQuality",
+    "enablePresence",
+    "enableReceipts",
+    "service"
+  ],
+  "relations": {
+    "belongsTo": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}
