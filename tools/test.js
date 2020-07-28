@@ -43,19 +43,16 @@ let predicateHierarchy = {};
   }
 
   console.log('\nCheck for duplicate properties and edges (inherited and redefined)...');
-  for (const entity of Object.keys(entityHierarchy)) {
-    // console.log('--------------------------------')
-    // console.log(entity)
-    if (entityHierarchy[entity]['children']) {
-      const fields = entityHierarchy[entity]['properties'].concat(Object.keys(entityHierarchy[entity]['relations']));
-      for (const child of entityHierarchy[entity]['children']) {
-        if(['Edge', 'UserState', 'ViewArguments'].includes(child)) continue
-        const childFields = entityHierarchy[child]['properties'].concat(Object.keys(entityHierarchy[child]['relations']));
-        // console.log(childFields)
-        for (const childField of childFields) {
-          if (fields.includes(childField)) {
-            console.log(`E: ${child} redefines ${childField} that is already in ${entity}.`);
-          }
+  for (const [entityName, entity] of Object.entries(entityHierarchy)) {
+    if (['Edge', 'UserState', 'ViewArguments'].includes(entityName)) continue;
+    let ancestry = helpers.getAncestry(entity['path'].split('/'));
+    delete ancestry[entityName];
+    const propertiesAndEdges = entity['properties'].concat(Object.keys(entity['relations']));
+    for (const ancestor of Object.keys(ancestry)) {
+      const ancestorFields = entityHierarchy[ancestor]['properties'].concat(Object.keys(entityHierarchy[ancestor]['relations']));
+      for (const field of propertiesAndEdges) {
+        if (ancestorFields.includes(field)) {
+          console.log(`E: ${entityName} redefines ${field} that is already in ${ancestor}.`);
         }
       }
     }
