@@ -1,10 +1,20 @@
 {
-  "description": "A measure consists of a quantity, symbol, definition, value and a unit.",
+  "description": "A measure consists of a definition, symbol, unit and value (int, float, string, bool, or datetime).",
   "properties": [
-    "type",
-    "url"
+    "definition",
+    "symbol",
+    "intValue",
+    "floatValue",
+    "stringValue",
+    "datetimeValue",
+    "boolValue"
   ],
-  "relations": {},
+  "relations": {
+    "unit": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
   "foregroundColor": "#ffffff",
   "backgroundColor": "#3d57e2"
 }
