@@ -1,0 +1,10 @@
+{
+  "description": "A measure consists of a quantity, symbol, definition, value and a unit.",
+  "properties": [
+    "type",
+    "url"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#3d57e2"
+}

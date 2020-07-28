@@ -1,0 +1,4 @@
+{
+  "description": "The price or cost of an Item, typically for one instance of the Item or the defaultQuantity.",
+  "type": "Measure"
+}

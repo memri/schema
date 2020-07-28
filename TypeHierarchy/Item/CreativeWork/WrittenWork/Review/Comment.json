@@ -1,8 +1,8 @@
 {
-  "description": "An audio file.",
+  "description": "A comment.",
   "properties": [
-    "caption",
-    "transcript"
+    "content",
+    "textContent"
   ],
   "relations": {},
   "foregroundColor": "#ffffff",

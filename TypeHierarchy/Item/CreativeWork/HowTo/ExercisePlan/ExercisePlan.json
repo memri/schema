@@ -1,0 +1,12 @@
+{
+  "description": "Fitness-related activity designed for a specific health-related purpose, including defined exercise routines as well as activity prescribed by a clinician.",
+  "properties": [
+    "duration",
+    "frequency",
+    "repetitions",
+    "workload"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

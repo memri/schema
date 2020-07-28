@@ -1,0 +1,9 @@
+{
+  "description": "Any kind of event, for instance a music festival or a business meeting.",
+  "properties": [
+  ],
+  "relations": {
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

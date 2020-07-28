@@ -1,0 +1,10 @@
+{
+  "description": "A code or number used to identify Products, for instance a UPC or GTIN.",
+  "properties": [
+    "productCodeType",
+    "productNumber"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

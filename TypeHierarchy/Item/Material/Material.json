@@ -1,0 +1,11 @@
+{
+  "description": "A material that an Item is (partially) made from, for instance cotton, paper, steel, etc.",
+  "properties": [
+    "name",
+    "price",
+    "defaultQuantity"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#3d57e2"
+}

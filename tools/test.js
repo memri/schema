@@ -44,11 +44,14 @@ let predicateHierarchy = {};
 
   console.log('\nCheck for duplicate properties and edges (inherited and redefined)...');
   for (const entity of Object.keys(entityHierarchy)) {
+    // console.log('--------------------------------')
+    // console.log(entity)
     if (entityHierarchy[entity]['children']) {
       const fields = entityHierarchy[entity]['properties'].concat(Object.keys(entityHierarchy[entity]['relations']));
       for (const child of entityHierarchy[entity]['children']) {
         if(['Edge', 'UserState', 'ViewArguments'].includes(child)) continue
         const childFields = entityHierarchy[child]['properties'].concat(Object.keys(entityHierarchy[child]['relations']));
+        // console.log(childFields)
         for (const childField of childFields) {
           if (fields.includes(childField)) {
             console.log(`E: ${child} redefines ${childField} that is already in ${entity}.`);
@@ -69,18 +72,18 @@ let predicateHierarchy = {};
   //   }
   // }
   //
-  // console.log('\nCheck for unused Edges...');
-  // let usedEdges = new Set();
-  // for (const entity of Object.values(entityHierarchy)) {
-  //   for (const relation of Object.keys(entity['relations'])) {
-  //     usedEdges.add(relation);
-  //   }
-  // }
-  // for (const edge of Object.keys(predicateHierarchy)) {
-  //   if (!(usedEdges.has(edge) || helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[edge]['type']))) {
-  //     console.log(`W: No Item uses Edge ${edge}`);
-  //   }
-  // }
+  console.log('\nCheck for unused Edges...');
+  let usedEdges = new Set();
+  for (const entity of Object.values(entityHierarchy)) {
+    for (const relation of Object.keys(entity['relations'])) {
+      usedEdges.add(relation);
+    }
+  }
+  for (const edge of Object.keys(predicateHierarchy)) {
+    if (!(usedEdges.has(edge) || helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[edge]['type']))) {
+      console.log(`W: No Item uses Edge ${edge}`);
+    }
+  }
   //
   // console.log('\nCheck for TBDs...');
   // for (const entity of Object.keys(entityHierarchy)) {
@@ -103,4 +106,6 @@ let predicateHierarchy = {};
   // }
   //
   // TODO check if properties are shared over all children of an Item, so they could be inherited
+  // TODO check if dir and json have the same name (except the .json extension)
+  // TODO catch json errors and provide useful error
 })();

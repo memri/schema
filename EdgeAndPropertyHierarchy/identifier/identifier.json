@@ -1,4 +1,4 @@
 {
-  "description": "The identifier property represents any kind of identifier for any kind of Thing.",
+  "description": "A number or string to identify an Item.",
   "type": "string"
 }

@@ -25,6 +25,10 @@
     "label": {
       "sequenced": false,
       "singular": false
+    },
+    "genericAttribute": {
+      "sequenced": false,
+      "singular": false
     }
   },
   "foregroundColor": "#ffffff",

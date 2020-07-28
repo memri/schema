@@ -1,0 +1,20 @@
+{
+  "description": "An article, for instance from a journal, magazine or newspaper.",
+  "properties": [
+    "content",
+    "textContent",
+    "text"
+  ],
+  "relations": {
+    "comment": {
+      "sequenced": false,
+      "singular": false
+    },
+    "file": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

@@ -1,5 +1,5 @@
 {
-  "description": "An account, typically for an online service, for instance an Apple account.",
+  "description": "An account or subscription, typically for some (online) service, for instance an Apple account.",
   "properties": [
     "displayName",
     "nameQuality",

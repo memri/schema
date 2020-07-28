@@ -1,0 +1,4 @@
+{
+  "description": "The default quantity, for instance 1 g or 0.25 L",
+  "type": "string"
+}

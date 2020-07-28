@@ -1,16 +1,14 @@
 {
   "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
   "properties": [
+    "title",
     "abstract",
     "datePublished",
     "keyword",
-    "text"
+    "text",
+    "transcript"
   ],
   "relations": {
-    "associatedMedia": {
-      "sequenced": false,
-      "singular": false
-    },
     "audio": {
       "sequenced": false,
       "singular": false
@@ -32,6 +30,10 @@
       "singular": false
     },
     "writtenBy": {
+      "sequenced": false,
+      "singular": false
+    },
+    "file": {
       "sequenced": false,
       "singular": false
     }

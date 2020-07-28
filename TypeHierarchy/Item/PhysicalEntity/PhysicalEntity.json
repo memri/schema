@@ -1,14 +1,14 @@
 {
-  "description": "Some object that exists in the real world. This could be used for ",
+  "description": "Some object that exists in the real world.",
   "properties": [
-    "displayName",
-    "nameQuality",
-    "enablePresence",
-    "enableReceipts",
-    "service"
+    "location"
   ],
   "relations": {
     "belongsTo": {
+      "sequenced": false,
+      "singular": false
+    },
+    "instanceOf": {
       "sequenced": false,
       "singular": false
     }

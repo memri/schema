@@ -1,0 +1,4 @@
+{
+  "description": "The material the Item is (partially) made of.",
+  "type": "Material"
+}

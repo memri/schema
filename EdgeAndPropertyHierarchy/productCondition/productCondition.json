@@ -1,0 +1,4 @@
+{
+  "description": "A description of the condition of a product, for instance new.",
+  "type": "string"
+}
