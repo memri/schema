@@ -1,8 +1,33 @@
 {
   "description": "Any kind of event, for instance a music festival or a business meeting.",
   "properties": [
+    "audience",
+    "startTime",
+    "endTime",
+    "duration",
+    "capacity"
   ],
   "relations": {
+    "location": {
+      "sequenced": false,
+      "singular": false
+    },
+    "eventStatus": {
+      "sequenced": false,
+      "singular": false
+    },
+    "review": {
+      "sequenced": false,
+      "singular": false
+    },
+    "superEvent": {
+      "sequenced": false,
+      "singular": false
+    },
+    "subEvent": {
+      "sequenced": false,
+      "singular": false
+    }
   },
   "foregroundColor": "#ffffff",
   "backgroundColor": "#93c47d"
