@@ -29,6 +29,14 @@
     "genericAttribute": {
       "sequenced": false,
       "singular": false
+    },
+    "measure": {
+      "sequenced": false,
+      "singular": false
+    },
+    "sharedWith": {
+      "sequenced": false,
+      "singular": false
     }
   },
   "foregroundColor": "#ffffff",

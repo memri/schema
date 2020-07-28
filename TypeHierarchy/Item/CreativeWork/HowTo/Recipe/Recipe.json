@@ -3,11 +3,14 @@
   "properties": [
     "price",
     "duration",
-    "instructions",
-    "yield"
+    "instructions"
   ],
   "relations": {
     "ingredient": {
+      "sequenced": false,
+      "singular": false
+    },
+    "yield": {
       "sequenced": false,
       "singular": false
     },

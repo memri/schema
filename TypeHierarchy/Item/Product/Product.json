@@ -3,8 +3,6 @@
   "properties": [
     "audience",
     "color",
-    "consumableBy",
-    "accessoryOrSparePartFor",
     "manufacturer",
     "model",
     "pattern",
@@ -19,15 +17,19 @@
       "sequenced": false,
       "singular": false
     },
-    "measure": {
-      "sequenced": false,
-      "singular": false
-    },
     "productCode": {
       "sequenced": false,
       "singular": false
     },
     "review": {
+      "sequenced": false,
+      "singular": false
+    },
+    "accessoryOrSparePartFor": {
+      "sequenced": false,
+      "singular": false
+    },
+    "consumableBy": {
       "sequenced": false,
       "singular": false
     }

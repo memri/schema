@@ -1,44 +1,48 @@
 {
-  "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
-  "properties": [
-    "title",
-    "abstract",
-    "datePublished",
-    "keyword",
-    "content",
-    "textContent",
-    "transcript"
-  ],
+  "description": "Any kind of event, for instance a music festival or a business meeting.",
+  "properties": [],
   "relations": {
-    "audio": {
+    "address": {
       "sequenced": false,
       "singular": false
     },
-    "citation": {
+    "areaServed": {
       "sequenced": false,
       "singular": false
     },
-    "contentLocation": {
+    "dateFounded": {
       "sequenced": false,
       "singular": false
     },
-    "locationCreated": {
+    "foundingLocation": {
       "sequenced": false,
       "singular": false
     },
-    "video": {
+    "logo": {
       "sequenced": false,
       "singular": false
     },
-    "writtenBy": {
+    "review": {
       "sequenced": false,
       "singular": false
     },
-    "file": {
+    "subOrganization": {
       "sequenced": false,
       "singular": false
     },
-    "recordedAt": {
+    "taxId": {
+      "sequenced": false,
+      "singular": false
+    },
+    "performsAt": {
+      "sequenced": false,
+      "singular": false
+    },
+    "attends": {
+      "sequenced": false,
+      "singular": false
+    },
+    "organizes": {
       "sequenced": false,
       "singular": false
     }

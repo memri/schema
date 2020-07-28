@@ -1,0 +1,4 @@
+{
+  "description": "The capacity of an Item, for instance the maximum number of attendees of an Event.",
+  "type": "Measure"
+}

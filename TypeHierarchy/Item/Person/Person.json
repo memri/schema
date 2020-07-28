@@ -64,6 +64,26 @@
     "medicalCondition": {
       "sequenced": false,
       "singular": false
+    },
+    "memberOf": {
+      "sequenced": false,
+      "singular": false
+    },
+    "performsAt": {
+      "sequenced": false,
+      "singular": false
+    },
+    "attends": {
+      "sequenced": false,
+      "singular": false
+    },
+    "organizes": {
+      "sequenced": false,
+      "singular": false
+    },
+    "founded": {
+      "sequenced": false,
+      "singular": false
     }
   },
   "foregroundColor": "#ffffff",

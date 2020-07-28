@@ -4,8 +4,7 @@
     "audience",
     "startTime",
     "endTime",
-    "duration",
-    "capacity"
+    "duration"
   ],
   "relations": {
     "location": {
@@ -20,11 +19,11 @@
       "sequenced": false,
       "singular": false
     },
-    "superEvent": {
+    "subEvent": {
       "sequenced": false,
       "singular": false
     },
-    "subEvent": {
+    "capacity": {
       "sequenced": false,
       "singular": false
     }

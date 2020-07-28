@@ -3,12 +3,7 @@
   "properties": [
     "occurrences"
   ],
-  "relations": {
-    "measure": {
-      "sequenced": false,
-      "singular": false
-    }
-  },
+  "relations": {},
   "foregroundColor": "#ffffff",
   "backgroundColor": "#93c47d"
 }
