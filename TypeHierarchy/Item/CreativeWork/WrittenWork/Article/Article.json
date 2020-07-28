@@ -1,16 +1,8 @@
 {
   "description": "An article, for instance from a journal, magazine or newspaper.",
-  "properties": [
-    "content",
-    "textContent",
-    "text"
-  ],
+  "properties": [],
   "relations": {
     "comment": {
-      "sequenced": false,
-      "singular": false
-    },
-    "file": {
       "sequenced": false,
       "singular": false
     }

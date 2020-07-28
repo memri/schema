@@ -1,9 +1,6 @@
 {
   "description": "A comment.",
-  "properties": [
-    "content",
-    "textContent"
-  ],
+  "properties": [],
   "relations": {},
   "foregroundColor": "#ffffff",
   "backgroundColor": "#93c47d"

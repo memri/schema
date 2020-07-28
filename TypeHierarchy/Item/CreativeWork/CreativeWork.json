@@ -5,7 +5,8 @@
     "abstract",
     "datePublished",
     "keyword",
-    "text",
+    "content",
+    "textContent",
     "transcript"
   ],
   "relations": {
