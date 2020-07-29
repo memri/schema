@@ -29,8 +29,8 @@ function getItemClasses() {
     for (const attribute of properties.concat(edges)) {
       if (['genericType', 'functions', 'updatedFields', 'allEdges'].includes(attribute)) continue;
       arguments += `${arguments === '' ? '' : ', '}${attribute}=None`;
-      if (item === 'Item' && attribute === 'uid') continue
       if (item === 'Item') itemArguments += `${itemArguments === '' ? '' : ', '}${attribute}=${attribute}`;
+      if (item === 'Item' && attribute === 'uid') continue
 
       if (properties.includes(attribute)) {
         fromJsonProperties.push(`${attribute} = json.get("${attribute}", None)`);
