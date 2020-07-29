@@ -1,7 +1,6 @@
 {
-  "description": "A bill that describes money owed for some Transaction.",
+  "description": "A Receipt is a confirmation of a transaction.",
   "properties": [
-    "dateDue"
   ],
   "relations": {
     "file": {
