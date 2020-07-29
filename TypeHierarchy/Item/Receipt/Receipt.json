@@ -3,9 +3,13 @@
   "properties": [
   ],
   "relations": {
-    "receipt": {
+    "file": {
       "sequenced": false,
-      "singular": false
+      "singular": true
+    },
+    "transaction": {
+      "sequenced": false,
+      "singular": true
     }
   },
   "foregroundColor": "#ffffff",

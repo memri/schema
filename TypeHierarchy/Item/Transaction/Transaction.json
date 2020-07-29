@@ -2,7 +2,10 @@
   "description": "An agreement between a buyer and a seller to exchange an asset for payment.",
   "properties": [
     "orderStatus",
-    "orderNumber"
+    "orderNumber",
+    "discountCode",
+    "dateOrdered",
+    "dateExecuted"
   ],
   "relations": {
     "purchaseLocation": {
@@ -14,6 +17,14 @@
       "singular": false
     },
     "billingAddress": {
+      "sequenced": false,
+      "singular": false
+    },
+    "payedWithAccount": {
+      "sequenced": false,
+      "singular": false
+    },
+    "discount": {
       "sequenced": false,
       "singular": false
     }

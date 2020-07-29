@@ -1,11 +1,12 @@
 {
-  "description": "An account or subscription, typically for some (online) service, for instance an Apple account.",
+  "description": "An account or subscription, for instance for some online service, or a bank account or wallet.",
   "properties": [
     "displayName",
     "nameQuality",
     "enablePresence",
     "enableReceipts",
-    "service"
+    "service",
+    "type"
   ],
   "relations": {
     "belongsTo": {

@@ -1,0 +1,4 @@
+{
+  "description": "An account or subscription, for instance for some online service, or a bank account or wallet.",
+  "type": "Account"
+}
