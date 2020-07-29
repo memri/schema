@@ -1,0 +1,4 @@
+{
+  "description": "Whether the item is active.",
+  "type": "bool"
+}
