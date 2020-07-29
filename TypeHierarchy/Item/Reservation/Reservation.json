@@ -1,9 +1,27 @@
 {
-  "description": "Describes a reservation for travel, dining or an event.",
+  "description": "Describes a reservation, for instance for a Route or Event, or at a Organization.",
   "properties": [
+    "dateReserved",
+    "reservationStatus"
   ],
   "relations": {
     "organization": {
+      "sequenced": false,
+      "singular": false
+    },
+    "route": {
+      "sequenced": false,
+      "singular": false
+    },
+    "reservedBy": {
+      "sequenced": false,
+      "singular": false
+    },
+    "reservedFor": {
+      "sequenced": false,
+      "singular": false
+    },
+    "price": {
       "sequenced": false,
       "singular": false
     }

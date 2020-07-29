@@ -1,0 +1,4 @@
+{
+  "description": "An option for some choice, for instance a Vote.",
+  "type": "Option"
+}

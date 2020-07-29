@@ -1,0 +1,4 @@
+{
+  "description": "Reservation date.",
+  "type": "datetime"
+}

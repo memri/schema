@@ -1,0 +1,22 @@
+{
+  "description": "The act casting a vote.",
+  "properties": [
+    "dateExecuted"
+  ],
+  "relations": {
+    "vote": {
+      "sequenced": false,
+      "singular": false
+    },
+    "usedBy": {
+      "sequenced": false,
+      "singular": false
+    },
+    "choice": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}
