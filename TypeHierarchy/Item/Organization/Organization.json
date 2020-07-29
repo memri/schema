@@ -1,16 +1,12 @@
 {
   "description": "Any kind of event, for instance a music festival or a business meeting.",
-  "properties": [],
+  "properties": [
+    "dateFounded",
+    "areaServed",
+    "taxId"
+  ],
   "relations": {
     "address": {
-      "sequenced": false,
-      "singular": false
-    },
-    "areaServed": {
-      "sequenced": false,
-      "singular": false
-    },
-    "dateFounded": {
       "sequenced": false,
       "singular": false
     },
@@ -27,10 +23,6 @@
       "singular": false
     },
     "subOrganization": {
-      "sequenced": false,
-      "singular": false
-    },
-    "taxId": {
       "sequenced": false,
       "singular": false
     },
@@ -51,6 +43,14 @@
       "singular": false
     },
     "industry": {
+      "sequenced": false,
+      "singular": false
+    },
+    "buyer": {
+      "sequenced": false,
+      "singular": false
+    },
+    "seller": {
       "sequenced": false,
       "singular": false
     }

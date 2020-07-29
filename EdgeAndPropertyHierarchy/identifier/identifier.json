@@ -1,4 +1,3 @@
 {
-  "description": "A number or string to identify an Item.",
-  "type": "string"
+  "description": "A number or string to identify an Item."
 }

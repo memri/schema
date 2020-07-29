@@ -1,28 +1,9 @@
 {
   "description": "A Receipt is a confirmation of a transaction.",
   "properties": [
-    "orderNumber",
-    "orderStatus",
-    "orderDate"
   ],
   "relations": {
-    "billingAddress": {
-      "sequenced": false,
-      "singular": false
-    },
-    "purchaseLocation": {
-      "sequenced": false,
-      "singular": false
-    },
-    "buyer": {
-      "sequenced": false,
-      "singular": false
-    },
-    "seller": {
-      "sequenced": false,
-      "singular": false
-    },
-    "product": {
+    "receipt": {
       "sequenced": false,
       "singular": false
     }

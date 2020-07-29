@@ -1,4 +1,4 @@
 {
   "description": "A way of transportation, for instance a bus or airplane.",
-  "type": "string"
+  "type": "ModeOfTransport"
 }

@@ -1,4 +1,4 @@
 {
   "description": "A Receipt is a confirmation of a transaction.",
-  "type": "receipt"
+  "type": "Receipt"
 }

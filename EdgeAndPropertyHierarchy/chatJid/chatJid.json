@@ -1,4 +1,0 @@
-{
-  "description": "The Synapse jid of a chat.",
-  "type": "string"
-}

@@ -1,14 +1,16 @@
 {
   "description": "Some object that exists in the real world.",
-  "properties": [
-    "location"
-  ],
+  "properties": [],
   "relations": {
     "belongsTo": {
       "sequenced": false,
       "singular": false
     },
     "instanceOf": {
+      "sequenced": false,
+      "singular": false
+    },
+    "location": {
       "sequenced": false,
       "singular": false
     }

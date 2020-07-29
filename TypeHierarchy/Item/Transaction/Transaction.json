@@ -1,30 +1,27 @@
 {
-  "description": "Any kind of event, for instance a music festival or a business meeting.",
+  "description": "An agreement between a buyer and a seller to exchange an asset for payment.",
   "properties": [
-    "audience",
-    "startTime",
-    "endTime",
-    "duration",
-    "eventStatus"
+    "orderStatus",
+    "orderNumber"
   ],
   "relations": {
-    "location": {
+    "role": {
       "sequenced": false,
       "singular": false
     },
-    "review": {
+    "purchaseLocation": {
       "sequenced": false,
       "singular": false
     },
-    "subEvent": {
+    "product": {
       "sequenced": false,
       "singular": false
     },
-    "capacity": {
+    "billingAddress": {
       "sequenced": false,
       "singular": false
     }
   },
   "foregroundColor": "#ffffff",
-  "backgroundColor": "#93c47d"
+  "backgroundColor": "#3a5eb2"
 }

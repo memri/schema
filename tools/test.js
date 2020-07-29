@@ -10,25 +10,29 @@ let predicateHierarchy = {};
   await helpers.getHierarchy(entityHierarchyPath, entityHierarchy, entityHierarchyPath, 'Item');
   await helpers.getHierarchy(predicateHierarchyPath, predicateHierarchy, predicateHierarchyPath, 'EdgeOrProperty');
 
-  console.log('\nCheck if properties of entities exist...');
+  console.log('\nCheck if Properties of Items exist...');
   for (const entity of Object.keys(entityHierarchy)) {
     for (let property of entityHierarchy[entity]['properties']) {
       if (!Object.keys(predicateHierarchy).includes(property)) {
         console.log(`E: Type: '${entity}', has non-existent property: '${property}'`);
+      } else if (!helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[property]['type'])) {
+        console.log(`E: Type: '${entity}', has non-existent property: '${property}', but there is an Edge with that name.`);
       }
     }
   }
 
-  console.log('\nCheck if relations of entities exist...');
+  console.log('\nCheck if Edges of Items exist...');
   for (const entity of Object.keys(entityHierarchy)) {
     for (let relation of Object.keys(entityHierarchy[entity]['relations'])) {
       if (!Object.keys(predicateHierarchy).includes(relation)) {
         console.log(`E: Type: '${entity}', has non-existent relation: '${relation}'`);
+      } else if (helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[relation]['type'])) {
+        console.log(`E: Type: '${entity}', has non-existent relation: '${relation}', but there is a Property with that name.`);
       }
     }
   }
 
-  console.log('\nCheck if types of predicates exist...');
+  console.log('\nCheck if Types of Edges and Properties exist...');
   for (const predicate of Object.keys(predicateHierarchy)) {
     if (predicateHierarchy[predicate]['type']) {
       let type = predicateHierarchy[predicate]['type'];
@@ -80,6 +84,21 @@ let predicateHierarchy = {};
     if (!(usedEdges.has(edge) || helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[edge]['type']))) {
       if (predicateHierarchy[edge]['type']) {
         console.log(`W: No Item uses Edge '${edge}' of Type '${predicateHierarchy[edge]['type']}'`);
+      }
+    }
+  }
+
+  console.log('\nCheck for unused Properties...');
+  let usedProperties = new Set();
+  for (const entity of Object.values(entityHierarchy)) {
+    for (const property of entity['properties']) {
+      usedProperties.add(property);
+    }
+  }
+  for (const property of Object.keys(predicateHierarchy)) {
+    if (!(usedProperties.has(property) || !helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[property]['type']))) {
+      if (predicateHierarchy[property]['type']) {
+        console.log(`W: No Item uses Property '${property}' of Type '${predicateHierarchy[property]['type']}'`);
       }
     }
   }

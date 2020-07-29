@@ -8,9 +8,6 @@
     "lastName",
     "gender",
     "sexualOrientation",
-    "height",
-    "shoulderWidth",
-    "armLength",
     "displayName",
     "nameQuality",
     "enablePresence",
@@ -86,6 +83,14 @@
       "singular": false
     },
     "role": {
+      "sequenced": false,
+      "singular": false
+    },
+    "buyer": {
+      "sequenced": false,
+      "singular": false
+    },
+    "seller": {
       "sequenced": false,
       "singular": false
     }

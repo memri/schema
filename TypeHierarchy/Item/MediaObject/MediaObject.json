@@ -5,10 +5,7 @@
     "duration",
     "endTime",
     "fileLocation",
-    "fileSize",
-    "height",
-    "startTime",
-    "width"
+    "startTime"
   ],
   "relations": {
     "file": {
