@@ -11,6 +11,7 @@ function getItemClasses() {
   let itemArguments = "";
   let itemClasses = [];
   for (const item of Object.keys(entityHierarchy)) {
+    // if (!['Item', 'Location'].includes(item)) continue
     if (['SyncableItem', 'Edge', 'Datasource', 'UserState', 'ViewArguments', 'CVUStateDefinition'].includes(item)) continue;
 
     let classDescription = `\n# ${entityHierarchy[item]['description']}\n`;
@@ -23,18 +24,26 @@ function getItemClasses() {
       edges = edges.concat(Object.keys(entityHierarchy[_item]['relations']));
     }
 
-    let arguments = "", edgesAttribute = "";
-    let attributes = [], jsonGets = [], fromJsons = [];
+    let arguments = "", fromJsonEdgeLoop = [];
+    let attributes = [], fromJsonEdges = [], fromJsonProperties = [];
     for (const attribute of properties.concat(edges)) {
-      if (['genericType', 'functions', 'updatedFields'].includes(attribute)) continue;
-      arguments += `${arguments === '' ? '' : ', '}${attribute}`;
-      if (item === 'Item') itemArguments += `${itemArguments === '' ? '' : ', '}${attribute}`;
+      if (['genericType', 'functions', 'updatedFields', 'allEdges'].includes(attribute)) continue;
+      arguments += `${arguments === '' ? '' : ', '}${attribute}=None`;
+      if (item === 'Item' && attribute === 'uid') continue
+      if (item === 'Item') itemArguments += `${itemArguments === '' ? '' : ', '}${attribute}=${attribute}`;
 
       if (properties.includes(attribute)) {
-        jsonGets.push(`${attribute} = json.get("${attribute}", None)`);
+        fromJsonProperties.push(`${attribute} = json.get("${attribute}", None)`);
       } else {
-        fromJsons.push(`if json.get("${attribute}", None) is not None: ${attribute} = Edge.from_json(json.get("${attribute}", None))`)
-        edgesAttribute += `${edgesAttribute === '' ? '' : ' + '}${attribute}`;
+        fromJsonEdges.push(`${attribute} = []`)
+        let singular;
+        for (const _item of Object.keys(entityHierarchy)) {
+          if (entityHierarchy[_item]['relations'][attribute]) singular = entityHierarchy[_item]['relations'][attribute]['singular'];
+        }
+        let isOrAppend = singular ? '= edge' : '.append(edge)'
+        let ifOrElif = fromJsonEdgeLoop.length === 0 ? 'if' : 'elif';
+        fromJsonEdgeLoop.push(`${ifOrElif} edge._type == "${attribute}" or edge._type == "~${attribute}": 
+                    ${attribute}${isOrAppend}`)
       }
 
       if (attributesItem.includes(attribute) && item !== 'Item') continue;
@@ -45,37 +54,34 @@ function getItemClasses() {
       dataItemClass = `
 
 ${classDescription}
-class Item:
+class Item(ItemBase):
     ${helpers.wrapText(`def __init__(self, ${arguments})`, 100, '\n' + ' '.repeat(17))}:
-        ${helpers.insertList(attributes, 8)}
-        self.edges = ${edgesAttribute}
-
-    def __getattribute__(self, name, edge):
-        res = self._meta[name]
-        if isinstance(res, edge):
-            return res.traverse()
-        else:
-            return res
-
-    def get_edge(self, name):
-        return self._meta[name]`;
+        super().__init__(uid)
+        ${helpers.insertList(attributes, 8)}`;
     } else {
       dataItemClass = `
 
 ${classDescription}
 class ${item}(Item):
     ${helpers.wrapText(`def __init__(self, ${arguments})`, 100, '\n' + ' '.repeat(17))}:
-        ${helpers.wrapText(`super().__init__(self, ${itemArguments})`, 100, '\n' + ' '.repeat(25))}
+        ${helpers.wrapText(`super().__init__(${itemArguments})`, 100, '\n' + ' '.repeat(25))}
         ${helpers.insertList(attributes, 8)}
-        ${helpers.wrapText(`self.edges = ${edgesAttribute}`, 100, ' \\\n' + ' '.repeat(12))}
 
     @classmethod
     def from_json(cls, json):
-        ${helpers.insertList(jsonGets, 8)}
+        all_edges = json.get("allEdges", None)
+        ${helpers.insertList(fromJsonProperties, 8)}
        
-        ${helpers.insertList(fromJsons,8)}
+        ${helpers.insertList(fromJsonEdges,8)}
         
-        ${helpers.wrapText(`cls(${arguments}`, 100, '\n' + ' '.repeat(12))})`;
+        if all_edges is not None:
+            for edge_json in all_edges:
+                edge = Edge.from_json(edge_json)
+                ${helpers.insertList(fromJsonEdgeLoop,16)}
+        
+        ${helpers.wrapText(`res = cls(${arguments}`, 100, '\n' + ' '.repeat(18))})
+        
+        return res`;
     }
     itemClasses.push(dataItemClass);
   }
@@ -97,6 +103,8 @@ let predicateHierarchy = {};
 #
 #  Copyright © 2020 memri. All rights reserved.
 #
+
+from .itembase import ItemBase
 ${helpers.insertList(itemClasses, 0)}`;
 
   fs.writeFile(outputFile, output, (err) => {
