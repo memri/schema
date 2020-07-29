@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The area that this Item operates in.",
   "type": "string"
 }

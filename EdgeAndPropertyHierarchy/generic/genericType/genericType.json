@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "A generic type that can be given to any Item to further specify what it is.",
   "type": "string"
 }

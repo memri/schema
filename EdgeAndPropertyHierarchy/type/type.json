@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "The type or (sub)category of some Item.",
   "type": "string"
 }

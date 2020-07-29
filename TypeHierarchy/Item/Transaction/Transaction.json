@@ -5,10 +5,6 @@
     "orderNumber"
   ],
   "relations": {
-    "role": {
-      "sequenced": false,
-      "singular": false
-    },
     "purchaseLocation": {
       "sequenced": false,
       "singular": false

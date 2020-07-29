@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
-  "type": "Role"
+  "description": "The role some Item has.",
+  "type": "string"
 }

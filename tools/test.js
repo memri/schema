@@ -68,7 +68,7 @@ let predicateHierarchy = {};
   //   if (predicate['type']) usedTypes.add(predicate['type']);
   // }
   // for (const entity of Object.keys(entityHierarchy)) {
-  //   if (!usedTypes.has(entity)) {
+  //   if (!usedTypes.has(entity) && !entityHierarchy[entity]['children']) {
   //     console.log(`W: No Edge has Type '${entity}'`);
   //   }
   // }
@@ -102,27 +102,30 @@ let predicateHierarchy = {};
       }
     }
   }
-  //
-  // console.log('\nCheck for TBDs...');
-  // for (const entity of Object.keys(entityHierarchy)) {
-  //   if (entityHierarchy[entity]['description']) {
-  //     if (entityHierarchy[entity]['description'].toLowerCase().includes('tbd')) {
-  //       console.log(`W: Item ${entity} has TBD in description.`);
-  //     }
-  //   } else {
-  //     console.log(`W: Item ${entity} is missing a description.`);
-  //   }
-  // }
-  // for (const predicate of Object.keys(predicateHierarchy)) {
-  //   if (predicateHierarchy[predicate]['description']) {
-  //     if (predicateHierarchy[predicate]['description'].toLowerCase().includes('tbd')) {
-  //       console.log(`W: Edge / Property ${predicate} has TBD in description.`);
-  //     }
-  //   } else {
-  //     console.log(`W: Edge / Property ${predicate} is missing a description.`);
-  //   }
-  // }
-  //
+
+  console.log('\nCheck for problems in descriptions...');
+  for (const entity of Object.keys(entityHierarchy)) {
+    if (entityHierarchy[entity]['description']) {
+      if (entityHierarchy[entity]['description'].toLowerCase().includes('tbd')) {
+        console.log(`W: Item '${entity}' has TBD in description.`);
+      }
+    } else {
+      console.log(`W: Item '${entity}' is missing a description.`);
+    }
+  }
+  for (const property of Object.keys(predicateHierarchy)) {
+    let isEdge = !helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[property]['type'])
+    if (predicateHierarchy[property]['description']) {
+      if (predicateHierarchy[property]['description'].toLowerCase().includes('tbd')) {
+        console.log(`W: ${isEdge ? 'Edge' : 'Property'} '${property}' has TBD in its description`);
+      }
+    } else if (predicateHierarchy[property]['description'] === "") {
+      console.log(`W: ${isEdge ? 'Edge' : 'Property'} '${property}' has an empty description`);
+    } else {
+      console.log(`W: ${isEdge ? 'Edge' : 'Property'} '${property}' is missing a description`);
+    }
+  }
+
   // TODO check if properties are shared over all children of an Item, so they could be inherited
   // TODO check if dir and json have the same name (except the .json extension)
   // TODO catch json errors and provide useful error

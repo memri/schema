@@ -11,7 +11,8 @@
     "displayName",
     "nameQuality",
     "enablePresence",
-    "enableReceipts"
+    "enableReceipts",
+    "role"
   ],
   "relations": {
     "address": {
@@ -79,10 +80,6 @@
       "singular": false
     },
     "founded": {
-      "sequenced": false,
-      "singular": false
-    },
-    "role": {
       "sequenced": false,
       "singular": false
     },

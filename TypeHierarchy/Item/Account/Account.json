@@ -11,6 +11,18 @@
     "belongsTo": {
       "sequenced": false,
       "singular": false
+    },
+    "price": {
+      "sequenced": false,
+      "singular": false
+    },
+    "location": {
+      "sequenced": false,
+      "singular": false
+    },
+    "organization": {
+      "sequenced": false,
+      "singular": false
     }
   },
   "foregroundColor": "#ffffff",
