@@ -1,4 +1,4 @@
 {
   "description": "A route from one Location to another, using some ModeOfTransport.",
-  "type": "string"
+  "type": "Route"
 }

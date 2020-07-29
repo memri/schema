@@ -1,6 +1,8 @@
 {
   "description": "A trip or journey, consisting of Routes.",
   "properties": [
+    "startTime",
+    "endTime"
   ],
   "relations": {
     "route": {
@@ -12,14 +14,6 @@
       "singular": false
     },
     "endLocation": {
-      "sequenced": false,
-      "singular": false
-    },
-    "startTime": {
-      "sequenced": false,
-      "singular": false
-    },
-    "endTime": {
       "sequenced": false,
       "singular": false
     },

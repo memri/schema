@@ -1,5 +1,5 @@
 {
-  "description": "Any kind of event, for instance a music festival or a business meeting.",
+  "description": "An organization, for instance an NGO, company or school.",
   "properties": [
     "dateFounded",
     "areaServed",

@@ -1,6 +1,8 @@
 {
   "description": "A route from one Location to another, using some ModeOfTransport.",
   "properties": [
+    "startTime",
+    "endTime"
   ],
   "relations": {
     "modeOfTransport": {
@@ -12,14 +14,6 @@
       "singular": false
     },
     "endLocation": {
-      "sequenced": false,
-      "singular": false
-    },
-    "startTime": {
-      "sequenced": false,
-      "singular": false
-    },
-    "endTime": {
       "sequenced": false,
       "singular": false
     },
