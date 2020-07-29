@@ -1,8 +1,9 @@
 {
-  "description": "A review of an Item, for instance a Organization, CreativeWork, or Product.",
-  "properties": [],
+  "description": "Describes a reservation for travel, dining or an event.",
+  "properties": [
+  ],
   "relations": {
-    "rating": {
+    "organization": {
       "sequenced": false,
       "singular": false
     }

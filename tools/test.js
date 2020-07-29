@@ -65,10 +65,10 @@ let predicateHierarchy = {};
   // }
   // for (const entity of Object.keys(entityHierarchy)) {
   //   if (!usedTypes.has(entity)) {
-  //     console.log(`W: No Edge uses Item ${entity}`);
+  //     console.log(`W: No Edge has Type '${entity}'`);
   //   }
   // }
-  //
+
   console.log('\nCheck for unused Edges...');
   let usedEdges = new Set();
   for (const entity of Object.values(entityHierarchy)) {
@@ -78,7 +78,9 @@ let predicateHierarchy = {};
   }
   for (const edge of Object.keys(predicateHierarchy)) {
     if (!(usedEdges.has(edge) || helpers.PRIMITIVE_TYPES.includes(predicateHierarchy[edge]['type']))) {
-      console.log(`W: No Item uses Edge ${edge}`);
+      if (predicateHierarchy[edge]['type']) {
+        console.log(`W: No Item uses Edge '${edge}' of Type '${predicateHierarchy[edge]['type']}'`);
+      }
     }
   }
   //

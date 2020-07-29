@@ -1,8 +1,8 @@
 {
-  "description": "A review of an Item, for instance a Organization, CreativeWork, or Product.",
+  "description": "Hours that an organization is open.",
   "properties": [],
   "relations": {
-    "rating": {
+    "timeFrame": {
       "sequenced": false,
       "singular": false
     }

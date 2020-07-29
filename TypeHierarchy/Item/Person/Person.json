@@ -45,7 +45,7 @@
       "sequenced": false,
       "singular": false
     },
-    "company": {
+    "industry": {
       "sequenced": false,
       "singular": false
     },
@@ -82,6 +82,10 @@
       "singular": false
     },
     "founded": {
+      "sequenced": false,
+      "singular": false
+    },
+    "role": {
       "sequenced": false,
       "singular": false
     }

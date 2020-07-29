@@ -1,0 +1,10 @@
+{
+  "description": "A specified period of time in which something occurs or is planned to take place.",
+  "properties": [
+    "startTime",
+    "endTime"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

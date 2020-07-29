@@ -1,35 +1,25 @@
 {
-  "description": "Any product.",
+  "description": "A route from one Location to another, using some ModeOfTransport.",
   "properties": [
-    "audience",
-    "color",
-    "manufacturer",
-    "model",
-    "pattern",
-    "dateAcquired",
-    "productCondition",
-    "dateProduced",
-    "datePublished",
-    "service"
   ],
   "relations": {
-    "material": {
+    "modeOfTransport": {
       "sequenced": false,
       "singular": false
     },
-    "productCode": {
+    "startLocation": {
       "sequenced": false,
       "singular": false
     },
-    "review": {
+    "endLocation": {
       "sequenced": false,
       "singular": false
     },
-    "accessoryOrSparePartFor": {
+    "startTime": {
       "sequenced": false,
       "singular": false
     },
-    "consumableBy": {
+    "endTime": {
       "sequenced": false,
       "singular": false
     },
@@ -37,7 +27,11 @@
       "sequenced": false,
       "singular": false
     },
-    "review": {
+    "receipt": {
+      "sequenced": false,
+      "singular": false
+    },
+    "ticket": {
       "sequenced": false,
       "singular": false
     }

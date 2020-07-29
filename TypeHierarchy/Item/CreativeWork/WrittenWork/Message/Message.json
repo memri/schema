@@ -1,7 +1,6 @@
 {
   "description": "A single message.",
   "properties": [
-    "type",
     "subject",
     "datetimeSent"
   ],

@@ -1,0 +1,4 @@
+{
+  "description": "Identifier of a transaction.",
+  "type": "string"
+}

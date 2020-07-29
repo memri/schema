@@ -1,0 +1,4 @@
+{
+  "description": "A rating is an evaluation using some Measure, for instance 1 to 5 stars.",
+  "type": "Measure"
+}

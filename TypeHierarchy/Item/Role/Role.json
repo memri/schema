@@ -1,0 +1,9 @@
+{
+  "description": "A role, duty, function or position.",
+  "properties": [
+    "description"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

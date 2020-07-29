@@ -7,7 +7,8 @@
     "keyword",
     "content",
     "textContent",
-    "transcript"
+    "transcript",
+    "type"
   ],
   "relations": {
     "audio": {
@@ -39,6 +40,10 @@
       "singular": false
     },
     "recordedAt": {
+      "sequenced": false,
+      "singular": false
+    },
+    "review": {
       "sequenced": false,
       "singular": false
     }

@@ -1,23 +1,29 @@
 {
-  "description": "A set of instructions for preparing a particular dish, including a list of the ingredients required.",
+  "description": "A trip or journey, consisting of Routes.",
   "properties": [
-    "duration",
-    "instructions"
   ],
   "relations": {
-    "ingredient": {
+    "route": {
+      "sequenced": false,
+      "singular": false
+    },
+    "startLocation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "endLocation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "startTime": {
+      "sequenced": false,
+      "singular": false
+    },
+    "endTime": {
       "sequenced": false,
       "singular": false
     },
     "price": {
-      "sequenced": false,
-      "singular": false
-    },
-    "yield": {
-      "sequenced": false,
-      "singular": false
-    },
-    "toolRequired": {
       "sequenced": false,
       "singular": false
     }

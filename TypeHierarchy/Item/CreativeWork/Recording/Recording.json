@@ -1,0 +1,7 @@
+{
+  "description": "A audio performance or production. Can be a single, album, radio show, podcast etc.",
+  "properties": [],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

@@ -1,23 +1,28 @@
 {
-  "description": "A set of instructions for preparing a particular dish, including a list of the ingredients required.",
+  "description": "A Receipt is a confirmation of a transaction.",
   "properties": [
-    "duration",
-    "instructions"
+    "orderNumber",
+    "orderStatus",
+    "orderDate"
   ],
   "relations": {
-    "ingredient": {
+    "billingAddress": {
       "sequenced": false,
       "singular": false
     },
-    "price": {
+    "purchaseLocation": {
       "sequenced": false,
       "singular": false
     },
-    "yield": {
+    "buyer": {
       "sequenced": false,
       "singular": false
     },
-    "toolRequired": {
+    "seller": {
+      "sequenced": false,
+      "singular": false
+    },
+    "product": {
       "sequenced": false,
       "singular": false
     }

@@ -1,4 +1,4 @@
 {
-  "description": "The price or cost of an Item.",
-  "type": "Measure"
+  "description": "A set of steps to reach a certain goal.",
+  "type": "string"
 }

@@ -45,6 +45,14 @@
     "organizes": {
       "sequenced": false,
       "singular": false
+    },
+    "openingHours": {
+      "sequenced": false,
+      "singular": false
+    },
+    "industry": {
+      "sequenced": false,
+      "singular": false
     }
   },
   "foregroundColor": "#ffffff",
