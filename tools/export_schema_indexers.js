@@ -78,7 +78,7 @@ class ${item}(Item):
                 ${helpers.insertList(fromJsonEdgeLoop,16)}
         
         ${helpers.wrapText(`res = cls(${clsArguments}`, 100, '\n' + ' '.repeat(18))})
-        
+        for e in res.get_all_edges(): e.source = res
         return res`;
     }
     itemClasses.push(dataItemClass);
@@ -103,6 +103,21 @@ let predicateHierarchy = {};
 #
 
 from .itembase import ItemBase
+
+
+def get_constructor(_type, indexer_class=None):
+    # from .models import *
+    from .models.GeoIndexer import GeoIndexer
+    from .models.Notes.NoteListIndexer import NotesListIndexer
+    classes = z = {**globals(), **locals()}
+    if _type in classes:
+        if _type == "Indexer":
+            constructor = classes[indexer_class]
+        else:
+            constructor = classes[_type]
+    else:
+        raise TypeError
+    return constructor
 ${helpers.insertList(itemClasses, 0)}`;
 
   fs.writeFile(outputFile, output, (err) => {
