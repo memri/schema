@@ -1,0 +1,4 @@
+{
+  "description": "The url property represents the Uniform Resource Location (URL) of a resource.",
+  "type": "string"
+}

@@ -1,8 +1,10 @@
 {
-  "description": "A public key used in an asymmetric cryptography protocol.",
+  "description": "A key used in an cryptography protocol.",
   "properties": [
     "type",
+    "role",
     "key",
+    "active",
     "name"
   ],
   "relations": {},

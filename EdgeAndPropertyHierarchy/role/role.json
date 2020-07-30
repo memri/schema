@@ -1,4 +1,4 @@
 {
-  "description": "The role some Item has.",
+  "description": "A role describes the function of the item in their context.",
   "type": "string"
 }

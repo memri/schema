@@ -47,7 +47,7 @@
       "sequenced": false,
       "singular": false
     },
-    "publicKey": {
+    "cryptoKey": {
       "sequenced": false,
       "singular": false
     },
