@@ -11,7 +11,6 @@ function getItemClasses() {
   let itemArguments = "";
   let itemClasses = [];
   for (const item of Object.keys(entityHierarchy)) {
-    // if (!['Item', 'Location'].includes(item)) continue
     if (['SyncableItem', 'Edge', 'Datasource', 'UserState', 'ViewArguments', 'CVUStateDefinition'].includes(item)) continue;
 
     let classDescription = `\n# ${entityHierarchy[item]['description']}\n`;
