@@ -102,7 +102,7 @@ let predicateHierarchy = {};
 #  Copyright © 2020 memri. All rights reserved.
 #
 
-from .itembase import ItemBase
+from .itembase import ItemBase, Edge
 
 
 def get_constructor(_type, indexer_class=None):
