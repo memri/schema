@@ -123,9 +123,12 @@ function getDataItemClasses() {
             default: // Relations are defined here, as they are not one of the primitive types (see cases above)
               if (entity === 'Item') continue;
               let sequenced, singular;
-              if (Object.keys(entityHierarchy[entity]['relations']).includes(field)) {
-                if (entityHierarchy[entity]['relations'][field]['sequenced']) sequenced = entityHierarchy[entity]['relations'][field]['sequenced'];
-                if (entityHierarchy[entity]['relations'][field]['singular']) singular = entityHierarchy[entity]['relations'][field]['singular'];
+              for (const _item in ancestry) {
+                if (Object.keys(entityHierarchy[_item]['relations']).includes(field)) {
+                  if (entityHierarchy[_item]['relations'][field]['sequenced']) sequenced = entityHierarchy[_item]['relations'][field]['sequenced'];
+                  if (entityHierarchy[_item]['relations'][field]['singular']) singular = entityHierarchy[_item]['relations'][field]['singular'];
+                  break
+                }
               }
               relations += `    var ${field}: ${singular ? `${type}` : `Results<${type}>`}? {\n` +
                 `        edge${singular ? '' : 's'}("${field}")?${sequenced ? '.sorted(byKeyPath: "sequence")' : ''}.${singular ? 'target' : 'items'}(type:${type}.self)\n` +
