@@ -1,20 +1,16 @@
 {
-  "description": "A single message.",
-  "properties": [
-    "subject",
-    "dateSent",
-    "dateReceived"
-  ],
+  "description": "A single email message.",
+  "properties": [],
   "relations": {
-    "messageChannel": {
+    "cc": {
       "sequenced": false,
       "singular": false
     },
-    "sender": {
+    "bcc": {
       "sequenced": false,
       "singular": false
     },
-    "receiver": {
+    "replyTo": {
       "sequenced": false,
       "singular": false
     }

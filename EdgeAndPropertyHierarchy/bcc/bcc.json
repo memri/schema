@@ -1,0 +1,4 @@
+{
+  "description": "Accounts this Message is sent to beside the receiver, without showing this to the primary receiver.",
+  "type": "Account"
+}
