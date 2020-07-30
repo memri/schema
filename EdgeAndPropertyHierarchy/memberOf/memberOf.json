@@ -1,0 +1,4 @@
+{
+  "description": "The organization this Item is a member of.",
+  "type": "Organization"
+}

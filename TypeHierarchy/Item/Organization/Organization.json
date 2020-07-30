@@ -1,0 +1,60 @@
+{
+  "description": "An organization, for instance an NGO, company or school.",
+  "properties": [
+    "dateFounded",
+    "areaServed",
+    "taxId"
+  ],
+  "relations": {
+    "address": {
+      "sequenced": false,
+      "singular": false
+    },
+    "foundingLocation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "logo": {
+      "sequenced": false,
+      "singular": false
+    },
+    "review": {
+      "sequenced": false,
+      "singular": false
+    },
+    "subOrganization": {
+      "sequenced": false,
+      "singular": false
+    },
+    "performsAt": {
+      "sequenced": false,
+      "singular": false
+    },
+    "attends": {
+      "sequenced": false,
+      "singular": false
+    },
+    "organizes": {
+      "sequenced": false,
+      "singular": false
+    },
+    "openingHours": {
+      "sequenced": false,
+      "singular": false
+    },
+    "industry": {
+      "sequenced": false,
+      "singular": false
+    },
+    "buyer": {
+      "sequenced": false,
+      "singular": false
+    },
+    "seller": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

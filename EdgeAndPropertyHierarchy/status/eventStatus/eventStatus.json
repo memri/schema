@@ -1,0 +1,4 @@
+{
+  "description": "The status of an event, for instance cancelled.",
+  "type": "string"
+}

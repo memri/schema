@@ -1,0 +1,4 @@
+{
+  "description": "An organization, for instance an NGO, company or school.",
+  "type": "Organization"
+}

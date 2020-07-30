@@ -1,0 +1,4 @@
+{
+  "description": "An identifier for Products, for instance a UPC or GTIN.",
+  "type": "string"
+}

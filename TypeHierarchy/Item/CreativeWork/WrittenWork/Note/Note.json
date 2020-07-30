@@ -1,0 +1,12 @@
+{
+  "description": "A file containing a note.",
+  "properties": [],
+  "relations": {
+    "comment": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

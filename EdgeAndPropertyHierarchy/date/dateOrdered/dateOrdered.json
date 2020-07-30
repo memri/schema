@@ -1,0 +1,4 @@
+{
+  "description": "The date this Item was lost.",
+  "type": "datetime"
+}

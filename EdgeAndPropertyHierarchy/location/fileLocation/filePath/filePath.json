@@ -1,4 +1,0 @@
-{
-  "description": "Location of the actual bytes of a File on disk.",
-  "type": "string"
-}

@@ -1,0 +1,9 @@
+{
+  "description": "The number of occurrences of a repeating event per measure of time.",
+  "properties": [
+    "occurrences"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

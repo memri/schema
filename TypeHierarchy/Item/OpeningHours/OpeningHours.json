@@ -1,0 +1,12 @@
+{
+  "description": "Hours that an organization is open.",
+  "properties": [],
+  "relations": {
+    "timeFrame": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

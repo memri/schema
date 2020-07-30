@@ -1,0 +1,4 @@
+{
+  "description": "The location where some Item starts, for instance the start of a route.",
+  "type": "Location"
+}

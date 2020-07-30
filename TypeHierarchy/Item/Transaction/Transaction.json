@@ -1,0 +1,34 @@
+{
+  "description": "An agreement between a buyer and a seller to exchange an asset for payment.",
+  "properties": [
+    "orderStatus",
+    "orderNumber",
+    "discountCode",
+    "dateOrdered",
+    "dateExecuted"
+  ],
+  "relations": {
+    "purchaseLocation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "product": {
+      "sequenced": false,
+      "singular": false
+    },
+    "billingAddress": {
+      "sequenced": false,
+      "singular": false
+    },
+    "payedWithAccount": {
+      "sequenced": false,
+      "singular": false
+    },
+    "discount": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#3a5eb2"
+}

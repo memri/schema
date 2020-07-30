@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
-  "type": "File"
+  "description": "The flag that represents some Item, for instance a Country.",
+  "type": "Photo"
 }

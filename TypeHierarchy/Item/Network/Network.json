@@ -1,0 +1,9 @@
+{
+  "description": "A group or system of interconnected people or things, for instance a social network.",
+  "properties": [
+    "name"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

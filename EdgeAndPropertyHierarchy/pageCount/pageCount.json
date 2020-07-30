@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Whether there is a page count.",
   "type": "bool"
 }

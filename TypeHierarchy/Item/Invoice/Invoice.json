@@ -1,0 +1,17 @@
+{
+  "description": "A Receipt is a confirmation of a transaction.",
+  "properties": [
+  ],
+  "relations": {
+    "file": {
+      "sequenced": false,
+      "singular": true
+    },
+    "transaction": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

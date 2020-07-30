@@ -1,0 +1,4 @@
+{
+  "description": "A fiscal identifier.",
+  "type": "string"
+}

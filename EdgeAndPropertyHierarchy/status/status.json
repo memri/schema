@@ -1,4 +1,3 @@
 {
-  "description": "A status of some Item.",
-  "type": "bool"
+  "description": "A status of some Item."
 }

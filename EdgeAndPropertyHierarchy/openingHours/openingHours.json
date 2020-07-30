@@ -1,0 +1,4 @@
+{
+  "description": "Hours that an organization is open.",
+  "type": "OpeningHours"
+}

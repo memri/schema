@@ -1,4 +1,4 @@
 {
-  "description": "",
+  "description": "Whether you retrieve Messages from this Person.",
   "type": "bool"
 }

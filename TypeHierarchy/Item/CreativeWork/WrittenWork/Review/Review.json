@@ -1,0 +1,12 @@
+{
+  "description": "A review of an Item, for instance a Organization, CreativeWork, or Product.",
+  "properties": [],
+  "relations": {
+    "rating": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

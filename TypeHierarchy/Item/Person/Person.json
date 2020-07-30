@@ -8,13 +8,11 @@
     "lastName",
     "gender",
     "sexualOrientation",
-    "height",
-    "shoulderWidth",
-    "armLength",
     "displayName",
     "nameQuality",
     "enablePresence",
-    "enableReceipts"
+    "enableReceipts",
+    "role"
   ],
   "relations": {
     "address": {
@@ -45,7 +43,7 @@
       "sequenced": false,
       "singular": false
     },
-    "company": {
+    "industry": {
       "sequenced": false,
       "singular": false
     },
@@ -53,7 +51,7 @@
       "sequenced": false,
       "singular": false
     },
-    "onlineProfile": {
+    "account": {
       "sequenced": false,
       "singular": false
     },
@@ -62,6 +60,34 @@
       "singular": false
     },
     "medicalCondition": {
+      "sequenced": false,
+      "singular": false
+    },
+    "memberOf": {
+      "sequenced": false,
+      "singular": false
+    },
+    "performsAt": {
+      "sequenced": false,
+      "singular": false
+    },
+    "attends": {
+      "sequenced": false,
+      "singular": false
+    },
+    "organizes": {
+      "sequenced": false,
+      "singular": false
+    },
+    "founded": {
+      "sequenced": false,
+      "singular": false
+    },
+    "buyer": {
+      "sequenced": false,
+      "singular": false
+    },
+    "seller": {
       "sequenced": false,
       "singular": false
     }

@@ -1,0 +1,27 @@
+{
+  "description": "A trip or journey, consisting of Routes.",
+  "properties": [
+    "startTime",
+    "endTime"
+  ],
+  "relations": {
+    "route": {
+      "sequenced": false,
+      "singular": false
+    },
+    "startLocation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "endLocation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "price": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

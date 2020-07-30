@@ -1,4 +1,0 @@
-{
-  "description": "The age of an Item, this can often be computed using for instance a birth date or creation date.",
-  "type": "float"
-}
