@@ -2,6 +2,7 @@
   "description": "Any type of file that can be stored on disk.",
   "properties": [
     "blake2b",
+    "sha256",
     "filename"
   ],
   "relations": {
