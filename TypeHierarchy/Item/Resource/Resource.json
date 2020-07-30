@@ -1,14 +1,9 @@
 {
-  "description": "Any type of file that can be stored on disk.",
+  "description": "A universal resource location",
   "properties": [
-    "sha256",
-    "filename"
+    "url"
   ],
   "relations": {
-    "url": {
-      "sequenced": false,
-      "singular": false
-    },
     "usedBy": {
       "sequenced": false,
       "singular": false
