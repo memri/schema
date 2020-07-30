@@ -6,7 +6,7 @@
     "filename"
   ],
   "relations": {
-    "url": {
+    "resource": {
       "sequenced": false,
       "singular": false
     },
