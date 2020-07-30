@@ -64,9 +64,13 @@ function getDataItemClasses() {
       if (propertiesAndRelationsItem.includes(field) && !['Item', 'Edge'].includes(entity)) continue;
 
       if (Object.keys(predicateHierarchy).includes(field)) {
+        let type = predicateHierarchy[field]['type'];
+        if (entity === 'Item' && !helpers.PRIMITIVE_TYPES.includes(type) && field !== 'allEdges') {
+          continue
+        }
+
         if (!['changelog', 'label'].includes(field)) codingKeys.push(field);
 
-        let type = predicateHierarchy[field]['type'];
         if (field === 'syncState' || helpers.PRIMITIVE_TYPES.includes(type) || type === 'Edge') {
           properties += helpers.wrapText(`    /// ${predicateHierarchy[field]['description']}\n`, 96);
         } else if (!['changelog', 'label'].includes(field)) {
