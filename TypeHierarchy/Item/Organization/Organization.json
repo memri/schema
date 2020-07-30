@@ -1,6 +1,7 @@
 {
   "description": "An organization, for instance an NGO, company or school.",
   "properties": [
+    "name",
     "dateFounded",
     "areaServed",
     "taxId"
