@@ -23,11 +23,12 @@ function getItemClasses() {
       edges = edges.concat(Object.keys(entityHierarchy[_item]['relations']));
     }
 
-    let arguments = "", fromJsonEdgeLoop = [];
-    let attributes = [], fromJsonEdges = [], fromJsonProperties = [];
+    let arguments = "", clsArguments = "";
+    let attributes = [], fromJsonEdges = [], fromJsonProperties = [], fromJsonEdgeLoop = [];
     for (const attribute of properties.concat(edges)) {
       if (['genericType', 'functions', 'updatedFields', 'allEdges'].includes(attribute)) continue;
       arguments += `${arguments === '' ? '' : ', '}${attribute}=None`;
+      clsArguments += `${clsArguments === '' ? '' : ', '}${attribute}=${attribute}`;
       if (item === 'Item') itemArguments += `${itemArguments === '' ? '' : ', '}${attribute}=${attribute}`;
       if (item === 'Item' && attribute === 'uid') continue
 
@@ -35,18 +36,16 @@ function getItemClasses() {
         fromJsonProperties.push(`${attribute} = json.get("${attribute}", None)`);
       } else {
         fromJsonEdges.push(`${attribute} = []`)
-        let singular;
-        for (const _item of Object.keys(entityHierarchy)) {
-          if (entityHierarchy[_item]['relations'][attribute]) singular = entityHierarchy[_item]['relations'][attribute]['singular'];
-        }
-        let isOrAppend = singular ? '= edge' : '.append(edge)'
         let ifOrElif = fromJsonEdgeLoop.length === 0 ? 'if' : 'elif';
         fromJsonEdgeLoop.push(`${ifOrElif} edge._type == "${attribute}" or edge._type == "~${attribute}": 
-                    ${attribute}${isOrAppend}`)
+                    ${attribute}.append(edge)`)
       }
-
       if (attributesItem.includes(attribute) && item !== 'Item') continue;
-      attributes.push(`self.${attribute} = ${attribute}`);
+      if (edges.includes(attribute)) {
+        attributes.push(`self.${attribute} = ${attribute} if ${attribute} is not None else []`);
+      } else {
+        attributes.push(`self.${attribute} = ${attribute}`);
+      }
     }
     let dataItemClass;
     if (item === 'Item') {
@@ -78,7 +77,7 @@ class ${item}(Item):
                 edge = Edge.from_json(edge_json)
                 ${helpers.insertList(fromJsonEdgeLoop,16)}
         
-        ${helpers.wrapText(`res = cls(${arguments}`, 100, '\n' + ' '.repeat(18))})
+        ${helpers.wrapText(`res = cls(${clsArguments}`, 100, '\n' + ' '.repeat(18))})
         
         return res`;
     }
