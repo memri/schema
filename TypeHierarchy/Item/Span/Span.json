@@ -1,5 +1,5 @@
 {
-  "description": "A class that represents a position of an element in a string",
+  "description": "A class that represents a position of an element in a string.",
   "properties": [
     "startIdx",
     "endIdx"

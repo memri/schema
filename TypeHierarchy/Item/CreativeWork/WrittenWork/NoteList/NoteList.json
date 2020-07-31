@@ -1,5 +1,5 @@
 {
-  "description": "A list in a note",
+  "description": "A list in a note.",
   "properties": [
     "category"
   ],

@@ -1,4 +1,4 @@
 {
-  "description": "Start position of an element",
+  "description": "Start position of an element.",
   "type": "int"
 }
