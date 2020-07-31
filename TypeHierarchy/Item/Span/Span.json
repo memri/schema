@@ -1,0 +1,10 @@
+{
+  "description": "A class that represents a position of an element in a string.",
+  "properties": [
+    "startIdx",
+    "endIdx"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}
