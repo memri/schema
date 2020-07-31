@@ -1,0 +1,17 @@
+{
+  "description": "A list in a note",
+  "properties": [
+    "content",
+    "textContent",
+    "title",
+    "category"
+  ],
+  "relations": {
+    "noteList": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}
