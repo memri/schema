@@ -1,0 +1,47 @@
+{
+  "description": "Any product.",
+  "properties": [
+    "audience",
+    "color",
+    "manufacturer",
+    "model",
+    "pattern",
+    "dateAcquired",
+    "productCondition",
+    "dateProduced",
+    "datePublished",
+    "service"
+  ],
+  "relations": {
+    "material": {
+      "sequenced": false,
+      "singular": false
+    },
+    "productCode": {
+      "sequenced": false,
+      "singular": false
+    },
+    "review": {
+      "sequenced": false,
+      "singular": false
+    },
+    "accessoryOrSparePartFor": {
+      "sequenced": false,
+      "singular": false
+    },
+    "consumableBy": {
+      "sequenced": false,
+      "singular": false
+    },
+    "price": {
+      "sequenced": false,
+      "singular": false
+    },
+    "review": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

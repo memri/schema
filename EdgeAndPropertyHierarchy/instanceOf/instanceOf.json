@@ -1,0 +1,4 @@
+{
+  "description": "An instance of an Item, for instance the PhysicalEntity instance of a Book.",
+  "type": "any"
+}

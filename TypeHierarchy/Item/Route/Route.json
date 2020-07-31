@@ -1,0 +1,35 @@
+{
+  "description": "A route from one Location to another, using some ModeOfTransport.",
+  "properties": [
+    "startTime",
+    "endTime"
+  ],
+  "relations": {
+    "modeOfTransport": {
+      "sequenced": false,
+      "singular": false
+    },
+    "startLocation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "endLocation": {
+      "sequenced": false,
+      "singular": false
+    },
+    "price": {
+      "sequenced": false,
+      "singular": false
+    },
+    "receipt": {
+      "sequenced": false,
+      "singular": false
+    },
+    "ticket": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

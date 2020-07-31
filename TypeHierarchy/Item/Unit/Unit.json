@@ -1,0 +1,10 @@
+{
+  "description": "A unit, typically from International System of Units (SI).",
+  "properties": [
+    "symbol",
+    "name"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

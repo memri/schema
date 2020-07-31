@@ -1,0 +1,4 @@
+{
+  "description": "The number of times something is repeated.",
+  "type": "int"
+}

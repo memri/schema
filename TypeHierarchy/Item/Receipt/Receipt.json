@@ -1,0 +1,18 @@
+{
+  "description": "A bill that describes money owed for some Transaction.",
+  "properties": [
+    "dateDue"
+  ],
+  "relations": {
+    "file": {
+      "sequenced": false,
+      "singular": true
+    },
+    "transaction": {
+      "sequenced": false,
+      "singular": true
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

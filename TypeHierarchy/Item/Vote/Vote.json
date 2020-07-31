@@ -1,0 +1,14 @@
+{
+  "description": "An occasion where a choice is made choose between two or more options, for instance an election.",
+  "properties": [
+    "type"
+  ],
+  "relations": {
+    "option": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

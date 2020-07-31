@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Some action that can be taken by some Item.",
   "type": "string"
 }

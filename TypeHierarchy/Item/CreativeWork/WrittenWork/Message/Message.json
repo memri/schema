@@ -1,0 +1,24 @@
+{
+  "description": "A single message.",
+  "properties": [
+    "subject",
+    "dateSent",
+    "dateReceived"
+  ],
+  "relations": {
+    "messageChannel": {
+      "sequenced": false,
+      "singular": false
+    },
+    "sender": {
+      "sequenced": false,
+      "singular": false
+    },
+    "receiver": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

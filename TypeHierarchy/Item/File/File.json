@@ -1,9 +1,15 @@
 {
   "description": "Any type of file that can be stored on disk.",
   "properties": [
-    "uri"
+    "blake2b",
+    "sha256",
+    "filename"
   ],
   "relations": {
+    "resource": {
+      "sequenced": false,
+      "singular": false
+    },
     "usedBy": {
       "sequenced": false,
       "singular": false

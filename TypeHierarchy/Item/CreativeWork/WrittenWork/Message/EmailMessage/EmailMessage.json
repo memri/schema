@@ -1,0 +1,20 @@
+{
+  "description": "A single email message.",
+  "properties": [],
+  "relations": {
+    "cc": {
+      "sequenced": false,
+      "singular": false
+    },
+    "bcc": {
+      "sequenced": false,
+      "singular": false
+    },
+    "replyTo": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

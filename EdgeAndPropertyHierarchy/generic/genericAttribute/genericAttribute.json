@@ -1,0 +1,4 @@
+{
+  "description": "A generic attribute that can be of any kind, and related to any Item.",
+  "type": "GenericAttribute"
+}

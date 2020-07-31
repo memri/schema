@@ -1,0 +1,4 @@
+{
+  "description": "A symbol, for instance to represent a Unit or Measure.",
+  "type": "string"
+}

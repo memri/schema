@@ -13,7 +13,7 @@ let predicateHierarchy = {};
   await helpers.getHierarchy(predicateHierarchyPath, predicateHierarchy, predicateHierarchyPath, 'EdgeOrProperty');
 
   let types = [];
-  for (const entity of Object.keys(entityHierarchy)) {
+  for (const entity of Object.keys(entityHierarchy).sort()) {
     if (['Item', 'SyncableItem', 'Edge'].includes(entity)) continue;
     let ancestry = helpers.getAncestry(entityHierarchy[entity]['path'].split('/'));
 

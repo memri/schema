@@ -1,0 +1,14 @@
+{
+  "description": "A universal resource location",
+  "properties": [
+    "url"
+  ],
+  "relations": {
+    "usedBy": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

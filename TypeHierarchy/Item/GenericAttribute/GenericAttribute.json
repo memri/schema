@@ -1,0 +1,14 @@
+{
+  "description": "A generic attribute that can be referenced by an Item.",
+  "properties": [
+    "name",
+    "boolValue",
+    "datetimeValue",
+    "floatValue",
+    "intValue",
+    "stringValue"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

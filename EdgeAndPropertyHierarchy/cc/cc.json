@@ -1,4 +1,4 @@
 {
-  "description": "TBD",
+  "description": "Accounts this Message is sent to beside the receiver.",
   "type": "Account"
 }

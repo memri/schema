@@ -1,0 +1,12 @@
+{
+  "description": "An offer for some transaction, for instance to buy something or to get some service.",
+  "properties": [],
+  "relations": {
+    "transaction": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

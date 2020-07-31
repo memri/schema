@@ -1,0 +1,4 @@
+{
+  "description": "The status of a reservation, for instance cancelled.",
+  "type": "string"
+}

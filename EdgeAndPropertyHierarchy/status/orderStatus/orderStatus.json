@@ -1,0 +1,4 @@
+{
+  "description": "Whether the Item is deleted.",
+  "type": "bool"
+}

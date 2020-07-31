@@ -1,0 +1,4 @@
+{
+  "description": "Intended group that would consume or receive this Item.",
+  "type": "string"
+}

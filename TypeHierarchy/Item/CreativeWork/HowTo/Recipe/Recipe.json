@@ -1,0 +1,27 @@
+{
+  "description": "A set of instructions for preparing a particular dish, including a list of the ingredients required.",
+  "properties": [
+    "duration",
+    "instructions"
+  ],
+  "relations": {
+    "ingredient": {
+      "sequenced": false,
+      "singular": false
+    },
+    "price": {
+      "sequenced": false,
+      "singular": false
+    },
+    "yields": {
+      "sequenced": false,
+      "singular": false
+    },
+    "toolRequired": {
+      "sequenced": false,
+      "singular": false
+    }
+  },
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

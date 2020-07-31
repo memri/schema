@@ -2,8 +2,7 @@
   "description": "An audio file.",
   "properties": [
     "caption",
-    "transcript",
-    "name"
+    "transcript"
   ],
   "relations": {},
   "foregroundColor": "#ffffff",

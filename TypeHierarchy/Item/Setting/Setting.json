@@ -1,5 +1,5 @@
 {
-  "description": "TBD",
+  "description": "A setting, named by a key, specifications in JSON format.",
   "properties": [
     "key",
     "json"

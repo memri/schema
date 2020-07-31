@@ -1,0 +1,7 @@
+{
+  "description": "A written work, for instance a book, article or note. Doesn't have to be published.",
+  "properties": [],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

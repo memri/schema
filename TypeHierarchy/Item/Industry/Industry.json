@@ -1,0 +1,9 @@
+{
+  "description": "A sector that produces goods or related services within an economy.",
+  "properties": [
+    "type"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}

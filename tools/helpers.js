@@ -22,6 +22,9 @@ async function getHierarchy(dir, hierarchy, rootDir, hierarchyType) {
       hierarchy[path2dir(filePath, hierarchyType)]['children'].push(dirent.name);
       await getHierarchy(path.resolve(dir, dirent.name), hierarchy, rootDir, hierarchyType);
     } else if (dirent.name.split('.')[1] === 'json') {
+      if (dir.split('/').splice(-1)[0] !== dirent.name.split('.')[0] && filePath !== '') {
+        console.log(`E: Directory '${dir.split('/').splice(-1)[0]}' and json name '${dirent.name}' do not match`);
+      }
       let data = fs.readFileSync(`${dir}/${dirent.name}`);
       hierarchy[path2dir(filePath, hierarchyType)] = {...hierarchy[path2dir(filePath, hierarchyType)], ...JSON.parse(data)};
       hierarchy[path2dir(filePath, hierarchyType)]['path'] = hierarchyType + filePath || hierarchyType;

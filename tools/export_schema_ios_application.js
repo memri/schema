@@ -8,7 +8,7 @@ const outputFile = './schema.swift';
 
 function getItemFamily() {
   let itemFamily = [], bgColors = [], fgColors = [], typeFunctions = [];
-  for (const entity of Object.keys(entityHierarchy)) {
+  for (const entity of Object.keys(entityHierarchy).sort()) {
     if (entity === 'Item') continue;
     itemFamily.push(`case type${entity} = "${entity}"`);
     bgColors.push(`case .type${entity}: return Color(hex: "${entityHierarchy[entity]['backgroundColor']}")`);
@@ -21,7 +21,7 @@ function getItemFamily() {
 function getDataItemClasses() {
   let propertiesAndRelationsItem = entityHierarchy['Item']['properties'].concat(Object.keys(entityHierarchy['Item']['relations']));
   let dataItemClasses = [];
-  for (const entity of Object.keys(entityHierarchy)) {
+  for (const entity of Object.keys(entityHierarchy).sort()) {
     if (['Datasource', 'UserState', 'ViewArguments', 'CVUStateDefinition'].includes(entity)) continue;
 
     let classDescription = `\n/// ${entityHierarchy[entity]['description']}\n`;
@@ -44,9 +44,14 @@ function getDataItemClasses() {
 
     let ancestry = helpers.getAncestry(entityHierarchy[entity]['path'].split('/'));
     let propertiesAndRelations = [];
-    for (const _item in ancestry) {
-      propertiesAndRelations = propertiesAndRelations.concat(entityHierarchy[_item]['properties']);
-      propertiesAndRelations = propertiesAndRelations.concat(Object.keys(entityHierarchy[_item]['relations']));
+    if (entity === 'Edge') {
+      propertiesAndRelations = propertiesAndRelations.concat(entityHierarchy[entity]['properties']);
+      propertiesAndRelations = propertiesAndRelations.concat(Object.keys(entityHierarchy[entity]['relations']));
+    } else {
+      for (const _item in ancestry) {
+        propertiesAndRelations = propertiesAndRelations.concat(entityHierarchy[_item]['properties']);
+        propertiesAndRelations = propertiesAndRelations.concat(Object.keys(entityHierarchy[_item]['relations']));
+      }
     }
 
     let properties = "";
@@ -59,9 +64,13 @@ function getDataItemClasses() {
       if (propertiesAndRelationsItem.includes(field) && !['Item', 'Edge'].includes(entity)) continue;
 
       if (Object.keys(predicateHierarchy).includes(field)) {
+        let type = predicateHierarchy[field]['type'];
+        if (entity === 'Item' && !helpers.PRIMITIVE_TYPES.includes(type) && field !== 'allEdges') {
+          continue
+        }
+
         if (!['changelog', 'label'].includes(field)) codingKeys.push(field);
 
-        let type = predicateHierarchy[field]['type'];
         if (field === 'syncState' || helpers.PRIMITIVE_TYPES.includes(type) || type === 'Edge') {
           properties += helpers.wrapText(`    /// ${predicateHierarchy[field]['description']}\n`, 96);
         } else if (!['changelog', 'label'].includes(field)) {
@@ -123,9 +132,12 @@ function getDataItemClasses() {
             default: // Relations are defined here, as they are not one of the primitive types (see cases above)
               if (entity === 'Item') continue;
               let sequenced, singular;
-              if (Object.keys(entityHierarchy[entity]['relations']).includes(field)) {
-                if (entityHierarchy[entity]['relations'][field]['sequenced']) sequenced = entityHierarchy[entity]['relations'][field]['sequenced'];
-                if (entityHierarchy[entity]['relations'][field]['singular']) singular = entityHierarchy[entity]['relations'][field]['singular'];
+              for (const _item in ancestry) {
+                if (Object.keys(entityHierarchy[_item]['relations']).includes(field)) {
+                  if (entityHierarchy[_item]['relations'][field]['sequenced']) sequenced = entityHierarchy[_item]['relations'][field]['sequenced'];
+                  if (entityHierarchy[_item]['relations'][field]['singular']) singular = entityHierarchy[_item]['relations'][field]['singular'];
+                  break
+                }
               }
               relations += `    var ${field}: ${singular ? `${type}` : `Results<${type}>`}? {\n` +
                 `        edge${singular ? '' : 's'}("${field}")?${sequenced ? '.sorted(byKeyPath: "sequence")' : ''}.${singular ? 'target' : 'items'}(type:${type}.self)\n` +
@@ -174,7 +186,7 @@ ${propertiesDecoder}${relationsDecoder}${additionalFunctionality}
 
 function getDataItemListToArray() {
   let dataItems = [];
-  for (const [index, entity] of Object.keys(entityHierarchy).entries()) {
+  for (const [index, entity] of Object.keys(entityHierarchy).sort().entries()) {
     if (['Datasource', 'SyncState', 'UserState', 'ViewArguments'].includes(entity)) continue;
     if (entity === 'Edge') {
       dataItems.push(`else if let list = object as? Results<Edge> { return list.itemsArray() }`);

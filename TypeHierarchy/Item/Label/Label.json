@@ -1,5 +1,5 @@
 {
-  "description": "TBD",
+  "description": "Attached to an Item, to mark it to be something.",
   "properties": [
     "color",
     "name"
