@@ -4,7 +4,11 @@
     "category"
   ],
   "relations": {
-    "noteList": {
+    "span": {
+      "sequenced": false,
+      "singular": false
+    },
+    "itemSpan": {
       "sequenced": false,
       "singular": false
     }

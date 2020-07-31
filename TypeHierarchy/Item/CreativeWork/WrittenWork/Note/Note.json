@@ -5,6 +5,10 @@
     "comment": {
       "sequenced": false,
       "singular": false
+    },
+    "noteList": {
+      "sequenced": false,
+      "singular": false
     }
   },
   "foregroundColor": "#ffffff",

@@ -1,0 +1,4 @@
+{
+  "description": "Range of an item in a piece of text.",
+  "type": "Span"
+}
