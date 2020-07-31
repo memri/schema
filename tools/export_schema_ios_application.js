@@ -77,7 +77,7 @@ function getDataItemClasses() {
           relations += helpers.wrapText(`    /// ${predicateHierarchy[field]['description']}\n`, 96);
         }
 
-        if (['allEdges', 'currentViewIndex', 'currentSessionIndex', 'version'].includes(field)) {
+        if (['allEdges', 'currentViewIndex', 'currentSessionIndex', 'version', 'type'].includes(field)) {
           switch (field) {
             case 'allEdges':
               properties += '    let allEdges = List<Edge>()\n';
@@ -91,6 +91,10 @@ function getDataItemClasses() {
             case 'version':
               properties += `    @objc dynamic var ${field}:Int = 1\n`;
               propertiesDecoder += `            ${field} = try decoder.decodeIfPresent("${field}") ?? ${field}\n`;
+              break;
+            case 'type':
+              properties += `    @objc dynamic var ${field}:Int = 1\n`;
+              propertiesDecoder += `            ${field} = try decoder.decodeIfPresent("_${field}") ?? ${field}\n`;
               break;
           }
         } else {
@@ -165,7 +169,7 @@ function getDataItemClasses() {
     private enum CodingKeys: String, CodingKey {
         ${helpers.wrapText('case ' + codingKeys.join(', '), 92, '\n            ')}`;
     } else if (entity === 'Edge') {
-      additionalFunctionality = '\n            try parseTargetDict(try decoder.decodeIfPresent("target"))\n        }';
+      additionalFunctionality = '\n            try parseTargetDict(try decoder.decodeIfPresent("_target"))\n        }';
     } else if (entity === 'SyncState') {
       additionalFunctionality = '        }';
     } else {
