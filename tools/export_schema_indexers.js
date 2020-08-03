@@ -4,7 +4,7 @@ const path = require('path');
 
 const entityHierarchyPath = path.resolve('../TypeHierarchy/Item');
 const predicateHierarchyPath = path.resolve('../EdgeAndPropertyHierarchy');
-const outputFile = './schema.py';
+const outputFile = process.env.INDEXER_SCHEMA_OUT != undefined ? process.env.INDEXER_SCHEMA_OUT : './schema.py';
 
 function getItemClasses() {
   let attributesItem = entityHierarchy['Item']['properties'].concat(Object.keys(entityHierarchy['Item']['relations']));
