@@ -4,7 +4,7 @@ const path = require('path');
 
 const entityHierarchyPath = path.resolve('../TypeHierarchy/Item');
 const predicateHierarchyPath = path.resolve('../EdgeAndPropertyHierarchy');
-const outputFile = './schema.py';
+const outputFile = process.env.INDEXER_SCHEMA_OUT != undefined ? process.env.INDEXER_SCHEMA_OUT : './schema.py';
 
 function getItemClasses() {
   let attributesItem = entityHierarchy['Item']['properties'].concat(Object.keys(entityHierarchy['Item']['relations']));
@@ -106,10 +106,20 @@ from .itembase import ItemBase, Edge
 
 
 def get_constructor(_type, indexer_class=None):
-    # from .models import *
-    from .models.GeoIndexer import GeoIndexer
-    from .models.Notes.NoteListIndexer import NotesListIndexer
-    classes = z = {**globals(), **locals()}
+    import indexers.models as models
+
+    def get_indexer_dict():
+        res = dict()
+        for x in dir(models):
+            imported = getattr(__import__("indexers.models", fromlist=[x]), x)
+
+            if isinstance(imported, (type, )) and issubclass(imported, Indexer) and imported != Indexer:
+                res[imported.__name__] = imported
+        return res
+    
+    indexer_dict = get_indexer_dict()
+
+    classes = z = {**globals(), **locals(), **indexer_dict}
     if _type in classes:
         if _type == "Indexer":
             constructor = classes[indexer_class]
