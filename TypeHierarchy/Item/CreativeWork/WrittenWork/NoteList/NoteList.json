@@ -11,6 +11,10 @@
     "itemSpan": {
       "sequenced": false,
       "singular": false
+    },
+    "note": {
+      "sequenced": false,
+      "singular": false
     }
   },
   "foregroundColor": "#ffffff",
