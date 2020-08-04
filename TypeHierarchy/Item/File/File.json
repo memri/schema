@@ -1,8 +1,9 @@
 {
-  "description": "Any type of file that can be stored on disk.",
+  "description": "Any file that can be stored on disk.",
   "properties": [
-    "blake2b",
     "sha256",
+    "nonce",
+    "key",
     "filename"
   ],
   "relations": {

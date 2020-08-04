@@ -1,0 +1,4 @@
+{
+  "description": "A cryptographic nonce https://en.wikipedia.org/wiki/Cryptographic_nonce",
+  "type": "string"
+}
