@@ -23,7 +23,7 @@ let predicateHierarchy = {};
     }
 
     let properties = [];
-    for (const property of propertiesIncludingInherited.flat()) {
+    for (const property of propertiesIncludingInherited.flat().sort()) {
       if (predicateHierarchy[property]) {
         let dbtype;
         switch (predicateHierarchy[property]['type']) {
