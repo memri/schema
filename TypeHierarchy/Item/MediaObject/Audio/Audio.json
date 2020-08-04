@@ -2,6 +2,10 @@
   "description": "An audio file.",
   "properties": [
     "caption",
+    "bitrate",
+    "duration",
+    "endTime",
+    "startTime",
     "transcript"
   ],
   "relations": {},

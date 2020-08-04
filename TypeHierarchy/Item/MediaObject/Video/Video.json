@@ -3,6 +3,10 @@
   "properties": [
     "caption",
     "exifData",
+    "bitrate",
+    "duration",
+    "endTime",
+    "startTime",
     "name"
   ],
   "relations": {

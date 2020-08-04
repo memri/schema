@@ -1,5 +1,5 @@
 {
-  "description": "A chat is a collection of messages.",
+  "description": "A MessageChannel is a collection of Messages. For EmailMessages this is a thread. Messages do not have to be part of a MessageChannel.",
   "properties": [
     "name",
     "topic",
