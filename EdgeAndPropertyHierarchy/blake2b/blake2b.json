@@ -1,4 +1,0 @@
-{
-  "description": "The blake2b hash of a resource.",
-  "type": "string"
-}
