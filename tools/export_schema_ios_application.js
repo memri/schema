@@ -98,7 +98,9 @@ function getDataItemClasses() {
             case 'string':
               properties += `    @objc dynamic var ${field}:String? = nil\n`;
               if (field === 'targetItemType') {
-                propertiesDecoder += `            ${field} = try decoder.decodeIfPresent("itemType") ?? ${field}\n`;
+                propertiesDecoder += `            ${field} = try decoder.decodeIfPresent("targetType") ?? ${field}\n`;
+              } else if (field === 'type') {
+                propertiesDecoder += `            ${field} = try decoder.decodeIfPresent("_type") ?? ${field}\n`;
               } else if (field !== 'sourceItemType') {
                 propertiesDecoder += `            ${field} = try decoder.decodeIfPresent("${field}") ?? ${field}\n`;
               }
