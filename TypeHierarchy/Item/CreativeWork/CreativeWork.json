@@ -8,7 +8,7 @@
     "content",
     "textContent",
     "transcript",
-    "type"
+    "itemType"
   ],
   "relations": {
     "audio": {

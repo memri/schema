@@ -5,7 +5,7 @@
     "postalCode",
     "state",
     "street",
-    "type",
+    "itemType",
     "locationAutoLookupHash"
   ],
   "relations": {
