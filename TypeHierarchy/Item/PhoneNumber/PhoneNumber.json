@@ -2,7 +2,7 @@
   "description": "A telephone number.",
   "properties": [
     "phoneNumber",
-    "type"
+    "itemType"
   ],
   "relations": {},
   "foregroundColor": "#ffffff",

@@ -1,7 +1,7 @@
 {
   "description": "A key used in an cryptography protocol.",
   "properties": [
-    "type",
+    "itemType",
     "role",
     "key",
     "active",

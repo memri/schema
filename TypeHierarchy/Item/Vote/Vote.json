@@ -1,7 +1,7 @@
 {
   "description": "An occasion where a choice is made choose between two or more options, for instance an election.",
   "properties": [
-    "type"
+    "itemType"
   ],
   "relations": {
     "option": {
