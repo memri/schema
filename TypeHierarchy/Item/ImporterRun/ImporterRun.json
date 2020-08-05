@@ -3,7 +3,9 @@
   "properties": [
     "name",
     "progress",
-    "dataType"
+    "dataType",
+    "username",
+    "password"
   ],
   "relations": {
     "importer": {
