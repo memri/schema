@@ -1,0 +1,4 @@
+{
+  "description": "Used to describe edge types in front end, will be deprecated in the near future.",
+  "type": "string"
+}
