@@ -6,7 +6,7 @@
     "name",
     "query",
     "selector",
-    "type"
+    "itemType"
   ],
   "relations": {},
   "foregroundColor": "#ffffff",

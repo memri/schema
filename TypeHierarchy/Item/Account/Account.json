@@ -7,7 +7,7 @@
     "enablePresence",
     "enableReceipts",
     "service",
-    "type"
+    "itemType"
   ],
   "relations": {
     "belongsTo": {
