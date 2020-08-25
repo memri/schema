@@ -1,0 +1,5 @@
+
+{
+  "description": "Username of an importer.",
+  "type": "string"
+}
