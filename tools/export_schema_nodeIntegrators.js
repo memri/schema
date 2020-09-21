@@ -14,7 +14,7 @@ function getItemClasses() {
     if (['SyncableItem', 'Edge', 'Datasource', 'UserState', 'ViewArguments', 'CVUStateDefinition'].includes(item)) continue;
 
     let classDescription = `\n// ${entityHierarchy[item]['description']}\n`;
-    classDescription = helpers.wrapText(`// ${entityHierarchy[item]['description']}`, 100, '\n// ');
+    classDescription = helpers.wrapText(`/* ${entityHierarchy[item]['description']} */`, 100, '\n * ');
 
     let ancestry = helpers.getAncestry(entityHierarchy[item]['path'].split('/'));
     let properties = [], edges = [];
@@ -51,8 +51,9 @@ function getItemClasses() {
     if (item === 'Item') {
       dataItemClass = `
 ${classDescription}
-class Item {
+class Item extends ItemBase {
   ${helpers.wrapText(`constructor(${arguments})`, 80, '\n' + ' '.repeat(14))} {
+    super();
     ${helpers.insertList(attributes, 4)}
   }
 }`;
