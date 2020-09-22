@@ -233,12 +233,14 @@ enum ItemFamily: String, ClassFamily, CaseIterable {
     var backgroundColor: Color {
         switch self {
         ${helpers.insertList(bgColors, 8)}
+        default: return Color(hex: "#93c47d")
         }
     }
 
     var foregroundColor: Color {
         switch self {
         ${helpers.insertList(fgColors, 8)}
+        default: return Color.white
         }
     }
 
