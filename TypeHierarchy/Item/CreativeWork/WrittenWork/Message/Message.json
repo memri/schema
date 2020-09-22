@@ -3,7 +3,8 @@
   "properties": [
     "subject",
     "dateSent",
-    "dateReceived"
+    "dateReceived",
+    "service"
   ],
   "relations": {
     "messageChannel": {

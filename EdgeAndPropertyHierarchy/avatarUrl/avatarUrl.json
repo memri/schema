@@ -1,0 +1,4 @@
+{
+  "description": "URL to avatar image used by WhatsApp.",
+  "type": "string"
+}
