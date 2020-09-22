@@ -1,14 +1,12 @@
 {
-  "description": "A run of a certain Importer, that defines the details of the specific import.",
+  "description": "A run of a certain Indexer.",
   "properties": [
-    "name",
+    "query",
     "progress",
-    "dataType",
-    "username",
-    "password"
+    "targetDataType"
   ],
   "relations": {
-    "importer": {
+    "indexer": {
       "sequenced": false,
       "singular": true
     }

@@ -1,0 +1,4 @@
+{
+  "description": "Repository associated with this item, e.g. used by Pod to start appropriate integrator container.",
+  "type": "string"
+}

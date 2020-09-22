@@ -1,0 +1,10 @@
+{
+  "description": "An integrator operates on your database enhances your personal data by inferring facts over existing data and adding those to the database.",
+  "properties": [
+    "name",
+    "repository"
+  ],
+  "relations": {},
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#93c47d"
+}
