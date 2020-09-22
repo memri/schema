@@ -106,20 +106,14 @@ from .itembase import ItemBase, Edge
 
 
 def get_constructor(_type, indexer_class=None):
-    import indexers.models as models
+    import integrators.indexers as models
+    from integrators.indexers.indexer import IndexerBase
+    import integrators.integrator_registry
 
-    def get_indexer_dict():
-        res = dict()
-        for x in dir(models):
-            imported = getattr(__import__("indexers.models", fromlist=[x]), x)
+    if _type == "Indexer" and indexer_class is not None and hasattr(integrators.integrator_registry, indexer_class):
+        return getattr(integrators.integrator_registry, indexer_class)
 
-            if isinstance(imported, (type, )) and issubclass(imported, Indexer) and imported != Indexer:
-                res[imported.__name__] = imported
-        return res
-    
-    indexer_dict = get_indexer_dict()
-
-    classes = z = {**globals(), **locals(), **indexer_dict}
+    classes = z = {**globals(), **locals()}
     if _type in classes:
         if _type == "Indexer":
             constructor = classes[indexer_class]
