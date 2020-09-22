@@ -3,11 +3,9 @@
   "properties": [
     "handle",
     "displayName",
-    "nameQuality",
-    "enablePresence",
-    "enableReceipts",
     "service",
-    "itemType"
+    "itemType",
+    "avatarUrl"
   ],
   "relations": {
     "belongsTo": {

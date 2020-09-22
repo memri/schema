@@ -9,9 +9,6 @@
     "gender",
     "sexualOrientation",
     "displayName",
-    "nameQuality",
-    "enablePresence",
-    "enableReceipts",
     "role"
   ],
   "relations": {
