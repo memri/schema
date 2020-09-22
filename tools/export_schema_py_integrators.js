@@ -10,7 +10,9 @@ function getItemClasses() {
   let attributesItem = entityHierarchy['Item']['properties'].concat(Object.keys(entityHierarchy['Item']['relations']));
   let itemArguments = "";
   let itemClasses = [];
-  for (const item of Object.keys(entityHierarchy)) {
+  let items = Object.keys(entityHierarchy).sort();
+  items.sort(function(x,y){ return x === "Item" ? -1 : y === "Item" ? 1 : 0; });
+  for (const item of items) {
     if (['SyncableItem', 'Edge', 'Datasource', 'UserState', 'ViewArguments', 'CVUStateDefinition'].includes(item)) continue;
 
     let classDescription = `\n# ${entityHierarchy[item]['description']}\n`;
