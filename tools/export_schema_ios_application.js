@@ -9,7 +9,7 @@ const outputFile = './schema.swift';
 function getItemFamily() {
   let itemFamily = [], bgColors = [], fgColors = [], typeFunctions = [];
   for (const entity of Object.keys(entityHierarchy).sort()) {
-    if (entity === 'Item') continue;
+    if (['Item', 'Datasource', 'UserState', 'ViewArguments', 'CVUStateDefinition', 'CVUStoredDefinition'].includes(entity)) continue;
     itemFamily.push(`case type${entity} = "${entity}"`);
     bgColors.push(`case .type${entity}: return Color(hex: "${entityHierarchy[entity]['backgroundColor']}")`);
     fgColors.push(`case .type${entity}: return Color(hex: "${entityHierarchy[entity]['foregroundColor']}")`);
