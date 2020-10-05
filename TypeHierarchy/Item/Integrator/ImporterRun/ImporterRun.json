@@ -6,7 +6,8 @@
     "username",
     "password",
     "runStatus",
-    "errorMessage"
+    "errorMessage",
+    "progressMessage"
   ],
   "relations": {
     "importer": {

@@ -1,0 +1,4 @@
+{
+  "description": "Message describing the progress of a process.",
+  "type": "string"
+}
