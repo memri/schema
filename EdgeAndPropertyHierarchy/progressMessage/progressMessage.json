@@ -1,4 +1,4 @@
 {
-  "description": "The progress an Item made. The number could be a (rounded) percentage or a count of a (potentially unknown) total.",
-  "type": "int"
+  "description": "Message describing the progress of a process.",
+  "type": "string"
 }
