@@ -4,7 +4,9 @@
     "progress",
     "dataType",
     "username",
-    "password"
+    "password",
+    "runStatus",
+    "errorMessage"
   ],
   "relations": {
     "importer": {

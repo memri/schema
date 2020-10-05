@@ -3,7 +3,9 @@
   "properties": [
     "query",
     "progress",
-    "targetDataType"
+    "targetDataType",
+    "runStatus",
+    "errorMessage"
   ],
   "relations": {
     "indexer": {

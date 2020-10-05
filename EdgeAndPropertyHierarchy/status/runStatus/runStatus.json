@@ -1,0 +1,4 @@
+{
+    "description": "The status of a run, (running, error, etc).",
+    "type": "string"
+}
