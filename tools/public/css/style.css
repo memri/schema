@@ -310,7 +310,6 @@ form {
     white-space: nowrap;
     list-style-type: none;
     padding: 10px 0 0 0;
-    line-height: initial;
 }
 
 .footer ul li a {
