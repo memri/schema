@@ -113,8 +113,6 @@
     { "item_type": "Audio", "property": "startTime", "property_type": "datetime" },
     /// Audio.file: Any type of file that can be stored on disk.
     { "item_type": "Audio", "property": "file", "property_type": "File" },
-    /// Audio.includes: Items included within this Item. Included Items can be of any type.
-    { "item_type": "Audio", "property": "includes", "property_type": "any" },
     /// Audio.caption: The caption for this object. For downloadable machine formats (closed
     /// caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
     { "item_type": "Audio", "property": "caption", "property_type": "string" },
@@ -128,8 +126,6 @@
     { "item_type": "AuditItem", "property": "content", "property_type": "string" },
     /// AuditItem.action: Some action that can be taken by some Item.
     { "item_type": "AuditItem", "property": "action", "property_type": "string" },
-    /// AuditItem.appliesTo: The Item this Item applies to.
-    { "item_type": "AuditItem", "property": "appliesTo", "property_type": "any" },
 
     /// CVUStoredDefinition.definition: The definition of an Item.
     { "item_type": "CVUStoredDefinition", "property": "definition", "property_type": "string" },
@@ -316,30 +312,6 @@
     { "item_type": "Diet", "property": "excludedProduct", "property_type": "Product" },
 
 
-    /// Edge.type: Used to describe edge types in front end, will be deprecated in the near
-    /// future.
-    { "item_type": "Edge", "property": "type", "property_type": "string" },
-    /// Edge.targetItemType: The type of the target Item, or Item to where an edge points.
-    /// Opposite of sourceItemType.
-    { "item_type": "Edge", "property": "targetItemType", "property_type": "string" },
-    /// Edge.targetItemID: The uid of the target Item, or Item to where an Edge points. Opposite
-    /// of sourceItemID
-    { "item_type": "Edge", "property": "targetItemID", "property_type": "int" },
-    /// Edge.sourceItemType: The type of the source Item, or Item from where an edge points.
-    /// Opposite of targetItemType.
-    { "item_type": "Edge", "property": "sourceItemType", "property_type": "string" },
-    /// Edge.sourceItemID: The uid of the source Item, or Item from where an Edge points.
-    /// Opposite of targetItemID
-    { "item_type": "Edge", "property": "sourceItemID", "property_type": "int" },
-    /// Edge.sequence: Used to define position in a sequence, enables ordering based on this
-    /// number.
-    { "item_type": "Edge", "property": "sequence", "property_type": "int" },
-    /// Edge.deleted: Whether the Item is deleted.
-    { "item_type": "Edge", "property": "deleted", "property_type": "bool" },
-    /// Edge.version: The last version loaded from the server.
-    { "item_type": "Edge", "property": "version", "property_type": "int" },
-    /// Edge.edgeLabel: A label of an edge.
-    { "item_type": "Edge", "property": "edgeLabel", "property_type": "string" },
 
     /// EmailMessage.title: The title of an Item.
     { "item_type": "EmailMessage", "property": "title", "property_type": "string" },
@@ -493,8 +465,6 @@
     { "item_type": "File", "property": "filename", "property_type": "string" },
     /// File.resource: A universal resource location
     { "item_type": "File", "property": "resource", "property_type": "Resource" },
-    /// File.usedBy: An Item this Item is used by.
-    { "item_type": "File", "property": "usedBy", "property_type": "any" },
 
     /// Frequency.occurrences: The number of occurrences.
     { "item_type": "Frequency", "property": "occurrences", "property_type": "string" },
@@ -688,29 +658,6 @@
     /// payment.
     { "item_type": "Invoice", "property": "transaction", "property_type": "Transaction" },
 
-    /// Item.dateAccessed: Last access date of the Item.
-    { "item_type": "Item", "property": "dateAccessed", "property_type": "datetime" },
-    /// Item.dateCreated: Creation date of the Item.
-    { "item_type": "Item", "property": "dateCreated", "property_type": "datetime" },
-    /// Item.dateModified: Last modification date of the Item.
-    { "item_type": "Item", "property": "dateModified", "property_type": "datetime" },
-    /// Item.deleted: Whether the Item is deleted.
-    { "item_type": "Item", "property": "deleted", "property_type": "bool" },
-    /// Item.externalId: The identifier of an external source.
-    { "item_type": "Item", "property": "externalId", "property_type": "string" },
-    /// Item.itemDescription: A description of the item.
-    { "item_type": "Item", "property": "itemDescription", "property_type": "string" },
-    /// Item.starred: Whether the Item is starred.
-    { "item_type": "Item", "property": "starred", "property_type": "bool" },
-    /// Item.version: The last version loaded from the server.
-    { "item_type": "Item", "property": "version", "property_type": "int" },
-    /// Item.uid: The unique identifier of the Item set by the pod.
-    { "item_type": "Item", "property": "uid", "property_type": "int" },
-    /// Item.importJson: Data that cannot directly be imported in the appropriate Items (yet),
-    /// in JSON format 
-    { "item_type": "Item", "property": "importJson", "property_type": "string" },
-    /// Item.allEdges: A collection of all edges of an Item.
-    { "item_type": "Item", "property": "allEdges", "property_type": "Edge" },
 
     /// Label.color: The color of this Item.
     { "item_type": "Label", "property": "color", "property_type": "string" },
@@ -718,8 +665,6 @@
     { "item_type": "Label", "property": "name", "property_type": "string" },
     /// Label.comment: A comment on this Item.
     { "item_type": "Label", "property": "comment", "property_type": "Comment" },
-    /// Label.appliesTo: The Item this Item applies to.
-    { "item_type": "Label", "property": "appliesTo", "property_type": "any" },
 
     /// Lead.offer: A potential offer.
     { "item_type": "Lead", "property": "offer", "property_type": "Offer" },
@@ -772,9 +717,6 @@
     { "item_type": "MediaObject", "property": "startTime", "property_type": "datetime" },
     /// MediaObject.file: Any type of file that can be stored on disk.
     { "item_type": "MediaObject", "property": "file", "property_type": "File" },
-    /// MediaObject.includes: Items included within this Item. Included Items can be of any
-    /// type.
-    { "item_type": "MediaObject", "property": "includes", "property_type": "any" },
 
     /// MedicalCondition.itemType: The type or (sub)category of some Item.
     { "item_type": "MedicalCondition", "property": "itemType", "property_type": "string" },
@@ -1179,8 +1121,6 @@
     { "item_type": "Photo", "property": "startTime", "property_type": "datetime" },
     /// Photo.file: Any type of file that can be stored on disk.
     { "item_type": "Photo", "property": "file", "property_type": "File" },
-    /// Photo.includes: Items included within this Item. Included Items can be of any type.
-    { "item_type": "Photo", "property": "includes", "property_type": "any" },
     /// Photo.caption: The caption for this object. For downloadable machine formats (closed
     /// caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
     { "item_type": "Photo", "property": "caption", "property_type": "string" },
@@ -1193,9 +1133,6 @@
 
     /// PhysicalEntity.belongsTo: The Person this Item belongs to.
     { "item_type": "PhysicalEntity", "property": "belongsTo", "property_type": "Person" },
-    /// PhysicalEntity.instanceOf: An instance of an Item, for instance the PhysicalEntity
-    /// instance of a Book.
-    { "item_type": "PhysicalEntity", "property": "instanceOf", "property_type": "any" },
     /// PhysicalEntity.location: The location of for example where the event is happening, an
     /// organization is located, or where an action takes place.
     { "item_type": "PhysicalEntity", "property": "location", "property_type": "Location" },
@@ -1366,8 +1303,6 @@
     /// Resource.url: The url property represents the Uniform Resource Location (URL) of a
     /// resource.
     { "item_type": "Resource", "property": "url", "property_type": "string" },
-    /// Resource.usedBy: An Item this Item is used by.
-    { "item_type": "Resource", "property": "usedBy", "property_type": "any" },
 
     /// Review.title: The title of an Item.
     { "item_type": "Review", "property": "title", "property_type": "string" },
@@ -1527,8 +1462,6 @@
     { "item_type": "Video", "property": "startTime", "property_type": "datetime" },
     /// Video.file: Any type of file that can be stored on disk.
     { "item_type": "Video", "property": "file", "property_type": "File" },
-    /// Video.includes: Items included within this Item. Included Items can be of any type.
-    { "item_type": "Video", "property": "includes", "property_type": "any" },
     /// Video.caption: The caption for this object. For downloadable machine formats (closed
     /// caption, subtitles etc.) use MediaObject and indicate the encodingFormat.
     { "item_type": "Video", "property": "caption", "property_type": "string" },
@@ -1591,8 +1524,6 @@
     /// VoteAction.vote: An occasion where a choice is made choose between two or more options,
     /// for instance an election.
     { "item_type": "VoteAction", "property": "vote", "property_type": "Vote" },
-    /// VoteAction.usedBy: An Item this Item is used by.
-    { "item_type": "VoteAction", "property": "usedBy", "property_type": "any" },
     /// VoteAction.choice: A chosen Option.
     { "item_type": "VoteAction", "property": "choice", "property_type": "Option" },
 

@@ -46,14 +46,12 @@
     { "item_type": "Audio", "property": "fileLocation", "property_type": "string" },
     { "item_type": "Audio", "property": "startTime", "property_type": "datetime" },
     { "item_type": "Audio", "property": "file", "property_type": "File" },
-    { "item_type": "Audio", "property": "includes", "property_type": "any" },
     { "item_type": "Audio", "property": "caption", "property_type": "string" },
     { "item_type": "Audio", "property": "transcript", "property_type": "string" },
 
     { "item_type": "AuditItem", "property": "date", "property_type": "datetime" },
     { "item_type": "AuditItem", "property": "content", "property_type": "string" },
     { "item_type": "AuditItem", "property": "action", "property_type": "string" },
-    { "item_type": "AuditItem", "property": "appliesTo", "property_type": "any" },
 
     { "item_type": "CVUStoredDefinition", "property": "definition", "property_type": "string" },
     { "item_type": "CVUStoredDefinition", "property": "domain", "property_type": "string" },
@@ -140,15 +138,6 @@
     { "item_type": "Diet", "property": "excludedProduct", "property_type": "Product" },
 
 
-    { "item_type": "Edge", "property": "type", "property_type": "string" },
-    { "item_type": "Edge", "property": "targetItemType", "property_type": "string" },
-    { "item_type": "Edge", "property": "targetItemID", "property_type": "int" },
-    { "item_type": "Edge", "property": "sourceItemType", "property_type": "string" },
-    { "item_type": "Edge", "property": "sourceItemID", "property_type": "int" },
-    { "item_type": "Edge", "property": "sequence", "property_type": "int" },
-    { "item_type": "Edge", "property": "deleted", "property_type": "bool" },
-    { "item_type": "Edge", "property": "version", "property_type": "int" },
-    { "item_type": "Edge", "property": "edgeLabel", "property_type": "string" },
 
     { "item_type": "EmailMessage", "property": "title", "property_type": "string" },
     { "item_type": "EmailMessage", "property": "abstract", "property_type": "string" },
@@ -215,7 +204,6 @@
     { "item_type": "File", "property": "key", "property_type": "string" },
     { "item_type": "File", "property": "filename", "property_type": "string" },
     { "item_type": "File", "property": "resource", "property_type": "Resource" },
-    { "item_type": "File", "property": "usedBy", "property_type": "any" },
 
     { "item_type": "Frequency", "property": "occurrences", "property_type": "string" },
 
@@ -307,22 +295,10 @@
     { "item_type": "Invoice", "property": "file", "property_type": "File" },
     { "item_type": "Invoice", "property": "transaction", "property_type": "Transaction" },
 
-    { "item_type": "Item", "property": "dateAccessed", "property_type": "datetime" },
-    { "item_type": "Item", "property": "dateCreated", "property_type": "datetime" },
-    { "item_type": "Item", "property": "dateModified", "property_type": "datetime" },
-    { "item_type": "Item", "property": "deleted", "property_type": "bool" },
-    { "item_type": "Item", "property": "externalId", "property_type": "string" },
-    { "item_type": "Item", "property": "itemDescription", "property_type": "string" },
-    { "item_type": "Item", "property": "starred", "property_type": "bool" },
-    { "item_type": "Item", "property": "version", "property_type": "int" },
-    { "item_type": "Item", "property": "uid", "property_type": "int" },
-    { "item_type": "Item", "property": "importJson", "property_type": "string" },
-    { "item_type": "Item", "property": "allEdges", "property_type": "Edge" },
 
     { "item_type": "Label", "property": "color", "property_type": "string" },
     { "item_type": "Label", "property": "name", "property_type": "string" },
     { "item_type": "Label", "property": "comment", "property_type": "Comment" },
-    { "item_type": "Label", "property": "appliesTo", "property_type": "any" },
 
     { "item_type": "Lead", "property": "offer", "property_type": "Offer" },
 
@@ -348,7 +324,6 @@
     { "item_type": "MediaObject", "property": "fileLocation", "property_type": "string" },
     { "item_type": "MediaObject", "property": "startTime", "property_type": "datetime" },
     { "item_type": "MediaObject", "property": "file", "property_type": "File" },
-    { "item_type": "MediaObject", "property": "includes", "property_type": "any" },
 
     { "item_type": "MedicalCondition", "property": "itemType", "property_type": "string" },
     { "item_type": "MedicalCondition", "property": "name", "property_type": "string" },
@@ -533,14 +508,12 @@
     { "item_type": "Photo", "property": "fileLocation", "property_type": "string" },
     { "item_type": "Photo", "property": "startTime", "property_type": "datetime" },
     { "item_type": "Photo", "property": "file", "property_type": "File" },
-    { "item_type": "Photo", "property": "includes", "property_type": "any" },
     { "item_type": "Photo", "property": "caption", "property_type": "string" },
     { "item_type": "Photo", "property": "exifData", "property_type": "string" },
     { "item_type": "Photo", "property": "name", "property_type": "string" },
     { "item_type": "Photo", "property": "thumbnail", "property_type": "File" },
 
     { "item_type": "PhysicalEntity", "property": "belongsTo", "property_type": "Person" },
-    { "item_type": "PhysicalEntity", "property": "instanceOf", "property_type": "any" },
     { "item_type": "PhysicalEntity", "property": "location", "property_type": "Location" },
 
     { "item_type": "Product", "property": "audience", "property_type": "string" },
@@ -618,7 +591,6 @@
     { "item_type": "Reservation", "property": "price", "property_type": "Measure" },
 
     { "item_type": "Resource", "property": "url", "property_type": "string" },
-    { "item_type": "Resource", "property": "usedBy", "property_type": "any" },
 
     { "item_type": "Review", "property": "title", "property_type": "string" },
     { "item_type": "Review", "property": "abstract", "property_type": "string" },
@@ -684,7 +656,6 @@
     { "item_type": "Video", "property": "fileLocation", "property_type": "string" },
     { "item_type": "Video", "property": "startTime", "property_type": "datetime" },
     { "item_type": "Video", "property": "file", "property_type": "File" },
-    { "item_type": "Video", "property": "includes", "property_type": "any" },
     { "item_type": "Video", "property": "caption", "property_type": "string" },
     { "item_type": "Video", "property": "exifData", "property_type": "string" },
     { "item_type": "Video", "property": "name", "property_type": "string" },
@@ -713,7 +684,6 @@
 
     { "item_type": "VoteAction", "property": "dateExecuted", "property_type": "datetime" },
     { "item_type": "VoteAction", "property": "vote", "property_type": "Vote" },
-    { "item_type": "VoteAction", "property": "usedBy", "property_type": "any" },
     { "item_type": "VoteAction", "property": "choice", "property_type": "Option" },
 
     { "item_type": "Website", "property": "itemType", "property_type": "string" },

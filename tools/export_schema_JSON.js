@@ -27,11 +27,11 @@ function getDataItemClasses(commented) {
     }
 
     let properties = "";
-    let codingKeys = [];
     for (const field of propertiesAndRelations) {
       // Skip certain properties
       if (['genericType', 'functions', 'updatedFields'].includes(field)) continue;
       if (propertiesAndRelationsItem.includes(field) && !['Item', 'Edge'].includes(entity)) continue;
+      if (['Item', 'Edge'].includes(entity)) continue;
 
       if (Object.keys(predicateHierarchy).includes(field)) {
         let type = predicateHierarchy[field]['type'];
@@ -39,7 +39,9 @@ function getDataItemClasses(commented) {
           continue
         }
 
-        if (!['changelog', 'label'].includes(field)) codingKeys.push(field);
+        if (type === 'any') {
+          continue
+        }
 
         if (commented) {
           if (field === 'syncState' || helpers.PRIMITIVE_TYPES.includes(type) || type === 'Edge') {
