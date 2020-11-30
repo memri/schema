@@ -48,7 +48,7 @@ function getDataItemClasses(commented) {
             properties += helpers.wrapText(`    /// ${entity}.${field}: ${predicateHierarchy[field]['description']}\n`, 96);
           }
       }
-        properties += `    { "item_type": "${entity}", "property": "${field}", "value_type": "${type}" },\n`;
+        properties += `    { "item_type": "${entity}", "property": "${field}", "property_type": "${type}" },\n`;
       }
     }
 
