@@ -1,4 +1,4 @@
 {
-  "description": "Channels of an item.",
+  "description": "Width of an item.",
   "type": "int"
 }

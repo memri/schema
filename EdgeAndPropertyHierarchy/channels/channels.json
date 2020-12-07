@@ -1,4 +1,4 @@
 {
-  "description": "Width of an item.",
+  "description": "Nr of channels for an item (for instance photos).",
   "type": "int"
 }
