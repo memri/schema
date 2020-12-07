@@ -12,6 +12,10 @@
     "role"
   ],
   "relations": {
+    "occurence": {
+      "sequenced": false,
+      "singular": false
+    },
     "address": {
       "sequenced": false,
       "singular": false

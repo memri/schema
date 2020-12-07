@@ -3,7 +3,10 @@
   "properties": [
     "caption",
     "exifData",
-    "name"
+    "name",
+    "height",
+    "width",
+    "channels"
   ],
   "relations": {
     "thumbnail": {
